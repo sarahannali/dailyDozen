@@ -1,0 +1,10 @@
+.sidebarTitle {
+  color: rgba(255, 255, 255, 0.65);;
+  margin-left: 25px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.sidebarTitle > h2 {
+  color: #FFFFFF;
+}
