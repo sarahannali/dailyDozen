@@ -1,7 +1,5 @@
-export default function Index() {
+export default function Home() {
   return (
-    <div>
-      DASHBOARD
-    </div>
+    <div>DASHBOARD</div>
   )
 }
