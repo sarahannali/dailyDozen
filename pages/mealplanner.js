@@ -1,3 +1,5 @@
-export default function MealPlanner() {
-  return <div>MEAL PLANNER</div>
+import MealPlanner from '../components/mealplanner/MealPlanner';
+
+export default function MealPlannerPage() {
+  return <MealPlanner />
 }
