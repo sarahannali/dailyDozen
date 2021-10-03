@@ -33,7 +33,7 @@ const Recipes = ({recipes}) => {
                     style={{marginBottom: '20px'}}
                   >
                     <RecipeCard
-                      id={"A"}
+                      id={"awpaXJkNX2cOgghLkKsz"}
                       image={recipe.imageURL}
                       name={recipe.name}
                     />

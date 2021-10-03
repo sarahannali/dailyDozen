@@ -5,7 +5,8 @@ import classes from '../css/recipes.module.css';
 
 const RecipeCard = ({id, image, name}) => {
   return (
-    <Link href={`recipes/?recipeId=${id}`}>
+    <Link href={`recipes/${id}`}>
+      <div>
       <Card className={classes.recipecard} hoverable>
         <Row>
           <Col span={12}>
@@ -16,6 +17,7 @@ const RecipeCard = ({id, image, name}) => {
           </Col>
         </Row>
       </Card>
+      </div>
     </Link>
   );
 };

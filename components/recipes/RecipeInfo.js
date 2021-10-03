@@ -2,6 +2,7 @@ import React from 'react';
 import {Typography, Row, Col} from 'antd';
 import nutritionCalc from '../../lib/nutrition';
 import classes from '../css/recipes.module.css';
+import { getRecipeData } from '../../lib/recipes';
 
 const {Title} = Typography;
 
@@ -32,9 +33,9 @@ const ColorMap = {
 // };
 
 
-const RecipeInfo = ({ id }) => {
-  console.log("SARAH: ", id);
-  return ( <div>HIIII {id}</div>
+const RecipeInfo = ({ recipe }) => {
+  console.log("SARAH2: ", recipe);
+  return ( <div>HIIII 2</div>
     // <div>
     //   <Row style={{marginBottom: '15px'}}>
     //     <Col>
