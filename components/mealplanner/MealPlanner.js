@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Button, DatePicker} from 'antd';
 import RecipeBox from './RecipeBox/RecipeBox';
 import {DragDropContext} from 'react-beautiful-dnd';
-import Recipes from './RecipeBox/Recipes.json';
-import Calendar from './Calendar/Calendar';
+import Calendar from './Calendar';
 import classes from '../css/mealplanner.module.css';
 
 import {LeftOutlined, RightOutlined, ProfileOutlined} from '@ant-design/icons';
@@ -170,9 +169,10 @@ const getDays = () => {
   ];
 };
 
-const MealPlanner = () => {
+const MealPlanner = ({allRecipeData}) => {
+  console.log("RECIPES: " + allRecipeData);
   const [draggingRecipe, setDraggingRecipe] = useState(false);
-  const [recipes] = useState(Recipes);
+  const [recipes] = useState(allRecipeData);
   const [days, setDays] = useState([]);
 
   useEffect(() => {
@@ -199,10 +199,6 @@ const MealPlanner = () => {
     if (result.source.droppableId == 'Recipes') setDraggingRecipe(true);
   };
 
-  function onChange(date, dateString) {
-    console.log(date, dateString);
-  }
-
   return (
     <div>
       <div className={classes.infoDiv}>
@@ -212,7 +208,7 @@ const MealPlanner = () => {
         <Button className={classes.weekButtons}>
           <RightOutlined />
         </Button>
-        <DatePicker onChange={onChange} />
+        <DatePicker />
       </div>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Calendar days={days}/>

@@ -1,0 +1,11 @@
+[
+  {
+    "ingredient": "cashews",
+    "types": ["nuts", "protein"],
+    "serving": "100"
+  },
+  {
+    "ingredient": "macaroni",
+    "types": ["grains"]
+  }
+]

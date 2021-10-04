@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Droppable} from 'react-beautiful-dnd';
-import Recipe from '../RecipeBox/Recipe';
+import Recipe from './RecipeBox/Recipe';
 import {Col, Divider} from 'antd';
+import classes from '../css/mealplanner.module.css';
 
 const getColor = (mealTime) => {
   switch (mealTime) {
@@ -47,12 +47,6 @@ const MealTime = ({day, mealTime, meals}) => {
       </Droppable>
     </Col>
   );
-};
-
-MealTime.propTypes = {
-  day: PropTypes.string,
-  mealTime: PropTypes.string,
-  meals: PropTypes.array,
 };
 
 export default MealTime;

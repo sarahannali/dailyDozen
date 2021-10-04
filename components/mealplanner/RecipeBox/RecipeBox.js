@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 import {Input, Drawer, Button} from 'antd';
-import PropTypes from 'prop-types';
 import {Droppable} from 'react-beautiful-dnd';
 import {
   FilterOutlined,
 } from '@ant-design/icons';
 import Recipe from './Recipe';
-import classes from '../css/RecipeBox.module.css';
+import classes from '../../css/RecipeBox.module.css';
 
 const {Search} = Input;
 
 import {PlusOutlined, DeleteOutlined} from '@ant-design/icons';
 
 const RecipeBox = ({items, droppableId, isDragging}) => {
+  console.log("ITEMS: " + items);
   const [visible, setVisible] = useState(false);
   const grid = 8;
 
@@ -80,12 +80,6 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
       </Drawer>
     </div>
   );
-};
-
-RecipeBox.propTypes = {
-  items: [],
-  droppableId: PropTypes.string,
-  isDragging: PropTypes.bool,
 };
 
 export default RecipeBox;

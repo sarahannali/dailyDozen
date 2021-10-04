@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Col, Modal} from 'antd';
 import MealTime from './MealTime';
 import {Typography} from 'antd';
-import DailyNutritionInfo from '../DailyNutritionInfo/DailyNutritionInfo';
+// import DailyNutritionInfo from '../DailyNutritionInfo/DailyNutritionInfo';
 import classes from '../css/mealplanner.module.css';
 
 const {Title} = Typography;
@@ -39,7 +39,7 @@ const SingleDay = ({day, date, meals}) => {
         onCancel={handleCancel}
         footer={null}
       >
-        <DailyNutritionInfo />
+        {/* <DailyNutritionInfo /> */}
       </Modal>
     </Col>
   );
