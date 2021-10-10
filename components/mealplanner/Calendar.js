@@ -5,7 +5,7 @@ import classes from '../css/mealplanner.module.css';
 
 const Calendar = ({days}) => {
   return (<Row>
-    <div className={classes.Calendar}>
+    <div className={classes.calendar}>
       {days.map((day) =>
         <SingleDay
           day={day.id}

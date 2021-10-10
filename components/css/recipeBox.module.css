@@ -29,3 +29,18 @@
   width: 138px;
   height: 138px;
 }
+
+.cropped {
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.drawer {
+  width: calc(100vw - 200px);
+  margin-left: 200px;
+}
+
+.transition:last-child {
+  width: 0px;
+}

@@ -6,11 +6,9 @@ import classes from '../../css/RecipeBox.module.css';
 
 const {Paragraph} = Typography;
 
-const grid = 8;
-
 const getItemStyle = (draggableStyle) => ({
   userSelect: 'none',
-  margin: `0 ${grid}px 0 0`,
+  margin: `20px 8px 0 0`,
   backgroundColor: 'white',
   overflow: 'none',
   ...draggableStyle,

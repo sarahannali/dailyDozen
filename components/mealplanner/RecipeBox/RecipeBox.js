@@ -5,16 +5,14 @@ import {
   FilterOutlined,
 } from '@ant-design/icons';
 import Recipe from './Recipe';
-import classes from '../../css/RecipeBox.module.css';
+import classes from '../../css/recipeBox.module.css';
 
 const {Search} = Input;
 
 import {PlusOutlined, DeleteOutlined} from '@ant-design/icons';
 
 const RecipeBox = ({items, droppableId, isDragging}) => {
-  console.log("ITEMS: " + items);
   const [visible, setVisible] = useState(false);
-  const grid = 8;
 
   const showDrawer = () => {
     setVisible(true);
@@ -33,7 +31,7 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
         >
           <PlusOutlined />
         </Button>
-        <Button className={classes.trashButton}>
+        <Button danger className={classes.trashButton}>
           <DeleteOutlined />
         </Button>
       </div>
@@ -47,9 +45,11 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
       >
         <Search
           placeholder="input search text"
-          style={{width: 200}}
+          style={{width: 300, marginRight: "10px"}}
         />
-        <FilterOutlined />
+        <Button>
+          <FilterOutlined />
+        </Button>
         <Droppable
           droppableId={droppableId}
           direction="horizontal"
@@ -61,7 +61,7 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
               isDraggingOver={snapshot.isDraggingOver}
               style={{
                 display: 'flex',
-                padding: grid,
+                padding: '8',
               }}
               {...provided.droppableProps}>
               {items.map((recipe, index) =>{

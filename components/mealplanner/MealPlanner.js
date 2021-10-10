@@ -170,7 +170,6 @@ const getDays = () => {
 };
 
 const MealPlanner = ({allRecipeData}) => {
-  console.log("RECIPES: " + allRecipeData);
   const [draggingRecipe, setDraggingRecipe] = useState(false);
   const [recipes] = useState(allRecipeData);
   const [days, setDays] = useState([]);
