@@ -1,181 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {Button, DatePicker} from 'antd';
-import RecipeBox from './RecipeBox/RecipeBox';
+import {Button, DatePicker, Modal} from 'antd';
+import RecipeBox from './recipeBox/RecipeBox';
 import {DragDropContext} from 'react-beautiful-dnd';
 import Calendar from './Calendar';
+import GroceryList from './groceryList/GroceryList';
 import classes from '../css/mealplanner.module.css';
+import {reorderMeals, PopulatedCalendarSkeleton, GetIngredients} from './_mealPlanner';
 
-import {LeftOutlined, RightOutlined, ProfileOutlined} from '@ant-design/icons';
+import {LeftOutlined, RightOutlined, ProfileOutlined} from '@ant-design/icons'
 
-const reorderMeals =
-  (source, destination, recipes, days) => {
-    let removed;
-    const daysClone = Array.from(days);
-
-    if (source.droppableId == 'Recipes') {
-      removed = recipes[source.index];
-    } else {
-      const sourceCodes = source.droppableId.split(':');
-
-      [removed] = daysClone
-          .find((d) => d.id === sourceCodes[0])
-          .meals
-          .find((m) => m.id == sourceCodes[1])
-          .recipes
-          .splice(source.index, 1);
-    }
-
-    const destCodes = destination.droppableId.split(':');
-
-    daysClone
-        .find((d) => d.id === destCodes[0])
-        .meals
-        .find((m) => m.id == destCodes[1])
-        .recipes
-        .splice(destination.index, 0, removed);
-
-    return daysClone;
-  };
-
-// api for fetching this weeks meals
-const getDays = () => {
-  return [
-    {
-      id: 'Sunday',
-      date: '09/12',
-      meals: [
-        {
-          id: 'breakfast',
-          recipes: [],
-        },
-        {
-          id: 'lunch',
-          recipes: [],
-        },
-        {
-          id: 'dinner',
-          recipes: [],
-        },
-      ],
-    },
-    {
-      id: 'Monday',
-      date: '09/13',
-      meals: [
-        {
-          id: 'breakfast',
-          recipes: [],
-        },
-        {
-          id: 'lunch',
-          recipes: [],
-        },
-        {
-          id: 'dinner',
-          recipes: [],
-        },
-      ],
-    },
-    {
-      id: 'Tuesday',
-      date: '09/14',
-      meals: [
-        {
-          id: 'breakfast',
-          recipes: [],
-        },
-        {
-          id: 'lunch',
-          recipes: [],
-        },
-        {
-          id: 'dinner',
-          recipes: [],
-        },
-      ],
-    },
-    {
-      id: 'Wednesday',
-      date: '09/15',
-      meals: [
-        {
-          id: 'breakfast',
-          recipes: [],
-        },
-        {
-          id: 'lunch',
-          recipes: [],
-        },
-        {
-          id: 'dinner',
-          recipes: [],
-        },
-      ],
-    },
-    {
-      id: 'Thursday',
-      date: '09/16',
-      meals: [
-        {
-          id: 'breakfast',
-          recipes: [],
-        },
-        {
-          id: 'lunch',
-          recipes: [],
-        },
-        {
-          id: 'dinner',
-          recipes: [],
-        },
-      ],
-    },
-    {
-      id: 'Friday',
-      date: '09/17',
-      meals: [
-        {
-          id: 'breakfast',
-          recipes: [],
-        },
-        {
-          id: 'lunch',
-          recipes: [],
-        },
-        {
-          id: 'dinner',
-          recipes: [],
-        },
-      ],
-    },
-    {
-      id: 'Saturday',
-      date: '09/18',
-      meals: [
-        {
-          id: 'breakfast',
-          recipes: [],
-        },
-        {
-          id: 'lunch',
-          recipes: [],
-        },
-        {
-          id: 'dinner',
-          recipes: [],
-        },
-      ],
-    },
-  ];
-};
-
-const MealPlanner = ({allRecipeData}) => {
+const MealPlanner = ({allRecipeData, currentWeekMealEvents}) => {
   const [draggingRecipe, setDraggingRecipe] = useState(false);
   const [recipes] = useState(allRecipeData);
   const [days, setDays] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => setIsModalVisible(true)
+  const handleCancel = () => setIsModalVisible(false)
 
   useEffect(() => {
-    setDays(getDays());
+    setDays(PopulatedCalendarSkeleton(allRecipeData, currentWeekMealEvents));
   }, []);
 
   const onDragEnd = (result) => {
@@ -198,6 +42,9 @@ const MealPlanner = ({allRecipeData}) => {
     if (result.source.droppableId == 'Recipes') setDraggingRecipe(true);
   };
 
+  const ingredients = GetIngredients(days);
+  console.log(ingredients)
+
   return (
     <div>
       <div className={classes.infoDiv}>
@@ -217,9 +64,20 @@ const MealPlanner = ({allRecipeData}) => {
           isDragging={draggingRecipe}
         />
       </DragDropContext>
-      <Button className={classes.groceryButton}>
+      <Button
+        className={classes.groceryButton}
+        onClick={showModal}
+      >
         <ProfileOutlined />
       </Button>
+      <Modal
+        title="Grocery List"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <GroceryList ingredients={ingredients}></GroceryList>
+      </Modal>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const {Paragraph} = Typography;
 
 const getItemStyle = (draggableStyle) => ({
   userSelect: 'none',
-  margin: `20px 8px 0 0`,
+  margin: `0 8px 0 0`,
   backgroundColor: 'white',
   overflow: 'none',
   ...draggableStyle,

@@ -1,21 +1,13 @@
 import React from 'react';
 import {Droppable} from 'react-beautiful-dnd';
-import Recipe from './RecipeBox/Recipe';
+import Recipe from './recipeBox/Recipe';
 import {Col, Divider} from 'antd';
 import classes from '../css/mealplanner.module.css';
-
-const getColor = (mealTime) => {
-  switch (mealTime) {
-    case 'breakfast':
-      return '#A8DBE9';
-    case 'lunch':
-      return '#FF9999';
-    case 'dinner':
-      return '#FDD09B';
-  }
-};
+import {getColor} from './_mealPlanner';
 
 const MealTime = ({day, mealTime, meals}) => {
+  const bgColor = getColor(mealTime);
+
   return (
     <Col className={classes.mealCol}>
       <Divider>{mealTime}</Divider>
@@ -28,7 +20,7 @@ const MealTime = ({day, mealTime, meals}) => {
             ref={provided.innerRef}
             isDraggingOver={snapshot.isDraggingOver}
             {...provided.droppableProps}
-            style={{backgroundColor: getColor(mealTime)}}>
+            style={{backgroundColor: bgColor}}>
             {meals ?
               meals.map((meal, index) =>{
                 return (<Recipe
@@ -39,7 +31,7 @@ const MealTime = ({day, mealTime, meals}) => {
                   index={index}
                 />);
               }) :
-              <div>PLACE HERE {mealTime}</div>
+              <div></div>
             }
             {provided.placeholder}
           </div>

@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import {Col, Modal} from 'antd';
 import MealTime from './MealTime';
 import {Typography} from 'antd';
@@ -11,13 +10,8 @@ const {Title} = Typography;
 const SingleDay = ({day, date, meals}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  const showModal = () => setIsModalVisible(true);
+  const handleCancel = () => setIsModalVisible(false);
 
   return (
     <Col className={classes.singleDayCol}>
@@ -43,12 +37,6 @@ const SingleDay = ({day, date, meals}) => {
       </Modal>
     </Col>
   );
-};
-
-SingleDay.propTypes = {
-  day: PropTypes.string,
-  meals: PropTypes.array,
-  date: PropTypes.string,
 };
 
 export default SingleDay;

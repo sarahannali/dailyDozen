@@ -45,7 +45,7 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
       >
         <Search
           placeholder="input search text"
-          style={{width: 300, marginRight: "10px"}}
+          style={{width: 300, margin: "0 10px 20px 0"}}
         />
         <Button>
           <FilterOutlined />
