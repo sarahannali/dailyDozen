@@ -5,11 +5,11 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import Calendar from './Calendar';
 import GroceryList from './groceryList/GroceryList';
 import classes from '../css/mealplanner.module.css';
-import {reorderMeals, PopulatedCalendarSkeleton, GetIngredients} from './_mealPlanner';
+import {ReorderMeals, PopulatedCalendar} from './utils/index';
 
 import {LeftOutlined, RightOutlined, ProfileOutlined} from '@ant-design/icons'
 
-const MealPlanner = ({allRecipeData, currentWeekMealEvents}) => {
+const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData}) => {
   const [draggingRecipe, setDraggingRecipe] = useState(false);
   const [recipes] = useState(allRecipeData);
   const [days, setDays] = useState([]);
@@ -19,7 +19,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents}) => {
   const handleCancel = () => setIsModalVisible(false)
 
   useEffect(() => {
-    setDays(PopulatedCalendarSkeleton(allRecipeData, currentWeekMealEvents));
+    setDays(PopulatedCalendar(allRecipeData, currentWeekMealEvents));
   }, []);
 
   const onDragEnd = (result) => {
@@ -30,7 +30,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents}) => {
       return;
     }
 
-    setDays(reorderMeals(
+    setDays(ReorderMeals(
         result.source,
         result.destination,
         recipes,
@@ -41,9 +41,6 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents}) => {
   const onDragStart = (result) => {
     if (result.source.droppableId == 'Recipes') setDraggingRecipe(true);
   };
-
-  const ingredients = GetIngredients(days);
-  console.log(ingredients)
 
   return (
     <div>
@@ -76,7 +73,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents}) => {
         onCancel={handleCancel}
         footer={null}
       >
-        <GroceryList ingredients={ingredients}></GroceryList>
+        <GroceryList days={days} allIngredientData={allIngredientData} />
       </Modal>
     </div>
   );

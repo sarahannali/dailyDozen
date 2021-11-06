@@ -1,14 +1,17 @@
 import React from 'react';
+import { GetGroceryList } from './_groceryList';
 
-const GroceryList = ({ingredients}) => {
+const GroceryList = ({days, allIngredientData}) => {
+  const groceryList = GetGroceryList(days, allIngredientData);
+
   return (
     <div>
       <ol>
-      {ingredients.map(ingredient => {
+      {groceryList.map(ingredient => {
         console.log(ingredient)
-        return (<li>
+        return (<ol>
           {ingredient.amount} {ingredient.name}
-        </li>)
+        </ol>)
       })}
       </ol>
     </div>

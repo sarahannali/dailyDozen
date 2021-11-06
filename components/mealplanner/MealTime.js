@@ -3,10 +3,10 @@ import {Droppable} from 'react-beautiful-dnd';
 import Recipe from './recipeBox/Recipe';
 import {Col, Divider} from 'antd';
 import classes from '../css/mealplanner.module.css';
-import {getColor} from './_mealPlanner';
+import {GetColor} from './utils/index';
 
 const MealTime = ({day, mealTime, meals}) => {
-  const bgColor = getColor(mealTime);
+  const bgColor = GetColor(mealTime);
 
   return (
     <Col className={classes.mealCol}>
