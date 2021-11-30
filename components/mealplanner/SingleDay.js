@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {Col, Modal} from 'antd';
 import MealTime from './MealTime';
 import {Typography} from 'antd';
-// import DailyNutritionInfo from '../DailyNutritionInfo/DailyNutritionInfo';
+import DailyNutritionInfo from './dailyNutritionInfo/DailyNutritionInfo';
 import classes from '../css/mealplanner.module.css';
 
 const {Title} = Typography;
 
-const SingleDay = ({day, date, meals}) => {
+const SingleDay = ({day, date, meals, allNutritionData}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => setIsModalVisible(true);
@@ -33,7 +33,7 @@ const SingleDay = ({day, date, meals}) => {
         onCancel={handleCancel}
         footer={null}
       >
-        {/* <DailyNutritionInfo /> */}
+        <DailyNutritionInfo allNutritionData={allNutritionData} />
       </Modal>
     </Col>
   );

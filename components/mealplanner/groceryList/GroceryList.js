@@ -1,19 +1,19 @@
 import React from 'react';
-import { GetGroceryList } from './_groceryList';
+import { GetGroceryList } from './utils/index';
 
 const GroceryList = ({days, allIngredientData}) => {
   const groceryList = GetGroceryList(days, allIngredientData);
 
   return (
     <div>
-      <ol>
+      <ul>
       {groceryList.map(ingredient => {
         console.log(ingredient)
-        return (<ol>
+        return (<li>
           {ingredient.amount} {ingredient.name}
-        </ol>)
+        </li>)
       })}
-      </ol>
+      </ul>
     </div>
   );
 };

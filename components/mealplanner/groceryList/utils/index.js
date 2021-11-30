@@ -1,0 +1,1 @@
+export {default as GetGroceryList} from './_getGroceryList';

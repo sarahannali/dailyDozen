@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Typography, Row, Col, Input} from 'antd';
 import RecipeCard from './RecipeCard';
+import axios from 'axios';
 
 const {Title} = Typography;
 
 const {Search} = Input;
 
 const Recipes = ({recipes}) => {
+  const [currRecipes, setCurrRecipes] = useState(recipes);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    if (search == "") setCurrRecipes(recipes);
+    else {
+      axios.post('/api/recipes/search', {'searchValue': search})
+      .then(function (response) {
+        setCurrRecipes(response.data);
+      })
+      .catch(function (error) {
+      });
+    }
+  }, [search])
   return (
     <div>
       <Row justify="center" style={{marginBottom: '10px'}}>
@@ -15,7 +30,7 @@ const Recipes = ({recipes}) => {
       <Row>
         <Col span={3}></Col>
         <Col span={5}>
-          <Search />
+          <Search onBlur={(e) => setSearch(e.target.value)} onPressEnter={(e) => setSearch(e.target.value)} />
         </Col>
         <Col span={2}></Col>
       </Row>
@@ -24,7 +39,7 @@ const Recipes = ({recipes}) => {
         <Col span={20}>
           <Row>
             {
-              recipes.map((recipe, idx) => {
+              currRecipes.map((recipe, idx) => {
                 return (
                   <Col
                     xs={24}
@@ -33,9 +48,7 @@ const Recipes = ({recipes}) => {
                     style={{marginBottom: '20px'}}
                   >
                     <RecipeCard
-                      id={"awpaXJkNX2cOgghLkKsz"}
-                      image={recipe.imageURL}
-                      name={recipe.name}
+                      recipe={recipe}
                     />
                   </Col>);
               })

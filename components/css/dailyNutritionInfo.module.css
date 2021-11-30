@@ -1,0 +1,24 @@
+.modal {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nutritionGoal {
+  text-align: center;
+}
+
+.goalImg {
+  max-width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin: 17px 0px 0px 0px;
+}
+
+.goalImgBorder {
+  border: 8px solid rgb(192, 192, 192);
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+}

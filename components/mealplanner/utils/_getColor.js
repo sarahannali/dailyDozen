@@ -1,14 +1,9 @@
-const GetColor = (mealTime) => {
-  switch (mealTime) {
-    case 'breakfast':
-      return '#A8DBE9';
-    case 'lunch':
-      return '#FF9999';
-    case 'dinner':
-      return '#FDD09B';
-    default:
-      return '#fff'
-  }
-};
+const MealMap = {
+  'breakfast': '#A8DBE9',
+  'lunch': '#FF9999',
+  'dinner': '#FDD09B'
+}
+
+const GetColor = (mealTime) => MealMap[mealTime];
 
 export default GetColor;

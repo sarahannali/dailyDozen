@@ -4,7 +4,7 @@ const ConvertGramsToUnits = (ingredientName, amount, allIngredientData) => {
   return (amount / ingr.ratio).toFixed(2) + " cup(s)";
 };
 
-export const GetGroceryList = (days, allIngredientData) => {
+const GetGroceryList = (days, allIngredientData) => {
   const ingredientMap = new Map();
 
   days.forEach(day => {
@@ -28,4 +28,6 @@ export const GetGroceryList = (days, allIngredientData) => {
   });
 
   return ingredients;
-}
+};
+
+export default GetGroceryList;

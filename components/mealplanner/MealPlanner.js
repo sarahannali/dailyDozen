@@ -9,7 +9,8 @@ import {ReorderMeals, PopulatedCalendar} from './utils/index';
 
 import {LeftOutlined, RightOutlined, ProfileOutlined} from '@ant-design/icons'
 
-const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData}) => {
+const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData, allNutritionData}) => {
+  console.log("CURRENT WEEK MEAL EVENTS: ", currentWeekMealEvents);
   const [draggingRecipe, setDraggingRecipe] = useState(false);
   const [recipes] = useState(allRecipeData);
   const [days, setDays] = useState([]);
@@ -24,6 +25,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData}) 
 
   const onDragEnd = (result) => {
     setDraggingRecipe(false);
+    updateMealEvent(result);
 
     // dropped outside the list or back in recipes
     if (!result.destination || result.destination.droppableId == 'Recipes') {
@@ -54,7 +56,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData}) 
         <DatePicker />
       </div>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-        <Calendar days={days}/>
+        <Calendar days={days} allNutritionData={allNutritionData}/>
         <RecipeBox
           items={recipes}
           droppableId="Recipes"

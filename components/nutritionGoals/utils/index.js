@@ -1,0 +1,1 @@
+export {default as IsNotMacro} from './_isNotMacro';
