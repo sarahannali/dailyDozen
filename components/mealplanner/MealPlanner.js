@@ -25,7 +25,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData, a
 
   const onDragEnd = (result) => {
     setDraggingRecipe(false);
-    updateMealEvent(result);
+    console.log("MOVED RECIPE OR NEW RECIPE: ", result);
 
     // dropped outside the list or back in recipes
     if (!result.destination || result.destination.droppableId == 'Recipes') {
