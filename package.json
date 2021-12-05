@@ -19,6 +19,7 @@
     "firebase": "^9.1.0",
     "fuzzy-search": "^3.2.1",
     "linq": "^4.0.0",
+    "moment": "^2.29.1",
     "next": "^11.0.0",
     "nodemon": "^2.0.12",
     "react": "17.0.2",

@@ -3,13 +3,12 @@ import {Input, Drawer, Button} from 'antd';
 import {Droppable} from 'react-beautiful-dnd';
 import {
   FilterOutlined,
+  PlusOutlined
 } from '@ant-design/icons';
 import Recipe from './Recipe';
 import classes from '../../css/recipeBox.module.css';
 
 const {Search} = Input;
-
-import {PlusOutlined, DeleteOutlined} from '@ant-design/icons';
 
 const RecipeBox = ({items, droppableId, isDragging}) => {
   const [visible, setVisible] = useState(false);
@@ -30,9 +29,6 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
           onClick={showDrawer}
         >
           <PlusOutlined />
-        </Button>
-        <Button danger className={classes.trashButton}>
-          <DeleteOutlined />
         </Button>
       </div>
       <Drawer

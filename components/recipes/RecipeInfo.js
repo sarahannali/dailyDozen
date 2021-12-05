@@ -1,11 +1,21 @@
-import React from 'react';
-import {Typography, Row, Col} from 'antd';
+import React, { useState } from 'react';
+import {Typography, Row, Col, InputNumber} from 'antd';
 import { Capitalize } from '../common';
 import classes from '../css/recipes.module.css';
 
 const {Title} = Typography;
 
 const RecipeInfo = ({ recipe }) => {
+  const [servings, setServings] = useState(recipe.nutritionValues.servings)
+  const servingsRatio = recipe.nutritionValues.servings;
+
+  const GetAmount = (strAmount, grams, ratio) => {
+    if (servings / recipe.nutritionValues.servings) return strAmount;
+    else {
+      console.log("NOT AMOUNT")
+    }
+  }
+
   return (
     <Row justify="center">
       <div style={{height: "80vh", width: "60vw"}}>
@@ -22,9 +32,21 @@ const RecipeInfo = ({ recipe }) => {
             const keyFormatted = Capitalize(key);
             const type = key == "protein" || key == "carbs" || key == "fat" ? "g" : "";
 
+            if (key == "servings") {
+              return (<div className={classes.nutritionGoal} key={key}>
+                <strong>{keyFormatted}</strong>: 
+                <InputNumber
+                  defaultValue={servings}
+                  onBlur={(e) => setServings(e.target.value)}
+                  style={{width: '75px', marginLeft: '10px'}}
+                  min={1}
+                />
+              </div>)
+            }
+
             return (
               <div className={classes.nutritionGoal} key={key}>
-                <strong>{keyFormatted}</strong>: {recipe.nutritionValues[key]}{type}
+                <strong>{keyFormatted}</strong>: {(recipe.nutritionValues[key] * (servings / servingsRatio)).toFixed(2)}{type}
               </div>
             )
           })}
@@ -35,7 +57,7 @@ const RecipeInfo = ({ recipe }) => {
             {recipe.ingredients.map((ingr, idx) => {
               return (
                 <li key={idx}>
-                  {ingr.amount} {ingr.name}
+                  {GetAmount(ingr.amount, ingr.grams, ingr.ratio)} {ingr.name}
                 </li>
               );
             })}

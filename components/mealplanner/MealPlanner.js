@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {Button, DatePicker, Modal} from 'antd';
+import {Button, DatePicker, Modal, notification} from 'antd';
 import RecipeBox from './recipeBox/RecipeBox';
 import {DragDropContext} from 'react-beautiful-dnd';
 import Calendar from './Calendar';
 import GroceryList from './groceryList/GroceryList';
 import classes from '../css/mealplanner.module.css';
-import {ReorderMeals, PopulatedCalendar} from './utils/index';
+import {ReorderMeals, PopulateCalendar, DeleteMeal, UpdateMeal} from './utils';
+import axios from 'axios';
+import moment from 'moment';
 
 import {LeftOutlined, RightOutlined, ProfileOutlined} from '@ant-design/icons'
 
-const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData, allNutritionData}) => {
-  console.log("CURRENT WEEK MEAL EVENTS: ", currentWeekMealEvents);
+const MealPlanner = ({allRecipeData, currentWeekMealEvents, allNutritionData}) => {
   const [draggingRecipe, setDraggingRecipe] = useState(false);
   const [recipes] = useState(allRecipeData);
   const [days, setDays] = useState([]);
@@ -20,25 +21,104 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData, a
   const handleCancel = () => setIsModalVisible(false)
 
   useEffect(() => {
-    setDays(PopulatedCalendar(allRecipeData, currentWeekMealEvents));
+    setDays(PopulateCalendar(currentWeekMealEvents));
   }, []);
 
   const onDragEnd = (result) => {
     setDraggingRecipe(false);
-    console.log("MOVED RECIPE OR NEW RECIPE: ", result);
 
     // dropped outside the list or back in recipes
     if (!result.destination || result.destination.droppableId == 'Recipes') {
       return;
     }
 
-    setDays(ReorderMeals(
-        result.source,
-        result.destination,
-        recipes,
-        days,
-    ));
+    const [newDays, movedObj] = ReorderMeals(
+      result.source,
+      result.destination,
+      recipes,
+      days
+    )
+
+    setDays(newDays);
+
+    if (result.source.droppableId == 'Recipes') {
+      axios.post(`/api/mealPlanner/`, movedObj)
+      .then(function (response) {
+        const destCodes = result.destination.droppableId.split(':');
+        const daysClone = Array.from(days);
+        daysClone
+          .find((d) => d.id === destCodes[0])
+          .meals[destCodes[1]][result.destination.index].id = response.data;
+        setDays(daysClone); //TODO: clean upppp
+
+        notification['success']({
+          message: 'Changes Saved', // TODO update to the next.js loading symbol thing
+        });
+      })
+      .catch(function (error) {
+        notification['error']({
+          message: 'Error',
+        });
+      });
+    } else {
+      axios.post(`/api/mealPlanner/${movedObj.id}`, movedObj)
+        .then(function (response) {
+          const destCodes = result.destination.droppableId.split(':');
+          const daysClone = Array.from(days);
+          daysClone
+            .find((d) => d.id === destCodes[0])
+            .meals[destCodes[1]][result.destination.index].id = response.data;
+          setDays(daysClone); //TODO: clean upppp
+
+          notification['success']({
+            message: 'Changes Saved', // TODO update to the next.js loading symbol thing
+          });
+        })
+        .catch(function (error) {
+          notification['error']({
+            message: 'Error',
+          });
+        });
+    }
   };
+
+  const updateServings = (mealEventID, key, servings, sourceIdx) => {
+    axios.post(`/api/mealPlanner/${mealEventID}`, {Servings: servings})
+    .then(function (response) {
+      notification['success']({
+        message: 'Changes Saved', // TODO update to the next.js loading symbol thing
+      });
+    })
+    .catch(function (error) {
+      notification['error']({
+        message: 'Error',
+      });
+    });
+
+    const destCodes = key.split(':');
+    const newDays = UpdateMeal(destCodes, sourceIdx, days, servings);// TODO clean this up
+
+    setDays([...newDays]);
+  }
+
+  const deleteMealEvent = (mealEventID, key, sourceIdx) => {
+    axios.delete(`/api/mealPlanner/${mealEventID}`)
+      .then(function (response) {
+        notification['success']({
+          message: 'Changes Saved', // TODO update to the next.js loading symbol thing
+        });
+      })
+      .catch(function (error) {
+        notification['error']({
+          message: 'Error',
+        });
+      });
+  
+      const destCodes = key.split(':');
+      const [_, newDays] = DeleteMeal(destCodes, sourceIdx, days);// TODO clean this up
+
+      setDays([...newDays]);
+  }
 
   const onDragStart = (result) => {
     if (result.source.droppableId == 'Recipes') setDraggingRecipe(true);
@@ -53,10 +133,10 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData, a
         <Button className={classes.weekButtons}>
           <RightOutlined />
         </Button>
-        <DatePicker />
+        <DatePicker defaultValue={moment(new Date())}/>
       </div>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-        <Calendar days={days} allNutritionData={allNutritionData}/>
+        <Calendar days={days} allNutritionData={allNutritionData} deleteMealEvent={deleteMealEvent} updateServings={updateServings}/>
         <RecipeBox
           items={recipes}
           droppableId="Recipes"
@@ -75,7 +155,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allIngredientData, a
         onCancel={handleCancel}
         footer={null}
       >
-        <GroceryList days={days} allIngredientData={allIngredientData} />
+        <GroceryList days={days} />
       </Modal>
     </div>
   );

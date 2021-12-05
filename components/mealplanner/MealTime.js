@@ -5,7 +5,7 @@ import {Col, Divider} from 'antd';
 import classes from '../css/mealplanner.module.css';
 import {GetColor} from './utils/index';
 
-const MealTime = ({day, mealTime, meals}) => {
+const MealTime = ({day, mealTime, meals, deleteMealEvent, updateServings}) => {
   const bgColor = GetColor(mealTime);
 
   return (
@@ -13,7 +13,6 @@ const MealTime = ({day, mealTime, meals}) => {
       <Divider>{mealTime}</Divider>
       <Droppable
         droppableId={day + ':' + mealTime}
-        style={{width: '145px'}}
       >
         {(provided, snapshot) => (
           <div
@@ -24,11 +23,16 @@ const MealTime = ({day, mealTime, meals}) => {
             {meals ?
               meals.map((meal, index) =>{
                 return (<Recipe
-                  key={meal.name + day + mealTime}
-                  listName={day + mealTime}
-                  image={meal.imageURL}
-                  name={meal.name}
+                  key={meal.RecipeInfo.name + day + mealTime}
+                  listName={day + ':' + mealTime}
+                  image={meal.RecipeInfo.imageURL}
+                  name={meal.RecipeInfo.name}
                   index={index}
+                  isMealEvent
+                  mealEventID={meal.id}
+                  deleteMealEvent={deleteMealEvent}
+                  givenServings={meal.Servings}
+                  updateServings={updateServings}
                 />);
               }) :
               <div></div>

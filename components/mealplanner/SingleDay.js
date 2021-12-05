@@ -4,10 +4,13 @@ import MealTime from './MealTime';
 import {Typography} from 'antd';
 import DailyNutritionInfo from './dailyNutritionInfo/DailyNutritionInfo';
 import classes from '../css/mealplanner.module.css';
+import {CalendarDays} from './utils'
 
 const {Title} = Typography;
 
-const SingleDay = ({day, date, meals, allNutritionData}) => {
+const SingleDay = ({date, meals, allNutritionData, deleteMealEvent, updateServings}) => {
+  const dayOfWeek = CalendarDays[date.getDay()];
+  const day = date.toDateString();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => setIsModalVisible(true);
@@ -16,15 +19,17 @@ const SingleDay = ({day, date, meals, allNutritionData}) => {
   return (
     <Col className={classes.singleDayCol}>
       <Title level={3} onClick={showModal} className={classes.singleDayTitle}>
-        {day}
-        <Title level={5}>{date}</Title>
+        {dayOfWeek}
+        <Title level={5}>{(date.getMonth() + 1) + "/" + date.getDate()}</Title>
       </Title>
-      {meals.map((meal) =>
+      {Object.keys(meals).map((mealTime) =>
         <MealTime
           day={day}
-          mealTime={meal.id}
-          meals={meal.recipes}
-          key={meal.id}
+          mealTime={mealTime}
+          meals={meals[mealTime]}
+          key={mealTime}
+          deleteMealEvent={deleteMealEvent}
+          updateServings={updateServings}
         />,
       )}
       <Modal
