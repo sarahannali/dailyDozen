@@ -15,7 +15,6 @@ const Meals = [
 ]
 
 const CalendarSkeleton = (startDate) => {
-  startDate.setHours(0, 0, 0, 0);
   const calendar = [];
 
   for (let i = 0; i < 7; i++) {
@@ -36,11 +35,11 @@ const CalendarSkeleton = (startDate) => {
   return calendar;
 }
 
-const PopulateCalendar = (currentWeekMealEvents) => {
-  const startDate = new Date();
+const PopulateCalendar = (mealEvents, startDate) => {
+  startDate.setHours(0, 0, 0, 0);
   var calendar = CalendarSkeleton(startDate);
 
-  currentWeekMealEvents.forEach((mealEvent) => {
+  mealEvents.forEach((mealEvent) => {
     const dateIdx = new Date(mealEvent.Date).getDay()
     var calendarIdx = Math.abs(dateIdx + (CalendarDays.length - startDate.getDay())) % CalendarDays.length;
     

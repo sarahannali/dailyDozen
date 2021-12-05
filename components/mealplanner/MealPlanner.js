@@ -16,12 +16,13 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allNutritionData}) =
   const [recipes] = useState(allRecipeData);
   const [days, setDays] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const showModal = () => setIsModalVisible(true)
   const handleCancel = () => setIsModalVisible(false)
 
   useEffect(() => {
-    setDays(PopulateCalendar(currentWeekMealEvents));
+    setDays(PopulateCalendar(currentWeekMealEvents, moment().toDate()));
   }, []);
 
   const onDragEnd = (result) => {
@@ -124,6 +125,16 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allNutritionData}) =
     if (result.source.droppableId == 'Recipes') setDraggingRecipe(true);
   };
 
+  const handleDateChange = (dateStr) => {
+    axios.get('/api/mealPlanner', { params: { date: dateStr } })
+      .then(function (response) {
+        setDays(PopulateCalendar(response.data, moment(dateStr).toDate()));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div className={classes.infoDiv}>
@@ -133,7 +144,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allNutritionData}) =
         <Button className={classes.weekButtons}>
           <RightOutlined />
         </Button>
-        <DatePicker defaultValue={moment(new Date())}/>
+        <DatePicker defaultValue={moment()} onBlur={(e) => handleDateChange(e.target.value)}/>
       </div>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Calendar days={days} allNutritionData={allNutritionData} deleteMealEvent={deleteMealEvent} updateServings={updateServings}/>

@@ -1,11 +1,11 @@
 import { getAllRecipeData } from '../lib/recipes';
-import { getCurrentWeekMealEvents } from '../lib/mealEvents';
+import { getMealEvents } from '../lib/mealEvents';
 import { getNutritionGoalInfo } from '../lib/goals';
 import MealPlanner from '../components/mealplanner/MealPlanner';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData()
-  const currentWeekMealEvents = await getCurrentWeekMealEvents();
+  const currentWeekMealEvents = await getMealEvents(new Date().toDateString());
   const allNutritionData = await getNutritionGoalInfo();
 
   return {
