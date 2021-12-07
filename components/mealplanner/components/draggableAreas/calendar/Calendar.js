@@ -1,9 +1,9 @@
 import React from 'react';
-import SingleDay from './SingleDay';
 import {Row} from 'antd';
-import classes from '../css/mealplanner.module.css';
+import SingleDay from './SingleDay';
+import classes from './calendar.module.css';
 
-const Calendar = ({days, allNutritionData, deleteMealEvent, updateServings}) => {
+const Calendar = ({days, allNutritionData, deleteMealEvent, updateMealEvent}) => {
   return (<Row>
     <div className={classes.calendar}>
       {days.map((day) =>
@@ -13,7 +13,7 @@ const Calendar = ({days, allNutritionData, deleteMealEvent, updateServings}) => 
           key={day.id}
           allNutritionData={allNutritionData}
           deleteMealEvent={deleteMealEvent}
-          updateServings={updateServings}
+          updateMealEvent={updateMealEvent}
         />
       )}
     </div>

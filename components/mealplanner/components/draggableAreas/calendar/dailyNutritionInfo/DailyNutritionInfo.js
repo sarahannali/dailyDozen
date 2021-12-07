@@ -1,6 +1,6 @@
 import React from 'react';
-import { GetNutritionGoalImg, Capitalize, GetBorderColor } from '../../common/index';
-import classes from '../../css/dailyNutritionInfo.module.css';
+import { GetNutritionGoalImg, Capitalize, GetBorderColor } from '../../../../../common';
+import classes from './dailyNutritionInfo.module.css';
 
 const DailyNutritionInfo = ({allNutritionData}) => {
   return (

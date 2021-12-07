@@ -1,32 +1,25 @@
 import React, {useState} from 'react';
 import {Input, Drawer, Button} from 'antd';
 import {Droppable} from 'react-beautiful-dnd';
+import {Recipe} from '../../common';
+import classes from './recipeBox.module.css';
+
 import {
   FilterOutlined,
   PlusOutlined
 } from '@ant-design/icons';
-import Recipe from './Recipe';
-import classes from '../../css/recipeBox.module.css';
 
 const {Search} = Input;
 
 const RecipeBox = ({items, droppableId, isDragging}) => {
   const [visible, setVisible] = useState(false);
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
-
   return (
     <div>
       <div style={visible ? {visibility: 'hidden'} : {}}>
         <Button className={classes.addButton}
           type="primary"
-          onClick={showDrawer}
+          onClick={() => setVisible(true)}
         >
           <PlusOutlined />
         </Button>
@@ -34,7 +27,7 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
       <Drawer
         placement="bottom"
         closable
-        onClose={onClose}
+        onClose={() => setVisible(false)}
         visible={visible}
         className={classes.drawer + ' ' +
         (isDragging ? classes.transition : {})}
@@ -61,11 +54,14 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
               }}
               {...provided.droppableProps}>
               {items.map((recipe, index) =>{
+                const recipeInfo = {
+                  imageURL: recipe.imageURL,
+                  name: recipe.name
+                }
+                
                 return (<Recipe
-                  key={recipe.name}
                   listName={droppableId}
-                  image={recipe.imageURL}
-                  name={recipe.name}
+                  recipeInfo={recipeInfo}
                   index={index}
                 />);
               })}

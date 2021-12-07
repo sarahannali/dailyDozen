@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { GetGroceryList, ConvertAmount } from './utils';
 import { Select } from 'antd';
+import { GetGroceryList, ConvertAmount } from './utils';
+
 import {
   PrinterOutlined,
   MailOutlined
@@ -30,7 +31,11 @@ const GroceryList = ({days}) => {
       {groceryList.map((ingredient, idx) => {
         return (<li>
           {ingredient.amount.toFixed(2)}
-          <Select defaultValue={ingredient.amountType} style={{ margin: "5px 10px" }} onChange={(type) => handleChange(ingredient.amount, ingredient.amountType, type, idx)}>
+          <Select
+            defaultValue={ingredient.amountType}
+            style={{ margin: "5px 10px" }}
+            onChange={(type) => handleChange(ingredient.amount, ingredient.amountType, type, idx)}
+          >
             <Option value="gal">gal</Option>
             <Option value="cup">cup</Option>
             <Option value="tbs">tbs</Option>

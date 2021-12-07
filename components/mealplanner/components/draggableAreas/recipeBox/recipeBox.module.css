@@ -1,0 +1,19 @@
+.addButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 24px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+}
+
+.drawer {
+  width: calc(100vw - 200px);
+  margin-left: 200px;
+}
+
+.transition:last-child {
+  width: 0px;
+}

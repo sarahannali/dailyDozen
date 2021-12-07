@@ -1,4 +1,6 @@
-export const DeleteMeal = (codes, sourceIdx, days) => {
+export const DeleteMeal = (key, sourceIdx, days) => {
+  const codes = key.split(':');
+
   const [removed] = days
     .find((d) => d.id === codes[0])
     .meals[codes[1]]
@@ -7,24 +9,25 @@ export const DeleteMeal = (codes, sourceIdx, days) => {
   return [removed, days];
 }
 
-export const UpdateMeal = (codes, sourceIdx, days, servings) => {
+export const UpdateMeal = (key, sourceIdx, days, newObj) => {
+  const codes = key.split(':');
+
   days
     .find((d) => d.id === codes[0])
     .meals[codes[1]]
-    [sourceIdx]
-    .Servings = servings
+    [sourceIdx] = newObj;
 
   return days;
 }
 
 const ReorderMeals = (source, destination, recipes, days) => {
-  let removed;
-  const daysClone = Array.from(days);
+  let movedObj;
   const destCodes = destination.droppableId.split(':');
 
   if (source.droppableId == 'Recipes') {
     const newMealEvent = recipes[source.index];
-    removed = {
+
+    movedObj = {
       id: null,
       RecipeInfo: {
         recipeID: newMealEvent.id,
@@ -35,25 +38,15 @@ const ReorderMeals = (source, destination, recipes, days) => {
       }
     };
   } else {
-    const sourceCodes = source.droppableId.split(':');
-
-    [removed] = DeleteMeal(sourceCodes, source.index, daysClone);
+    [movedObj] = DeleteMeal(source.droppableId, source.index, days);
   }
 
-  daysClone
+  days
     .find((d) => d.id === destCodes[0])
     .meals[destCodes[1]]
-    .splice(destination.index, 0, removed);
+    .splice(destination.index, 0, movedObj);
 
-  return [
-    daysClone,
-    {
-      id: removed.id,
-      Date: destCodes[0],
-      MealTime: destCodes[1],
-      RecipeInfo: removed.RecipeInfo
-    }
-  ];
+  return [movedObj, days];
 };
 
 export default ReorderMeals;
