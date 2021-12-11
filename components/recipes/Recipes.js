@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Typography, Row, Col, Input} from 'antd';
-import RecipeCard from './RecipeCard';
-import axios from 'axios';
+import {RecipeCard} from './components';
+import { searchRecipes } from './requests';
 
 const {Title} = Typography;
 
@@ -14,14 +14,13 @@ const Recipes = ({recipes}) => {
   useEffect(() => {
     if (search == "") setCurrRecipes(recipes);
     else {
-      axios.post('/api/recipes/search', {'searchValue': search})
-      .then(function (response) {
-        setCurrRecipes(response.data);
-      })
-      .catch(function (error) {
-      });
+      (async () => {
+        const foundRecipes = await searchRecipes();
+        setCurrRecipes(foundRecipes);
+      })()
     }
   }, [search])
+
   return (
     <div>
       <Row justify="center" style={{marginBottom: '10px'}}>

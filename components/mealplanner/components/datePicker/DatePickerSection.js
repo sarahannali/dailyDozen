@@ -15,7 +15,7 @@ const DatePickerSection = ({setDays}) => {
   const [date, setDate] = useState(moment());
 
   const handleDateChange = async (momentDate) => {
-    setDate(momentDate);
+    setDate(new moment(momentDate));
     const newDays = await getMealEvents(momentDate.toDate());
 
     setDays(PopulateCalendar(newDays, momentDate.toDate()));
@@ -29,7 +29,7 @@ const DatePickerSection = ({setDays}) => {
       <Button className={classes.weekButtons} onClick={() => handleDateChange(date.add(1, 'days'))}>
         <RightOutlined />
       </Button>
-      <DatePicker defaultValue={date} value={date} defaultPickerValue={date} onChange={handleDateChange} />
+      <DatePicker value={date} onChange={handleDateChange} />
     </div>
   );
 };

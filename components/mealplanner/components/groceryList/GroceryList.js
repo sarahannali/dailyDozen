@@ -32,7 +32,7 @@ const GroceryList = ({days}) => {
         return (<li>
           {ingredient.amount.toFixed(2)}
           <Select
-            defaultValue={ingredient.amountType}
+            value={ingredient.amountType}
             style={{ margin: "5px 10px" }}
             onChange={(type) => handleChange(ingredient.amount, ingredient.amountType, type, idx)}
           >
