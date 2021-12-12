@@ -1,33 +1,33 @@
-import React from 'react';
-import {InputNumber} from 'antd';
-import { Capitalize } from '../../../common';
-import classes from '../recipes.module.css';
+import React, { useState } from 'react';
+import { Tooltip, Progress, InputNumber } from 'antd';
+import { GetBorderColor, GetNutritionGoalImg } from '../../../common';
+import { GetNutritionValues } from './utils';
+import classes from './recipeInfo.module.css';
 
-const NutritionValues = ({values, servings, setServings, servingsRatio}) => {
-  return Object.keys(values).sort().map(value => {
-    const keyFormatted = Capitalize(value);
-    
-    if (value != "servings") {
-      const amount = parseFloat((values[value] * (servings / servingsRatio)).toFixed(2));
-      return (
-        <div className={classes.nutritionGoal} key={value}>
-          <strong>{keyFormatted}</strong>: {amount}{value != "calories" ? "g" : ""}
-        </div>
-      )
-    }
+const NutritionValues = ({ingredients, nutritionGoalData, servings, servingsRatio}) => {
+  const nutritionValues = GetNutritionValues(ingredients, nutritionGoalData, servings, servingsRatio);
 
-    return (
-      <div className={classes.nutritionGoal} key={value}>
-        <strong>{keyFormatted}</strong>: 
-        <InputNumber
-          defaultValue={servings}
-          onBlur={(e) => setServings(e.target.value)}
-          style={{width: '75px', marginLeft: '10px'}}
-          min={1}
-        />
+  return (
+    <div className={classes.nutritionValues}>
+      {
+        Object.keys(nutritionValues).map(val => {
+          return nutritionValues[val] != 0 && (
+            <div className={classes.nutritionValueImg}>
+              <Tooltip title={val} key={val}>
+                <Progress
+                  type="circle"
+                  percent={nutritionValues[val] * 100}
+                  format={() => <img className={classes.goalImg} src={GetNutritionGoalImg(val)} />}
+                  strokeColor={GetBorderColor(val)}
+                  width={70}
+                />
+              </Tooltip>
+            </div>
+          )
+        })
+      }
     </div>
-    )
-  });
+  )
 };
 
 export default NutritionValues;

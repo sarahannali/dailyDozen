@@ -10,13 +10,4 @@
   max-width: 40px;
   height: 40px;
   object-fit: cover;
-  margin: 17px 0px 0px 17px;
-}
-
-.goalImgBorder { 
-  border: 8px solid rgb(192, 192, 192);
-  border-radius: 50%;
-  width: 90px;
-  height: 90px;
-  margin-right: 20px;
 }

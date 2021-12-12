@@ -7,27 +7,3 @@
   height: 100px;
   object-fit: cover;
 }
-
-.ingredients {
-  background-color: #e8eded;
-  padding: 15px;
-  border-radius: 10px;
-  margin: 15px 0px 15px 0px;
-}
-
-.recipeInfoImg {
-  max-width: 200px;
-  max-height: 200px;
-  object-fit: cover;
-}
-
-.goalImg {
-  max-width: 20px;
-  height: 20px;
-  object-fit: cover;
-  margin: 4px 0px 0px 6px;
-}
-
-.nutritionGoal {
-  margin: 10px;
-}

@@ -4,7 +4,8 @@ const ColorMap = {
   'calories': '#E9A8E2',
   'carbs': '#A8DBE9',
   'fat': '#FDD09B',
-  'protein': '#FDD09B'
+  'protein': '#FDD09B',
+  'proteinType': '#E9A8E2',
 }
 
 const GetBorderColor = (goal) => ColorMap[goal];

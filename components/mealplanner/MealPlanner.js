@@ -15,7 +15,7 @@ import {
   CloseCircleTwoTone
 } from '@ant-design/icons';
 
-const MealPlanner = ({allRecipeData, currentWeekMealEvents, allNutritionData}) => {
+const MealPlanner = ({allRecipeData, currentWeekMealEvents, nutritionGoalData}) => {
   const [days, setDays] = useState([]);
   const [loadingSymbol, setLoadingSymbol] = useState(null);
 
@@ -50,7 +50,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, allNutritionData}) =
       </div>
       <DraggableAreas
         allRecipeData={allRecipeData}
-        allNutritionData={allNutritionData}
+        nutritionGoalData={nutritionGoalData}
         days={days}
         performRequest={performRequest}
         setDays={setDays}

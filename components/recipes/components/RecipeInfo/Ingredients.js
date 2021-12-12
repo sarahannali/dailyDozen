@@ -1,6 +1,6 @@
 import React from 'react';
 import {Typography} from 'antd';
-import classes from '../recipes.module.css';
+import classes from './recipeInfo.module.css';
 import { ConvertGramsToUnits } from '../../../common';
 
 const {Title} = Typography;

@@ -2,10 +2,10 @@ import React from 'react';
 import { GetNutritionGoalImg, Capitalize, GetBorderColor } from '../../../../../common';
 import classes from './dailyNutritionInfo.module.css';
 
-const DailyNutritionInfo = ({allNutritionData}) => {
+const DailyNutritionInfo = ({nutritionGoalData}) => {
   return (
     <div className={classes.modal}>
-      {allNutritionData.map(nutritionGoal => {
+      {nutritionGoalData.map(nutritionGoal => {
         return (
           <div className={classes.nutritionGoal}>
             <h4>{Capitalize(nutritionGoal.name)}</h4>

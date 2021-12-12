@@ -17,6 +17,7 @@
     "craco-antd": "^1.19.0",
     "craco-less": "^1.20.0",
     "firebase": "^9.1.0",
+    "fuse.js": "^6.4.6",
     "fuzzy-search": "^3.2.1",
     "linq": "^4.0.0",
     "moment": "^2.29.1",

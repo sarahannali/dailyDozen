@@ -1,0 +1,31 @@
+.recipeInfoImg {
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.ingredients {
+  background-color: #e8eded;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0px 15px 0px;
+}
+
+.goalImg {
+  max-width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.nutritionGoal {
+  margin: 5px;
+}
+
+.nutritionValues {
+  display: flex;
+  margin-left: 15px;
+}
+
+.nutritionValueImg {
+  margin: 5px;
+}

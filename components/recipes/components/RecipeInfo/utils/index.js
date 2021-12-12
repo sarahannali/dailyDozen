@@ -1,0 +1,1 @@
+export {default as GetNutritionValues} from './_getNutritionValues';

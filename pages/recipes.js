@@ -1,16 +1,19 @@
-import { getAllRecipeData } from '../lib/recipes'
+import { getAllRecipeData } from '../lib/recipes';
+import { getNutritionGoalData } from '../lib/goals';
 import Recipes from '../components/recipes/Recipes';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData()
+  const nutritionGoalData = await getNutritionGoalData();
 
   return {
     props: {
-      allRecipeData
+      allRecipeData,
+      nutritionGoalData
     }
   }
 };
 
-export default function RecipesPage({allRecipeData}) {
-  return <Recipes recipes={allRecipeData} />
+export default function RecipesPage({allRecipeData, nutritionGoalData}) {
+  return <Recipes recipes={allRecipeData} nutritionGoalData={nutritionGoalData} />
 }

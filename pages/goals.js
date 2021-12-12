@@ -1,8 +1,8 @@
 import NutritionGoals from '../components/nutritionGoals/NutritionGoals';
-import { getNutritionGoalInfo, postNutritionGoalData, testingGet } from '../lib/goals';
+import { getNutritionGoalData } from '../lib/goals';
 
 export const getStaticProps = async () => {
-  const allNutritionData = await getNutritionGoalInfo();
+  const allNutritionData = await getNutritionGoalData();
 
   return {
     props: {

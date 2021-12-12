@@ -15,7 +15,7 @@ import {Calendar} from './calendar';
 import {RecipeBox} from './recipeBox';
 
 
-const DraggableAreas = ({allRecipeData, allNutritionData, days, setDays, performRequest}) => {
+const DraggableAreas = ({allRecipeData, nutritionGoalData, days, setDays, performRequest}) => {
   const [draggingRecipe, setDraggingRecipe] = useState(false);
 
   const onDragStart = (result) => {
@@ -69,7 +69,7 @@ const DraggableAreas = ({allRecipeData, allNutritionData, days, setDays, perform
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <Calendar
         days={days}
-        allNutritionData={allNutritionData}
+        nutritionGoalData={nutritionGoalData}
         deleteMealEvent={deleteMealEventHandler}
         updateMealEvent={updateMealEvent}
       />

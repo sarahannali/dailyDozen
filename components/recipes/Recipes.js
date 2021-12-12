@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import {Typography, Row, Col, Input} from 'antd';
+import React, { useState } from 'react';
+import {Typography, Row, Col} from 'antd';
 import {RecipeCard} from './components';
-import { searchRecipes } from './requests';
+import { SearchBar } from '../common';
 
 const {Title} = Typography;
 
-const {Search} = Input;
-
-const Recipes = ({recipes}) => {
+const Recipes = ({recipes, nutritionGoalData}) => {
   const [currRecipes, setCurrRecipes] = useState(recipes);
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    if (search == "") setCurrRecipes(recipes);
-    else {
-      (async () => {
-        const foundRecipes = await searchRecipes();
-        setCurrRecipes(foundRecipes);
-      })()
-    }
-  }, [search])
-
+  
   return (
     <div>
       <Row justify="center" style={{marginBottom: '10px'}}>
@@ -28,8 +15,12 @@ const Recipes = ({recipes}) => {
       </Row>
       <Row>
         <Col span={3}></Col>
-        <Col span={5}>
-          <Search onBlur={(e) => setSearch(e.target.value)} onPressEnter={(e) => setSearch(e.target.value)} />
+        <Col>
+          <SearchBar 
+            allData={recipes}
+            setData={setCurrRecipes}
+            searchKeys={['name']}
+          />
         </Col>
         <Col span={2}></Col>
       </Row>
@@ -48,6 +39,7 @@ const Recipes = ({recipes}) => {
                   >
                     <RecipeCard
                       recipe={recipe}
+                      nutritionGoalData={nutritionGoalData}
                     />
                   </Col>);
               })

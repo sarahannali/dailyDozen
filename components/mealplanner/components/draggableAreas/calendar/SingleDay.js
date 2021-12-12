@@ -7,7 +7,7 @@ import classes from './calendar.module.css';
 
 const {Title} = Typography;
 
-const SingleDay = ({date, meals, allNutritionData, deleteMealEvent, updateMealEvent}) => {
+const SingleDay = ({date, meals, nutritionGoalData, deleteMealEvent, updateMealEvent}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dayOfWeek = CalendarDays[date.getDay()];
@@ -37,7 +37,7 @@ const SingleDay = ({date, meals, allNutritionData, deleteMealEvent, updateMealEv
         onCancel={() => setIsModalVisible(false)}
         footer={null}
       >
-        <DailyNutritionInfo allNutritionData={allNutritionData} />
+        <DailyNutritionInfo nutritionGoalData={nutritionGoalData} />
       </Modal>
     </Col>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Row, Col, Typography, Input} from 'antd';
+import {Card, Row, Col, Typography, Input, Progress} from 'antd';
 import { Capitalize, GetBorderColor, GetNutritionGoalImg } from '../common';
 import classes from '../css/nutritionGoals.module.css';
 
@@ -11,12 +11,16 @@ const GoalCard = ({name, amount, updateNutritionGoals}) => {
       <Card className={classes.card} title={Capitalize(name)}>
         <Row style={{alignItems: "center"}}>
           <Col>
-            <div className={classes.goalImgBorder} style={{borderColor: GetBorderColor(name)}}>
-              <img className={classes.goalImg} src={GetNutritionGoalImg(name)} />
-            </div>
+            <Progress
+              type="circle"
+              percent={100}
+              format={() => <img className={classes.goalImg} src={GetNutritionGoalImg(name)} />}
+              strokeColor={GetBorderColor(name)}
+              width={100}
+            />
           </Col>
           <Col>
-            <Row style={{lineHeight: '2', margin: '5px'}}>
+            <Row style={{lineHeight: '2', marginRight: '5px', marginLeft: '30px'}}>
               <Text>Daily Goal: </Text>
             </Row>
           </Col>

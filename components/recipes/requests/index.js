@@ -1,1 +1,0 @@
-export {searchRecipes as searchRecipes} from './get';

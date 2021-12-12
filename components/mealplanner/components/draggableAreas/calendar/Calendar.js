@@ -3,7 +3,7 @@ import {Row} from 'antd';
 import SingleDay from './SingleDay';
 import classes from './calendar.module.css';
 
-const Calendar = ({days, allNutritionData, deleteMealEvent, updateMealEvent}) => {
+const Calendar = ({days, nutritionGoalData, deleteMealEvent, updateMealEvent}) => {
   return (<Row>
     <div className={classes.calendar}>
       {days.map((day) =>
@@ -11,7 +11,7 @@ const Calendar = ({days, allNutritionData, deleteMealEvent, updateMealEvent}) =>
           meals={day.meals}
           date={day.date}
           key={day.id}
-          allNutritionData={allNutritionData}
+          nutritionGoalData={nutritionGoalData}
           deleteMealEvent={deleteMealEvent}
           updateMealEvent={updateMealEvent}
         />
