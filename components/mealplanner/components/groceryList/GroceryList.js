@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Select } from 'antd';
+import { Select, Checkbox, Row } from 'antd';
 import { GetGroceryList, ConvertAmount } from './utils';
-
-import {
-  PrinterOutlined,
-  MailOutlined
-} from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -25,24 +20,26 @@ const GroceryList = ({days}) => {
 
   return (
     <div>
-      <PrinterOutlined />
-      <MailOutlined />
       <ul>
       {groceryList.map((ingredient, idx) => {
-        return (<li>
-          {ingredient.amount.toFixed(2)}
-          <Select
-            value={ingredient.amountType}
-            style={{ margin: "5px 10px" }}
-            onChange={(type) => handleChange(ingredient.amount, ingredient.amountType, type, idx)}
-          >
-            <Option value="gal">gal</Option>
-            <Option value="cup">cup</Option>
-            <Option value="tbs">tbs</Option>
-            <Option value="tsp">tsp</Option>
-          </Select>
-          {ingredient.name}
-        </li>)
+        return (
+          <Row>
+            <Checkbox>
+              {ingredient.amount.toFixed(2)}
+              <Select
+                value={ingredient.amountType}
+                style={{ margin: "5px 10px" }}
+                onChange={(type) => handleChange(ingredient.amount, ingredient.amountType, type, idx)}
+              >
+                <Option value="gal">gal</Option>
+                <Option value="cup">cup</Option>
+                <Option value="tbs">tbs</Option>
+                <Option value="tsp">tsp</Option>
+              </Select>
+              {ingredient.name}
+            </Checkbox>
+          </Row>
+        )
       })}
       </ul>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Typography, Row, Col, Rate} from 'antd';
+import {Typography, Row, Col, Rate, InputNumber} from 'antd';
 import MacroValues from './MacroValues';
 import Ingredients from './Ingredients';
 import NutritionValues from './NutritionValues';
@@ -7,9 +7,9 @@ import classes from './recipeInfo.module.css';
 
 const {Title} = Typography;
 
-const RecipeInfo = ({ recipe, nutritionGoalData }) => {
-  const [servings, setServings] = useState(recipe.nutritionValues.servings)
-  const servingsRatio = recipe.nutritionValues.servings;
+const RecipeInfo = ({ recipe, nutritionGoalData, setRecipeInfo }) => {
+  const [servings, setServings] = useState(recipe.servings);
+  const servingsRatio = recipe.servings;
 
   return (
     <Row justify="center">
@@ -29,28 +29,43 @@ const RecipeInfo = ({ recipe, nutritionGoalData }) => {
         </Row>
         <Row justify="center">
           <MacroValues
-            values={recipe.nutritionValues}
+            values={recipe.macros}
             servings={servings}
-            setServings={setServings}
             servingsRatio={servingsRatio}
           />
         </Row>
         <Row justify="center">
-          <Rate />
+            <strong>Servings</strong>: 
+            <InputNumber
+              defaultValue={servings}
+              onChange={(e) => setServings(e)}
+              style={{width: '75px', marginLeft: '10px'}}
+              min={1}
+            />
+        </Row>
+        <Row justify="center">
+          <Rate 
+            defaultValue={recipe.Rating} 
+            onChange={(e) => setRecipeInfo(() => {
+              return {Favorite: recipe.Favorite, Rating: e}
+            })}
+          />
         </Row>
         <Ingredients
           ingredients={recipe.ingredients}
           servings={servings}
           servingsRatio={servingsRatio}
         />
-        <Title level={4}>Steps:</Title>
-        {recipe.steps.map((step, idx) => {
-          return (
-            <div key={idx}>
-              {idx + 1}. {step}
-              <p></p>
-            </div>);
-        })}
+        <Row>
+          <Title level={4}>Steps:</Title>
+          {recipe.steps.map((step, idx) => {
+            return (
+              <div key={idx}>
+                {idx + 1}. {step}
+                <p></p>
+              </div>);
+          })}
+        </Row>
       </div>
     </Row>
   );

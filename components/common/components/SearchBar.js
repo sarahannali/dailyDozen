@@ -21,7 +21,7 @@ const SearchBar = ({allData, setData, searchKeys}) => {
 
   return (
     <Search 
-      onBlur={(e) => setSearch(e.target.value)} 
+      onChange={(e) => setSearch(e.target.value)} 
       onSearch={(e) => setSearch(e)}
       style={{width: '250px'}}
     />

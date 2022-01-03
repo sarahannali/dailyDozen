@@ -1,11 +1,13 @@
 const ColorMap = {
-  'fruit': '#A2DDBC',
-  'nuts': '#FF7C7C',
-  'calories': '#E9A8E2',
-  'carbs': '#A8DBE9',
-  'fat': '#FDD09B',
-  'protein': '#FDD09B',
-  'proteinType': '#E9A8E2',
+  'beans': '#f79292',
+  'berries': '#f7c78d',
+  'cruciferous': '#faf1ac',
+  'flaxseed': '#a1e3a4',
+  'fruit': '#9beaf2',
+  'grains': '#a0c4ff',
+  'greens': '#bdb2ff',
+  'nuts': '#ffc6ff',
+  'vegetables': '#fca9d4'
 }
 
 const GetBorderColor = (goal) => ColorMap[goal];

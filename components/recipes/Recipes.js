@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
-import {Typography, Row, Col} from 'antd';
+import React, { useState, useEffect } from 'react';
+import {Typography, Row, Col, Rate} from 'antd';
 import {RecipeCard} from './components';
+import { getRecipes } from './requests';
 import { SearchBar } from '../common';
+
+import {
+  HeartFilled
+} from '@ant-design/icons';
 
 const {Title} = Typography;
 
 const Recipes = ({recipes, nutritionGoalData}) => {
+  const [baseRecipes, setBaseRecipes] = useState(recipes);
   const [currRecipes, setCurrRecipes] = useState(recipes);
+  const [showFavorites, setShowFavorites] = useState(false);
+
+  useEffect(() => {
+    setCurrRecipes(baseRecipes);
+  }, [baseRecipes]);
+
+  const updateRecipes = async () => {
+    const upToDateRecipes = await getRecipes();
+    setBaseRecipes(upToDateRecipes);
+  };
   
   return (
     <div>
@@ -17,12 +33,19 @@ const Recipes = ({recipes, nutritionGoalData}) => {
         <Col span={3}></Col>
         <Col>
           <SearchBar 
-            allData={recipes}
+            allData={baseRecipes}
             setData={setCurrRecipes}
             searchKeys={['name']}
           />
         </Col>
-        <Col span={2}></Col>
+        <Col span={12}></Col>
+        <Rate 
+          count={1}
+          value={showFavorites}
+          character={<HeartFilled style={{color: showFavorites ? "#eb2f96" : "#caccce"}} />} 
+          style={{color: '#eb2f96'}} 
+          onChange={() => setShowFavorites(!showFavorites)}
+        />
       </Row>
       <Row justify="center" style={{marginTop: '40px'}}>
         <Col span={2}></Col>
@@ -30,18 +53,22 @@ const Recipes = ({recipes, nutritionGoalData}) => {
           <Row>
             {
               currRecipes.map((recipe, idx) => {
-                return (
-                  <Col
-                    xs={24}
-                    xl={7}
-                    key={idx}
-                    style={{marginBottom: '20px'}}
-                  >
-                    <RecipeCard
-                      recipe={recipe}
-                      nutritionGoalData={nutritionGoalData}
-                    />
-                  </Col>);
+                if ((!showFavorites) || (showFavorites && recipe.Favorite)) {
+                  return (
+                    <Col
+                      xs={24}
+                      xl={7}
+                      key={idx}
+                      style={{marginBottom: '20px'}}
+                    >
+                      <RecipeCard
+                        recipe={recipe}
+                        nutritionGoalData={nutritionGoalData}
+                        updateRecipes={updateRecipes}
+                      />
+                    </Col>
+                  )
+                }
               })
             }
           </Row>

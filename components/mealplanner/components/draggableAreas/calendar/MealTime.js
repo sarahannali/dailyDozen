@@ -21,6 +21,7 @@ const MealTime = ({day, mealTime, meals, deleteMealEvent, updateMealEvent}) => {
             {meals ?
               meals.map((meal, index) =>{
                 return (<Recipe
+                  key={index}
                   isMealEvent
                   recipeInfo={meal.RecipeInfo}
                   listName={day + ':' + mealTime}

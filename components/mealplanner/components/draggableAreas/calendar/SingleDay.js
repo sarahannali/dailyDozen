@@ -11,6 +11,7 @@ const SingleDay = ({date, meals, nutritionGoalData, deleteMealEvent, updateMealE
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dayOfWeek = CalendarDays[date.getDay()];
+  const dateStr = (date.getMonth() + 1) + "/" + date.getDate();
   const day = date.toDateString();
 
   return (
@@ -19,7 +20,7 @@ const SingleDay = ({date, meals, nutritionGoalData, deleteMealEvent, updateMealE
         <Title level={3} style={{marginBottom: "0px"}} onClick={() => setIsModalVisible(true)} className={classes.singleDayTitle}>
           {dayOfWeek}
         </Title>
-        <Title level={5} style={{marginTop: "0px"}}>{(date.getMonth() + 1) + "/" + date.getDate()}</Title>
+        <Title level={5} style={{marginTop: "0px"}}>{dateStr}</Title>
       </div>
       {Object.keys(meals).map((mealTime) =>
         <MealTime
@@ -32,12 +33,12 @@ const SingleDay = ({date, meals, nutritionGoalData, deleteMealEvent, updateMealE
         />
       )}
       <Modal
-        title={day}
+        title={dayOfWeek + " " + dateStr}
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
       >
-        <DailyNutritionInfo nutritionGoalData={nutritionGoalData} />
+        <DailyNutritionInfo nutritionGoalData={nutritionGoalData} meals={meals} />
       </Modal>
     </Col>
   );

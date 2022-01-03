@@ -1,18 +1,38 @@
 import React, {useState} from 'react';
-import {Card, Col, Row, Modal, Rate, Badge} from 'antd';
+import {Card, Col, Row, Modal, Rate, Badge, Spin} from 'antd';
 import RecipeInfo from './RecipeInfo/RecipeInfo';
+import { putUserRecipe } from '../requests';
 import classes from './recipes.module.css';
 
 import {
-  HeartFilled 
+  HeartFilled,
+  LoadingOutlined
 } from '@ant-design/icons';
 
-const RecipeCard = ({recipe, nutritionGoalData}) => {
+const RecipeCard = ({recipe, nutritionGoalData, updateRecipes}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [favorite, setFavorite] = useState(true);
+  const [recipeInfo, setRecipeInfo] = useState({Favorite: recipe.Favorite, Rating: recipe.Rating});
+  const [loading, setLoading] = useState(false);
+
+  const onCancel = async () => {
+    if (recipeInfo.Favorite != recipe.Favorite || recipeInfo.Rating != recipe.Rating) {
+      setLoading(true);
+
+      await putUserRecipe({
+        id: recipe.userRecipeID,
+        Rating: recipeInfo.Rating,
+        Favorite: recipeInfo.Favorite
+      });
+  
+      updateRecipes();
+    }
+
+    setIsModalVisible(false);
+    setLoading(false);
+  }
 
   return (
-    <Badge count={<HeartFilled style={{color: '#eb2f96', fontSize:'20px'}}/>}>
+    <Badge count={recipeInfo.Favorite ? <HeartFilled style={{color: '#eb2f96', fontSize:'20px'}}/> : null}>
       <Card className={classes.recipecard} onClick={() => setIsModalVisible(true)} hoverable>
         <Row>
           <Col span={12}>
@@ -28,18 +48,28 @@ const RecipeCard = ({recipe, nutritionGoalData}) => {
             <span>
               {recipe.name}
               <Rate 
-                count={1} 
+                count={1}
+                value={recipeInfo.Favorite}
                 character={<HeartFilled />} 
                 style={{color: '#eb2f96', marginLeft: '10px'}} 
+                onChange={() => setRecipeInfo(() => {
+                  return {...recipeInfo, Favorite: !recipeInfo.Favorite}
+                })}
               />
             </span>
           }
           visible={isModalVisible}
-          onCancel={() => setIsModalVisible(false)}
+          onCancel={onCancel}
           footer={null}
-          bodyStyle={{overflowY: 'scroll', overflowX: 'hidden', marginBottom: '20px'}}
+          style={{marginTop: '-50px'}}
+          bodyStyle={{maxHeight: '600px', overflowY: 'auto', overflowX: 'none'}}
         >
-          <RecipeInfo recipe={recipe} nutritionGoalData={nutritionGoalData} />
+          <Spin
+            spinning={loading}
+            indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
+          >
+            <RecipeInfo recipe={recipe} nutritionGoalData={nutritionGoalData} setRecipeInfo={setRecipeInfo} />
+          </Spin>
         </Modal>
     </Badge>
   );

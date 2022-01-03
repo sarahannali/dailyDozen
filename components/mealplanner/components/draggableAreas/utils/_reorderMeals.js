@@ -34,7 +34,8 @@ const ReorderMeals = (source, destination, recipes, days) => {
         imageURL: newMealEvent.imageURL, 
         name: newMealEvent.name,
         ingredients: newMealEvent.ingredients,
-        nutritionValues: newMealEvent.nutritionValues
+        macros: newMealEvent.macros,
+        servings: newMealEvent.servings
       }
     };
   } else {

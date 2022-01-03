@@ -33,7 +33,6 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, nutritionGoalData}) 
     }
     catch (err) {
       setLoadingSymbol(<CloseCircleTwoTone twoToneColor="#eb2f3c" />);
-      console.log("ERROR: ", err)
     }
     finally {
       setTimeout(() => setLoadingSymbol(null), 2000);

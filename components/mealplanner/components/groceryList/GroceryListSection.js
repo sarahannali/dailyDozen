@@ -21,6 +21,8 @@ const GroceryListSection = ({days}) => {
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
+        style={{marginTop: '-50px'}}
+        bodyStyle={{maxHeight: '600px', overflowY: 'auto', overflowX: 'none'}}
       >
         <GroceryList days={days} />
       </Modal>

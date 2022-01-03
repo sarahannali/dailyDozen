@@ -1,7 +1,6 @@
 import { ConvertGramsToUnits } from "../../../../common";
 
 const GetGroceryList = (days) => {
-  console.log("GETTING GROCERY LIST")
   const ingredientMap = new Map();
 
   days.forEach(day => {

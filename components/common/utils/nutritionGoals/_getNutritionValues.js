@@ -23,7 +23,7 @@ const GetNutritionValues = (ingredients, nutritionGoalData, servings, servingsRa
         nutritionMap[type] += amountOfGoal;
       })
     }
-  })
+  });
 
   return nutritionMap;
 }

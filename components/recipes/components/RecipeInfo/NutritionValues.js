@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Tooltip, Progress, InputNumber } from 'antd';
+import React from 'react';
+import { Tooltip, Progress } from 'antd';
 import { GetBorderColor, GetNutritionGoalImg } from '../../../common';
-import { GetNutritionValues } from './utils';
+import { GetNutritionValues } from '../../../common';
 import classes from './recipeInfo.module.css';
 
 const NutritionValues = ({ingredients, nutritionGoalData, servings, servingsRatio}) => {
@@ -12,8 +12,8 @@ const NutritionValues = ({ingredients, nutritionGoalData, servings, servingsRati
       {
         Object.keys(nutritionValues).map(val => {
           return nutritionValues[val] != 0 && (
-            <div className={classes.nutritionValueImg}>
-              <Tooltip title={val} key={val}>
+            <div className={classes.nutritionValueImg} key={val}>
+              <Tooltip title={val}>
                 <Progress
                   type="circle"
                   percent={nutritionValues[val] * 100}

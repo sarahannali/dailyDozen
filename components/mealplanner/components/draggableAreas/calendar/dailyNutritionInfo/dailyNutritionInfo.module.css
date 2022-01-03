@@ -5,15 +5,10 @@
   flex-wrap: wrap;
 }
 
-.nutritionGoal {
-  text-align: center;
-}
-
 .goalImg {
   max-width: 40px;
   height: 40px;
   object-fit: cover;
-  margin: 17px 0px 0px 0px;
 }
 
 .goalImgBorder {

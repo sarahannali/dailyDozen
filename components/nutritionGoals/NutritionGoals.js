@@ -89,23 +89,9 @@ const NutritionGoals = ({allNutritionData}) => {
         </Col>
         <Col span={2}></Col>
       </Row>
-      <Row style={{marginTop: '20px'}}>
-        <Col span={2}></Col>
-        <Col span={7}>
-          <Row>
-            <Title level={4}>Select a Plan</Title>
-          </Row>
-          <Row>
-            <Select defaultValue="dailyDozen" style={{width: '100%'}}>
-              <Option value="dailyDozen">Daily Dozen</Option>
-              <Option value="plateMethod">The Plate Method</Option>
-            </Select>
-          </Row>
-        </Col>
-      </Row>
       <Row justify="center" style={{marginTop: '40px'}}>
         {
-          Object.keys(nutritionGoals).map((goal) => {
+          Object.keys(nutritionGoals).sort().map((goal) => {
             return IsNotMacro(goal)
             ? (
               <Col xs={9} key={goal}>
