@@ -6,7 +6,6 @@ import { SearchBar } from '../../../../common';
 import classes from './recipeBox.module.css';
 
 import {
-  FilterOutlined,
   PlusOutlined
 } from '@ant-design/icons';
 
@@ -27,8 +26,10 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
       <Drawer
         placement="bottom"
         closable
+        title="Recipes"
         onClose={() => setVisible(false)}
         visible={visible}
+        height='300px'
         className={classes.drawer + ' ' +
         (isDragging ? classes.transition : {})}
       >
@@ -37,36 +38,38 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
             setData={setRecipes}
             searchKeys={['name']}
         />
-        <Droppable
-          droppableId={droppableId}
-          direction="horizontal"
-          isDropDisabled
-        >
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              isDraggingOver={snapshot.isDraggingOver}
-              style={{
-                display: 'flex',
-                padding: '8',
-              }}
-              {...provided.droppableProps}>
-              {recipes.map((recipe, index) =>{
-                const recipeInfo = {
-                  imageURL: recipe.imageURL,
-                  name: recipe.name
-                }
-                
-                return (<Recipe
-                  listName={droppableId}
-                  recipeInfo={recipeInfo}
-                  index={index}
-                />);
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+        <div style={{marginTop: '20px'}}>
+          <Droppable
+            droppableId={droppableId}
+            direction="horizontal"
+            isDropDisabled
+          >
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                isDraggingOver={snapshot.isDraggingOver}
+                style={{
+                  display: 'flex',
+                  padding: '8',
+                }}
+                {...provided.droppableProps}>
+                {recipes.map((recipe, index) =>{
+                  const recipeInfo = {
+                    imageURL: recipe.imageURL,
+                    name: recipe.name
+                  }
+                  
+                  return (<Recipe
+                    listName={droppableId}
+                    recipeInfo={recipeInfo}
+                    index={index}
+                  />);
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
       </Drawer>
     </div>
   );

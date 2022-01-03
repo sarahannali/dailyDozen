@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {Typography, Row, Col, Rate} from 'antd';
-import {RecipeCard} from './components';
+import {Typography, Row, Col} from 'antd';
+import {RecipeCard, SearchSection, CreateRecipe} from './components';
 import { getRecipes } from './requests';
-import { SearchBar } from '../common';
 
 import {
-  HeartFilled
+  PlusOutlined
 } from '@ant-design/icons';
 
 const {Title} = Typography;
@@ -29,24 +28,12 @@ const Recipes = ({recipes, nutritionGoalData}) => {
       <Row justify="center" style={{marginBottom: '10px'}}>
         <Title level={2}>Recipes</Title>
       </Row>
-      <Row>
-        <Col span={3}></Col>
-        <Col>
-          <SearchBar 
-            allData={baseRecipes}
-            setData={setCurrRecipes}
-            searchKeys={['name']}
-          />
-        </Col>
-        <Col span={12}></Col>
-        <Rate 
-          count={1}
-          value={showFavorites}
-          character={<HeartFilled style={{color: showFavorites ? "#eb2f96" : "#caccce"}} />} 
-          style={{color: '#eb2f96'}} 
-          onChange={() => setShowFavorites(!showFavorites)}
-        />
-      </Row>
+      <SearchSection
+        baseRecipes={baseRecipes}
+        showFavorites={showFavorites}
+        setShowFavorites={setShowFavorites}
+        setCurrRecipes={setCurrRecipes}
+      />
       <Row justify="center" style={{marginTop: '40px'}}>
         <Col span={2}></Col>
         <Col span={20}>
@@ -74,6 +61,7 @@ const Recipes = ({recipes, nutritionGoalData}) => {
           </Row>
         </Col>
       </Row>
+      <CreateRecipe />
     </div>
   );
 };

@@ -1,0 +1,13 @@
+.addButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 50px;
+}
+
+.formSection {
+  background-color: #f2f2f2;
+  border-radius: 2px;
+  padding: 10px;
+  margin-bottom: 20px;
+}

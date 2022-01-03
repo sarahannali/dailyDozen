@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import {Layout, Menu} from 'antd';
 import {
-  HomeOutlined,
   PieChartOutlined,
   FolderOpenOutlined,
   LineChartOutlined,
@@ -27,22 +26,17 @@ export default function AppLayout({ children }) {
               <h2>Sarah Ali</h2>
             </div>
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-              <Menu.Item key="1" icon={<HomeOutlined />}>
+              <Menu.Item key="1" icon={<PieChartOutlined />}>
                 <Link href="/">
-                  Dashboard
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="2" icon={<PieChartOutlined />}>
-                <Link href="/mealplanner">
                   Meal Planner
                 </Link>
               </Menu.Item>
-              <Menu.Item key="3" icon={<FolderOpenOutlined />}>
+              <Menu.Item key="2" icon={<FolderOpenOutlined />}>
                 <Link href="/recipes">
                   Recipes
                 </Link>
               </Menu.Item>
-              <Menu.Item key="4" icon={<LineChartOutlined />}>
+              <Menu.Item key="3" icon={<LineChartOutlined />}>
                 <Link href="/goals">
                   Goals
                 </Link>
