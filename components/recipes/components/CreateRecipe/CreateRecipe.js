@@ -26,6 +26,8 @@ const CreateRecipe = () => {
         visible={showForm}
         onCancel={() => setShowForm(false)}
         footer={null}
+        style={{marginTop: '-50px'}}
+        bodyStyle={{maxHeight: '600px', overflowY: 'auto', overflowX: 'none'}}
       >
         <Form
           labelCol={{ span: 4 }}
@@ -91,10 +93,10 @@ const CreateRecipe = () => {
                       />}
                     </Form.Item>
                     <Form.Item
-                      label="Amount"
+                      label="Amount (g)"
                       key={field.key}
                     >
-                      <InputNumber  style={{ width: '90%', marginRight: '10px' }}/>
+                      <InputNumber  style={{ width: '40%', marginRight: '10px' }}/>
                     </Form.Item>
                   </Form.Item>
                 ))}
@@ -143,6 +145,13 @@ const CreateRecipe = () => {
               </>
             )}
           </Form.List>
+          <Row justify="center"  className={classes.submitButton}>
+            <Form.Item style={{marginBottom: '0px'}}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Row>
         </Form>
       </Modal>
     </div>

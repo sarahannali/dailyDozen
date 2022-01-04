@@ -12,25 +12,19 @@ const DailyNutritionInfo = ({nutritionGoalData, meals}) => {
     <div className={classes.modal}>
       {Object.keys(macroInfo).map(macro => {
         return (
-          <Col>
-            <Row>
+            <>
+              <strong style={{marginBottom: '-30px'}}>{Capitalize(macro)}</strong>
               <Progress
-                type="circle"
                 percent={(macroInfo[macro] / nutritionGoalData[macro]) * 100}
                 format={() => <div style={{color: 'black'}}>{macroInfo[macro].toFixed(2)}</div>}
                 strokeColor={"#001529"}
-                width={100}
               />
-            </Row>
-            <Row justify="center">
-              <strong>{Capitalize(macro)}</strong>
-            </Row>
-          </Col>
+            </>
         )
         })
       }
 
-      {Object.keys(nutritionInfo).map(goal => {
+      {Object.keys(nutritionInfo).sort().map(goal => {
         return (
           <Progress
             type="circle"

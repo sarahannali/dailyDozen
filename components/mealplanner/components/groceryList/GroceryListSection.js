@@ -5,7 +5,7 @@ import classes from './groceryList.module.css';
 
 import {ProfileOutlined} from '@ant-design/icons'
 
-const GroceryListSection = ({days}) => {
+const GroceryListSection = ({days, groceryList}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   
   return (
@@ -24,7 +24,7 @@ const GroceryListSection = ({days}) => {
         style={{marginTop: '-50px'}}
         bodyStyle={{maxHeight: '600px', overflowY: 'auto', overflowX: 'none'}}
       >
-        <GroceryList days={days} />
+        <GroceryList days={days} originalGroceryList={groceryList} />
       </Modal>
     </div>
   );

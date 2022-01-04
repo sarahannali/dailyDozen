@@ -30,14 +30,18 @@ const RecipeMealEvent = ({name, index, listName, meal, deleteMealEvent, servings
     <span
       className={classes.leftServingArrow}
       onClick={() => servings > 0 && setServings(servings - 1)}
-      style={{color: servings <= 0 && "gray"}}
+      style={{color: servings <= 0 && "gray", zIndex: '1'}}
     >
       <CaretLeftOutlined />
     </span>
     <Tooltip title="Servings">
       <div className={classes.servingSize}>{servings}</div>
     </Tooltip>
-    <span className={classes.rightServingArrow} onClick={() => setServings(servings + 1)}>
+    <span 
+      className={classes.rightServingArrow}
+      onClick={() => setServings(servings + 1)}
+      style={{zIndex: '1'}}
+    >
       <CaretRightOutlined />
     </span>
     </>

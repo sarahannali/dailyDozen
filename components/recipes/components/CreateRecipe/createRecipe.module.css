@@ -11,3 +11,10 @@
   padding: 10px;
   margin-bottom: 20px;
 }
+
+.submitButton {
+  margin-top: 20px;
+  background-color: #f2f2f2;
+  border-radius: 2px;
+  padding: 10px;
+}

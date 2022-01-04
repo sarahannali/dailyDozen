@@ -37,6 +37,7 @@ const SingleDay = ({date, meals, nutritionGoalData, deleteMealEvent, updateMealE
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
+        style={{marginTop: '-50px'}}
       >
         <DailyNutritionInfo nutritionGoalData={nutritionGoalData} meals={meals} />
       </Modal>

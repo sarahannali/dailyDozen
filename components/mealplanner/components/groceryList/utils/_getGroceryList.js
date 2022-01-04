@@ -1,6 +1,12 @@
 import { ConvertGramsToUnits } from "../../../../common";
 
-const GetGroceryList = (days) => {
+const UpdateGroceryList = (groceryList, days) => {
+  // when days updates, just add it to the amount, don't change the amount type
+  // when amount type changes, then adjust that
+  return GetGroceryList(days, groceryList);
+}
+
+const GetGroceryList = (days, groceryList) => {
   const ingredientMap = new Map();
 
   days.forEach(day => {
@@ -18,12 +24,16 @@ const GetGroceryList = (days) => {
   const ingredients = [];
 
   Object.keys(ingredientMap).forEach(key => {
+    const groceryIngredient = groceryList.find(entry => entry.name == key);
+
     if (ingredientMap[key].amount != 0) {
-      const [amount, amountType] = ConvertGramsToUnits(ingredientMap[key].amount, ingredientMap[key].ratio);
+      const [amount, amountType] = ConvertGramsToUnits(ingredientMap[key].amount, ingredientMap[key].ratio, groceryIngredient ? groceryIngredient.amountType : null);
+
       ingredients.push({
         "name": key,
         "amount": amount,
-        "amountType": amountType
+        "amountType": amountType,
+        "checked": groceryIngredient ? groceryIngredient.checked : false
       });
     }
   });
@@ -31,4 +41,4 @@ const GetGroceryList = (days) => {
   return ingredients;
 };
 
-export default GetGroceryList;
+export default UpdateGroceryList;

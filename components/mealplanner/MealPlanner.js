@@ -15,7 +15,7 @@ import {
   CloseCircleTwoTone
 } from '@ant-design/icons';
 
-const MealPlanner = ({allRecipeData, currentWeekMealEvents, nutritionGoalData}) => {
+const MealPlanner = ({allRecipeData, currentWeekMealEvents, nutritionGoalData, groceryList}) => {
   const [days, setDays] = useState([]);
   const [loadingSymbol, setLoadingSymbol] = useState(null);
 
@@ -54,7 +54,7 @@ const MealPlanner = ({allRecipeData, currentWeekMealEvents, nutritionGoalData}) 
         performRequest={performRequest}
         setDays={setDays}
       />
-      <GroceryListSection days={days} />
+      <GroceryListSection days={days} groceryList={groceryList} />
     </div>
   );
 };
