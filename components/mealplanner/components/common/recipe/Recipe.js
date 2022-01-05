@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Draggable} from 'react-beautiful-dnd';
-import {Card, Typography} from 'antd';
-import classes from './recipe.module.css';
-import RecipeMealEvent from './RecipeMealEvent';
+import {Badge} from 'antd';
+import RecipeCard from './RecipeCard';
 
-const {Paragraph} = Typography;
+import {
+  HeartFilled
+} from '@ant-design/icons';
 
 const getItemStyle = (draggableStyle) => ({
   userSelect: 'none',
@@ -15,18 +16,7 @@ const getItemStyle = (draggableStyle) => ({
   ...draggableStyle,
 });
 
-const Recipe = ({isMealEvent = false, recipeInfo, index, listName, meal, deleteMealEvent = () => {}, updateMealEvent = () => {}, givenServings = 1}) => {
-  const [hover, setHover] = useState(false);
-  const [servings, setServings] = useState(givenServings);
-
-  const onMouseLeave = () => {
-    setHover(false);
-
-    if (isMealEvent && servings != meal.Servings) {
-      meal.Servings = servings;
-      updateMealEvent(meal, listName, index);
-    }
-  }
+const Recipe = ({isMealEvent = false, recipeInfo, index, listName, meal, deleteMealEvent = () => {}, updateMealEvent = () => {}, givenServings = 1, favorite = false}) => {
 
   return (
     <Draggable key={recipeInfo.name} draggableId={recipeInfo.name + listName + index} index={index}>
@@ -39,28 +29,31 @@ const Recipe = ({isMealEvent = false, recipeInfo, index, listName, meal, deleteM
               provided.draggableProps.style
           )}
         > 
-          <Card
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={onMouseLeave}
-            className={classes.card}
-          >
-            {hover ?
-              isMealEvent ?
-                <RecipeMealEvent
-                  name={recipeInfo.name}
-                  index={index}
-                  meal={meal}
-                  listName={listName}
-                  servings={servings}
-                  deleteMealEvent={deleteMealEvent} 
-                  setServings={setServings}
-                />
-                : <Paragraph style={{marginBottom: "0px", height: "90px", width: "90px"}} ellipsis={{rows: 3}}>
-                    {recipeInfo.name}
-                  </Paragraph>
-              : <img src={recipeInfo.imageURL} className={classes.recipeImg} />
-            }
-          </Card>
+        {
+          favorite
+          ? <Badge count={<HeartFilled style={{color: '#eb2f96', fontSize:'20px'}} />}>
+              <RecipeCard 
+                isMealEvent={isMealEvent}
+                recipeInfo={recipeInfo}
+                index={index}
+                listName={listName}
+                meal={meal}
+                deleteMealEvent={deleteMealEvent}
+                updateMealEvent={updateMealEvent}
+                givenServings={givenServings}
+              />
+            </Badge>
+          : <RecipeCard 
+              isMealEvent={isMealEvent}
+              recipeInfo={recipeInfo}
+              index={index}
+              listName={listName}
+              meal={meal}
+              deleteMealEvent={deleteMealEvent}
+              updateMealEvent={updateMealEvent}
+              givenServings={givenServings}
+            />
+        }
         </div>
       )}
     </Draggable>

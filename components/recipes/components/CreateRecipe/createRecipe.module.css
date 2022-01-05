@@ -18,3 +18,10 @@
   border-radius: 2px;
   padding: 10px;
 }
+
+.deleteButton {
+  z-index: 1;
+  position: relative;
+  bottom: -10px;
+  left: 88%;
+}

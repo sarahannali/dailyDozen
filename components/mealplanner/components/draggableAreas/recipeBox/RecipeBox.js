@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Drawer, Button} from 'antd';
 import {Droppable} from 'react-beautiful-dnd';
 import {Recipe} from '../../common';
-import { SearchBar } from '../../../../common';
+import { SearchSection } from '../../../../common';
 import classes from './recipeBox.module.css';
 
 import {
@@ -12,6 +12,7 @@ import {
 const RecipeBox = ({items, droppableId, isDragging}) => {
   const [recipes, setRecipes] = useState(items);
   const [visible, setVisible] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   return (
     <div>
@@ -33,10 +34,11 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
         className={classes.drawer + ' ' +
         (isDragging ? classes.transition : {})}
       >
-        <SearchBar 
-            allData={items}
-            setData={setRecipes}
-            searchKeys={['name']}
+        <SearchSection 
+          baseRecipes={items}
+          setCurrRecipes={setRecipes}
+          showFavorites={showFavorites}
+          setShowFavorites={setShowFavorites}
         />
         <div style={{marginTop: '20px'}}>
           <Droppable
@@ -59,11 +61,13 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
                     name: recipe.name
                   }
                   
-                  return (<Recipe
-                    listName={droppableId}
-                    recipeInfo={recipeInfo}
-                    index={index}
-                  />);
+                  return (!showFavorites || recipe.Favorite) &&
+                    (<Recipe
+                      listName={droppableId}
+                      recipeInfo={recipeInfo}
+                      index={index}
+                      favorite={recipe.Favorite}
+                    />);
                 })}
                 {provided.placeholder}
               </div>

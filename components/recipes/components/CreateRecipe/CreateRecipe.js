@@ -3,7 +3,9 @@ import {Button, Form, Input, InputNumber, Row} from 'antd';
 import classes from './createRecipe.module.css';
 
 import {
-  DeleteOutlined,
+  DeleteFilled,
+  CloseOutlined,
+  MinusCircleOutlined,
   PlusOutlined
 } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
@@ -12,6 +14,10 @@ const CreateRecipe = () => {
   const [showForm, setShowForm] = useState(false);
 
   const macros = ["Carbs", "Calories", "Fat", "Protein"];
+
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
 
   return (
     <div>
@@ -32,6 +38,7 @@ const CreateRecipe = () => {
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{span: 18}}
+          onFinish={onFinish}
         >
           <Form.Item
             label="Name"
@@ -88,7 +95,7 @@ const CreateRecipe = () => {
                     >
                       <Input style={{ width: '90%', marginRight: '10px' }}/>
                       {fields.length > 0 &&
-                        <DeleteOutlined
+                        <DeleteFilled
                           onClick={() => remove(field.name)}
                       />}
                     </Form.Item>
@@ -119,28 +126,37 @@ const CreateRecipe = () => {
             label="Steps"
             name="steps"
           >
-            {(fields, {add, remove}) => (
+            {(fields, { add, remove }) => (
               <>
                 {fields.map((field, index) => (
                   <Form.Item
-                    label={`${index}`}
+                    label={`${index + 1}`}
                     key={field.key}
+                    labelCol={{ span: 4 }}
+                    wrapperCol={{span: 18}}
                   >
-                      <Input  style={{ width: '90%', marginRight: '10px' }}/>
-                    {fields.length > 0 ? (
-                      <DeleteOutlined
+                    {fields.length > 1 ? (
+                      <CloseOutlined
+                        className={classes.deleteButton}
                         onClick={() => remove(field.name)}
                       />
                     ) : null}
+                    <Form.Item
+                      {...field}
+                    >
+                      <Input  style={{ width: '90%', marginRight: '10px', marginTop: '-20px'}}/>
+                    </Form.Item>
                   </Form.Item>
                 ))}
                 <Row justify="center">
-                  <Button
-                    onClick={() => add()}
-                    icon={<PlusOutlined />}
-                  >
-                    Add Step
-                  </Button>
+                  <Form.Item>
+                    <Button
+                      onClick={() => add()}
+                      icon={<PlusOutlined />}
+                    >
+                      Add Step
+                    </Button>
+                  </Form.Item>
                 </Row>
               </>
             )}

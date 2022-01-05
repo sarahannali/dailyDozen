@@ -32,7 +32,7 @@ const RecipeCard = ({recipe, nutritionGoalData, updateRecipes}) => {
   }
 
   return (
-    <Badge count={recipeInfo.Favorite ? <HeartFilled style={{color: '#eb2f96', fontSize:'20px'}}/> : null}>
+    <Badge count={recipeInfo.Favorite ? <HeartFilled style={{color: '#eb2f96', fontSize:'20px'}}/> : 0}>
       <Card className={classes.recipecard} onClick={() => setIsModalVisible(true)} hoverable>
         <Row>
           <Col span={12}>

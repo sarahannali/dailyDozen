@@ -1,15 +1,14 @@
 import React from 'react';
 import {Row, Col, Rate} from 'antd';
-import { SearchBar } from '../../../common';
+import SearchBar from './SearchBar';
 
 import {
   HeartFilled
 } from '@ant-design/icons';
 
-const SearchSection = ({baseRecipes, showFavorites, setShowFavorites, setCurrRecipes}) => {
+const SearchSection = ({baseRecipes, setCurrRecipes, showFavorites, setShowFavorites}) => {
   return (
     <Row>
-      <Col span={3}></Col>
       <Col>
         <SearchBar 
           allData={baseRecipes}
@@ -17,12 +16,11 @@ const SearchSection = ({baseRecipes, showFavorites, setShowFavorites, setCurrRec
           searchKeys={['name']}
         />
       </Col>
-      <Col span={12}></Col>
       <Rate 
         count={1}
         value={showFavorites}
         character={<HeartFilled style={{color: showFavorites ? "#eb2f96" : "#caccce"}} />} 
-        style={{color: '#eb2f96'}} 
+        style={{color: '#eb2f96', marginLeft: '10px', lineHeight: '1.3'}} 
         onChange={() => setShowFavorites(!showFavorites)}
       />
     </Row>

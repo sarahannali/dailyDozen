@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {Typography, Row, Col} from 'antd';
-import {RecipeCard, SearchSection, CreateRecipe} from './components';
+import {RecipeCard, CreateRecipe} from './components';
 import { getRecipes } from './requests';
-
-import {
-  PlusOutlined
-} from '@ant-design/icons';
+import { SearchSection } from '../common';
 
 const {Title} = Typography;
 
@@ -28,12 +25,15 @@ const Recipes = ({recipes, nutritionGoalData}) => {
       <Row justify="center" style={{marginBottom: '10px'}}>
         <Title level={2}>Recipes</Title>
       </Row>
-      <SearchSection
-        baseRecipes={baseRecipes}
-        showFavorites={showFavorites}
-        setShowFavorites={setShowFavorites}
-        setCurrRecipes={setCurrRecipes}
-      />
+      <Row>
+        <Col span={3} />
+        <SearchSection
+          baseRecipes={baseRecipes}
+          showFavorites={showFavorites}
+          setShowFavorites={setShowFavorites}
+          setCurrRecipes={setCurrRecipes}
+        />
+      </Row>
       <Row justify="center" style={{marginTop: '40px'}}>
         <Col span={2}></Col>
         <Col span={20}>
