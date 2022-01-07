@@ -58,6 +58,8 @@ const RecipeInfo = ({ recipe, nutritionGoalData, setRecipeInfo }) => {
         />
         <Row>
           <Title level={4}>Steps:</Title>
+        </Row>
+        <Row>
           {recipe.steps.map((step, idx) => {
             return (
               <div key={idx}>

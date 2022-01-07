@@ -1,10 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Typography, Row, Col, InputNumber, Select, notification} from 'antd';
+import {Typography, Row, Col, InputNumber, notification} from 'antd';
 import GoalCard from './GoalCard';
 import { IsNotMacro } from './utils';
 import axios from 'axios';
-
-const {Option} = Select;
 
 const {Title} = Typography;
 
@@ -19,7 +17,7 @@ const NutritionGoals = ({allNutritionData}) => {
 
   useEffect(() => {
     if (!firstRender.current) {
-      axios.post('/api/goals', nutritionGoals)
+      axios.post('/api/routes/goals', nutritionGoals)
       .then(function (response) {
         notification['success']({
           message: 'Changes Saved',

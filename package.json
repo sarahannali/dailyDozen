@@ -19,6 +19,7 @@
     "firebase": "^9.1.0",
     "fuse.js": "^6.4.6",
     "fuzzy-search": "^3.2.1",
+    "http-status-codes": "^2.2.0",
     "linq": "^4.0.0",
     "moment": "^2.29.1",
     "next": "^11.0.0",
