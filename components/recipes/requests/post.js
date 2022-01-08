@@ -10,5 +10,5 @@ export const postRecipe = (obj) => axios.post(`/api/routes/recipes`, obj)
     return {err: false, data: res.data};
   })
   .catch((err) => {
-    return {err: true, data: err.message};
+    return {err: true, data: err.response.data};
   });

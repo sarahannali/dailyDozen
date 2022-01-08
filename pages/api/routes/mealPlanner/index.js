@@ -1,4 +1,4 @@
-import { getMealEvents, createMealEvent } from '../../../lib/mealEvents';
+import { getMealEvents, createMealEvent } from '../../../../lib/mealEvents';
 import apiHandler from '../../middleware/apiHandler';
 
 async function handler(req, res) {

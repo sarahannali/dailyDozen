@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button, Form, Input, InputNumber, Row, Spin, Select, Alert} from 'antd';
+import {Button, Form, Input, InputNumber, Row, Col, Spin, Select, Alert} from 'antd';
 import classes from './createRecipe.module.css';
 
 const {Option} = Select;
@@ -15,6 +15,7 @@ import { postRecipe } from '../../requests/post';
 const CreateRecipe = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const macros = ["Calories", "Carbs", "Fat", "Protein"];
 
@@ -22,14 +23,14 @@ const CreateRecipe = () => {
     setLoading(true);
 
     const {err, data} = await postRecipe(values);
+    setLoading(false);
 
     if (err) {
       setError(data);
-      // show <Alert message="Error Text" type="error" />
+      return;
     }
 
     setIsModalVisible(false);
-    setLoading(false);
   };
 
   return (
@@ -40,10 +41,6 @@ const CreateRecipe = () => {
       >
         <PlusOutlined /> Create New
       </Button>
-      <Spin
-          spinning={loading}
-          indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
-        >
         <Modal
           title="Create Recipe"
           visible={isModalVisible}
@@ -52,6 +49,10 @@ const CreateRecipe = () => {
           style={{marginTop: '-50px'}}
           bodyStyle={{maxHeight: '600px', overflowY: 'auto', overflowX: 'none'}}
         >
+          <Spin
+            spinning={loading}
+            indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
+          >
             <Form
               labelCol={{ span: 4 }}
               wrapperCol={{span: 18}}
@@ -201,16 +202,25 @@ const CreateRecipe = () => {
                   </>
                 )}
               </Form.List>
-              <Row justify="center"  className={classes.submitButton}>
-                <Form.Item style={{marginBottom: '0px'}}>
-                  <Button type="primary" htmlType="submit">
-                    Submit
-                  </Button>
-                </Form.Item>
+              <Row justify="center" className={classes.submitButton}>
+                <Col>
+                  {error &&
+                    <Row style={{marginBottom: '5px'}} justify="center">
+                        <Alert message={error} type="error" />
+                    </Row>
+                  }
+                  <Row justify="center">
+                    <Form.Item style={{marginBottom: '0px'}}>
+                      <Button type="primary" htmlType="submit">
+                        Submit
+                      </Button>
+                    </Form.Item>
+                  </Row>
+                </Col>
               </Row>
             </Form>
+          </Spin>
         </Modal>
-      </Spin>
     </div>
   );
 };
