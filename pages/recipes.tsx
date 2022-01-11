@@ -1,7 +1,7 @@
-import { getAllRecipeData } from '../lib/recipes';
-import { getNutritionGoalData } from '../lib/goals';
+import React from 'react';
+import { getAllRecipeData, getNutritionGoalData } from '../lib';
 import Recipes from '../components/recipes/Recipes';
-import { Recipe } from '../utils/propTypes';
+import { NutritionGoals, Recipe } from '../utils/propTypes';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData();
@@ -17,7 +17,7 @@ export const getStaticProps = async () => {
 
 type RecipesPageProps = {
   allRecipeData: Array<Recipe>,
-  nutritionGoalData: Array<
+  nutritionGoalData: Array<NutritionGoals>
 }
 
 export default function RecipesPage({ allRecipeData, nutritionGoalData }: RecipesPageProps) {

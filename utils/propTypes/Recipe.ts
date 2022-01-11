@@ -1,4 +1,4 @@
-interface Ingredient {
+export interface Ingredient {
   amount: string,
   grams: number,
   name: string,
@@ -6,7 +6,7 @@ interface Ingredient {
   types: Array<string>
 }
 
-interface Macros {
+export interface Macros {
   calories: number,
   carbs: number,
   fat: number,

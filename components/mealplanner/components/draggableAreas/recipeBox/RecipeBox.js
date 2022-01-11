@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
-import {Drawer, Button} from 'antd';
-import {Droppable} from 'react-beautiful-dnd';
-import {Recipe} from '../../common';
-import { SearchSection } from '../../../../common';
+import React, { useState } from 'react';
+import { Drawer, Button } from 'antd';
+import { Droppable } from 'react-beautiful-dnd';
+import {
+  PlusOutlined,
+} from '@ant-design/icons';
+import { Recipe } from '../../common';
+import { SearchRecipeSection } from '../../../../common';
 import classes from './recipeBox.module.css';
 
-import {
-  PlusOutlined
-} from '@ant-design/icons';
-
-const RecipeBox = ({items, droppableId, isDragging}) => {
+function RecipeBox({ items, droppableId, isDragging }) {
   const [recipes, setRecipes] = useState(items);
   const [visible, setVisible] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
 
   return (
     <div>
-      <div style={visible ? {visibility: 'hidden'} : {}}>
-        <Button className={classes.addButton}
+      <div style={visible ? { visibility: 'hidden' } : {}}>
+        <Button
+          className={classes.addButton}
           type="primary"
           onClick={() => setVisible(true)}
         >
@@ -30,17 +30,17 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
         title="Recipes"
         onClose={() => setVisible(false)}
         visible={visible}
-        height='300px'
-        className={classes.drawer + ' ' +
-        (isDragging ? classes.transition : {})}
+        height="300px"
+        className={`${classes.drawer} ${
+          isDragging ? classes.transition : {}}`}
       >
-        <SearchSection 
+        <SearchRecipeSection
           baseRecipes={items}
           setCurrRecipes={setRecipes}
           showFavorites={showFavorites}
           setShowFavorites={setShowFavorites}
         />
-        <div style={{marginTop: '20px'}}>
+        <div style={{ marginTop: '20px' }}>
           <Droppable
             droppableId={droppableId}
             direction="horizontal"
@@ -54,20 +54,23 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
                   display: 'flex',
                   padding: '8',
                 }}
-                {...provided.droppableProps}>
-                {recipes.map((recipe, index) =>{
+                {...provided.droppableProps}
+              >
+                {recipes.map((recipe, index) => {
                   const recipeInfo = {
                     imageURL: recipe.imageURL,
-                    name: recipe.name
-                  }
-                  
-                  return (!showFavorites || recipe.Favorite) &&
-                    (<Recipe
+                    name: recipe.name,
+                  };
+
+                  return (!showFavorites || recipe.Favorite)
+                    && (
+                    <Recipe
                       listName={droppableId}
                       recipeInfo={recipeInfo}
                       index={index}
                       favorite={recipe.Favorite}
-                    />);
+                    />
+                    );
                 })}
                 {provided.placeholder}
               </div>
@@ -77,6 +80,6 @@ const RecipeBox = ({items, droppableId, isDragging}) => {
       </Drawer>
     </div>
   );
-};
+}
 
 export default RecipeBox;
