@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ReactElement } from 'react';
 import {
   getAllRecipeData, getMealEvents, getNutritionGoalData, getGroceryList,
 } from '../lib';
@@ -6,6 +7,7 @@ import MealPlanner from '../components/mealplanner/MealPlanner';
 import {
   NutritionGoals, Recipe, MealEvent, GroceryItem,
 } from '../utils/propTypes';
+import AppLayout from '../components/layout';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData();
@@ -42,3 +44,11 @@ export default function MealPlannerPage({
     />
   );
 }
+
+MealPlannerPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <AppLayout>
+      {page}
+    </AppLayout>
+  );
+};

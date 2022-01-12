@@ -1,13 +1,26 @@
-import { NutritionGoalsWithMacros, Ingredient } from '../../../../utils/propTypes';
+import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
 
 const GetNutritionValues = (
-  ingredients: Array<Ingredient>,
+  ingredients: Array<RecipeIngredient>,
   nutritionGoalData: NutritionGoalsWithMacros,
   servings: number,
   servingsRatio: number,
-) => {
-  const nutritionMap = Object.keys(nutritionGoalData)
-    .reduce((prevObj, key) => ({ ...prevObj, [key]: 0 }), {});
+): NutritionGoals => {
+  const nutritionMap: NutritionGoals = {
+    beans: 0,
+    berries: 0,
+    calories: 0,
+    carbs: 0,
+    cruciferous: 0,
+    fat: 0,
+    flaxseed: 0,
+    fruit: 0,
+    grains: 0,
+    greens: 0,
+    nuts: 0,
+    protein: 0,
+    vegetables: 0,
+  };
 
   ingredients.forEach((ingr) => {
     const { types } = ingr;

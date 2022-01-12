@@ -1,8 +1,8 @@
 const ConvertGramsToUnits = (
   amountInGrams: number,
   ratio: number,
-  givenAmountType: string = null,
-) => {
+  givenAmountType = '',
+): [number, string] => {
   const amountInCups = amountInGrams / ratio; // todo: rewrite?
   let amount = amountInCups;
   let amountType = givenAmountType || 'cup';

@@ -1,6 +1,7 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import {Layout, Menu} from 'antd';
+import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { Layout, Menu } from 'antd';
 import {
   PieChartOutlined,
   FolderOpenOutlined,
@@ -8,9 +9,13 @@ import {
 } from '@ant-design/icons';
 import classes from './css/layout.module.css';
 
-const {Sider, Content} = Layout;
+const { Sider, Content } = Layout;
 
-export default function AppLayout({ children }) {
+type AppLayoutProps = {
+  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>
+}
+
+export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="container">
       <Head>
@@ -19,7 +24,7 @@ export default function AppLayout({ children }) {
       </Head>
 
       <main>
-        <Layout style={{minHeight: '100vh'}}>
+        <Layout style={{ minHeight: '100vh' }}>
           <Sider theme="dark">
             <div className={classes.sidebarTitle}>
               Welcome back,
@@ -43,11 +48,11 @@ export default function AppLayout({ children }) {
               </Menu.Item>
             </Menu>
           </Sider>
-          <Content style={{margin: '16px 0'}}>
+          <Content style={{ margin: '16px 0' }}>
             {children}
           </Content>
         </Layout>
       </main>
     </div>
-  )
+  );
 }

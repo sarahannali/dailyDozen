@@ -24,7 +24,10 @@
     "isolatedModules": true
   },
   "include": [
-    "./lib/**/*"
+    "./lib/**/*",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules"

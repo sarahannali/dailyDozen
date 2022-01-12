@@ -4,7 +4,7 @@ import {
 import { StatusCodes } from 'http-status-codes';
 import db from '../firebase/clientApp';
 import { getAllUserRecipeData } from './userRecipes';
-import { AmountType, ErrorWithStatus } from '../utils/propTypes';
+import { ErrorWithStatus, IngredientRequest, RecipeRequest } from '../utils/propTypes';
 
 export const getAllRecipeData = async () => {
   const userRecipes = await getAllUserRecipeData();
@@ -33,13 +33,7 @@ const AmountTypeMultipliers = {
   gal: 0.0625,
 };
 
-type Ingr = {
-  amount: number,
-  amountType: AmountType,
-  name: string
-}
-
-const PopulateIngredients = async (ingredients: Array<Ingr>) => { // todo: fix type
+const PopulateIngredients = async (ingredients: Array<IngredientRequest>) => { // todo: fix type
   const ingredientCollection = collection(db, 'ingredients');
 
   const populatedIngredients = await Promise.all(ingredients.map(async (ingredient) => {
@@ -74,19 +68,6 @@ const PopulateIngredients = async (ingredients: Array<Ingr>) => { // todo: fix t
 
   return populatedIngredients;
 };
-
-type RecipeRequest = {
-  name: string,
-  source: string,
-  imageURL: string,
-  calories: number,
-  carbs: number,
-  fat: number,
-  protein: number,
-  servings: number,
-  ingredients: Array<Ingr>,
-  steps: Array<string>
-}
 
 export const postRecipe = async (recipe: RecipeRequest) => {
   const recipesCollection = collection(db, 'recipes');

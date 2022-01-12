@@ -10,6 +10,6 @@ const clientCredentials = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-var app = initializeApp(clientCredentials);
+const app = initializeApp(clientCredentials);
 
 export default getFirestore(app);

@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import {Typography, Row, Col, Rate, InputNumber} from 'antd';
+import {
+  Typography, Row, Col, Rate, InputNumber, Button,
+} from 'antd';
+import Image from 'next/image';
 import MacroValues from './MacroValues';
 import Ingredients from './Ingredients';
 import NutritionValues from './NutritionValues';
 import classes from './recipeInfo.module.css';
+import { NutritionGoals, Recipe, UserRecipe } from '../../../../utils/propTypes';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
-const RecipeInfo = ({ recipe, nutritionGoalData, setRecipeInfo }) => {
+type RecipeInfoProps = {
+  recipe: Recipe,
+  nutritionGoalData: NutritionGoals,
+  setRecipeInfo: React.Dispatch<React.SetStateAction<UserRecipe>>
+}
+
+function RecipeInfo({ recipe, nutritionGoalData, setRecipeInfo }: RecipeInfoProps) {
   const [servings, setServings] = useState(recipe.servings);
   const servingsRatio = recipe.servings;
 
   return (
     <Row justify="center">
-      <div style={{height: "80vh", width: "60vw"}}>
-        <Row style={{marginBottom: '15px'}}>
+      <div style={{ height: '80vh', width: '60vw' }}>
+        <Row style={{ marginBottom: '15px' }}>
           <Col>
-            <img src={recipe.imageURL} className={classes.recipeInfoImg} />
+            <Image src={recipe.imageURL} className={classes.recipeInfoImg} />
           </Col>
           <Col span={10}>
             <NutritionValues
@@ -35,20 +45,19 @@ const RecipeInfo = ({ recipe, nutritionGoalData, setRecipeInfo }) => {
           />
         </Row>
         <Row justify="center">
-            <strong>Servings</strong>: 
-            <InputNumber
-              defaultValue={servings}
-              onChange={(e) => setServings(e)}
-              style={{width: '75px', marginLeft: '10px'}}
-              min={1}
-            />
+          <strong>Servings</strong>
+          :
+          <InputNumber
+            defaultValue={servings}
+            onChange={(e) => setServings(e)}
+            style={{ width: '75px', marginLeft: '10px' }}
+            min={1}
+          />
         </Row>
         <Row justify="center">
-          <Rate 
-            defaultValue={recipe.Rating} 
-            onChange={(e) => setRecipeInfo(() => {
-              return {Favorite: recipe.Favorite, Rating: e}
-            })}
+          <Rate
+            defaultValue={recipe.Rating}
+            onChange={(e) => setRecipeInfo(() => ({ Favorite: recipe.Favorite, Rating: e }))}
           />
         </Row>
         <Ingredients
@@ -60,17 +69,11 @@ const RecipeInfo = ({ recipe, nutritionGoalData, setRecipeInfo }) => {
           <Title level={4}>Steps:</Title>
         </Row>
         <Row>
-          {recipe.steps.map((step, idx) => {
-            return (
-              <div key={idx}>
-                {idx + 1}. {step}
-                <p></p>
-              </div>);
-          })}
+          <Button href={recipe.source}>View Recipe</Button>
         </Row>
       </div>
     </Row>
   );
-};
+}
 
 export default RecipeInfo;

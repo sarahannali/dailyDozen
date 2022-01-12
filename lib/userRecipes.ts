@@ -2,6 +2,7 @@ import {
   collection, getDocs, doc, updateDoc,
 } from 'firebase/firestore/lite';
 import db from '../firebase/clientApp';
+import { UserRecipe } from '../utils/propTypes';
 
 const userID = 'NqDiT6W2QieatjDUbbUO';
 
@@ -22,12 +23,7 @@ export const getAllUserRecipeData = async () => {
   return userRecipesList;
 };
 
-type UserRecipeRequest = {
-  Rating: number,
-  Favorite: boolean
-}
-
-export const updateUserRecipe = async (userRecipeID: string, userRecipe: UserRecipeRequest) => {
+export const updateUserRecipe = async (userRecipeID: string, userRecipe: UserRecipe) => {
   const userRecipeDoc = doc(db, `users/${userID}/userRecipes/${userRecipeID}`);
 
   await updateDoc(userRecipeDoc, {

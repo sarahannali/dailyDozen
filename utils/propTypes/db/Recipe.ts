@@ -1,9 +1,11 @@
+import { Type } from './Ingredient';
+
 export interface Ingredient {
-  amount: string,
+  amount: number,
   grams: number,
   name: string,
   ratio: number,
-  types: Array<string>
+  types: Array<Type>
 }
 
 export interface Macros {
@@ -13,13 +15,18 @@ export interface Macros {
   protein: number
 }
 
+export interface UserRecipe {
+  id?: string,
+  Rating: number,
+  Favorite: boolean
+}
+
 interface Recipe {
   id: string,
   name: string,
   imageURL: string,
   source: string,
   ingredients: Array<Ingredient>,
-  steps: Array<string>, // todo: remove
   macros: Macros,
   servings: number,
   Rating: number,
