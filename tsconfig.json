@@ -28,7 +28,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/mealplanner/components/common/recipe/RecipeCard.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,12 +1,12 @@
 import { AmountType } from '../db/Ingredient';
 
-export type IngredientRequest = {
+export interface IngredientRequest {
   amount: number,
   amountType: AmountType,
   name: string
 }
 
-type RecipeRequest = {
+interface RecipeRequest {
   name: string,
   source: string,
   imageURL: string,
@@ -15,8 +15,8 @@ type RecipeRequest = {
   fat: number,
   protein: number,
   servings: number,
-  ingredients: Array<IngredientRequest>,
-  steps: Array<string>
+  ingredients: IngredientRequest[],
+  steps: string[]
 }
 
 export default RecipeRequest;

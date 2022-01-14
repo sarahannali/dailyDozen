@@ -18,7 +18,7 @@ export type AmountType = 'cup' | 'tbs' | 'tsp' | 'gal'
 type Ingredient = {
   name: string,
   ratio: number,
-  types: Array<Type>
+  types: Type[]
 }
 
 export default Ingredient;

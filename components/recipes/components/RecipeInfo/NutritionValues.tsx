@@ -6,7 +6,7 @@ import classes from './recipeInfo.module.css';
 import { NutritionGoals, RecipeIngredient } from '../../../../utils/propTypes';
 
 type NutritionValuesProps = {
-  ingredients: Array<RecipeIngredient>,
+  ingredients: RecipeIngredient[],
   nutritionGoalData: NutritionGoals,
   servings: number,
   servingsRatio: number

@@ -8,8 +8,8 @@ import { NutritionGoals, Recipe } from '../../utils/propTypes';
 const { Title } = Typography;
 
 type RecipesProps = {
-  recipes: Array<Recipe>,
-  nutritionGoalData: Array<NutritionGoals>
+  recipes: Recipe[],
+  nutritionGoalData: NutritionGoals
 }
 
 function Recipes({ recipes, nutritionGoalData }: RecipesProps) {

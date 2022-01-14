@@ -1,1 +1,0 @@
-export {default as GetColor} from './_getColor';

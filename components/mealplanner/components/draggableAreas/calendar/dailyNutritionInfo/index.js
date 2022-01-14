@@ -1,1 +1,0 @@
-export {default as DailyNutritionInfo} from './DailyNutritionInfo';

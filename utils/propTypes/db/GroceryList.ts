@@ -1,6 +1,8 @@
+import { AmountType } from '..';
+
 interface GroceryItem {
   amount: number,
-  amountType: string,
+  amountType: AmountType,
   checked: boolean,
   name: string
 }

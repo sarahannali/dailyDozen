@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@types/react-beautiful-dnd": "^13.1.2",
     "antd": "^4.17.0-alpha.9",
     "axios": "^0.24.0",
     "firebase": "^9.1.0",

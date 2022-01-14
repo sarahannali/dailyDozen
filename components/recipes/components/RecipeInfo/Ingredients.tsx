@@ -7,7 +7,7 @@ import { RecipeIngredient } from '../../../../utils/propTypes';
 const { Title } = Typography;
 
 type IngredientsProps = {
-  ingredients: Array<RecipeIngredient>,
+  ingredients: RecipeIngredient[],
   servings: number,
   servingsRatio: number
 }

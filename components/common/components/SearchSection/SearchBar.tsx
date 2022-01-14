@@ -5,9 +5,9 @@ import Fuse from 'fuse.js';
 const { Search } = Input;
 
 type SearchBarProps = {
-  allData: Array<any>,
-  setData: React.Dispatch<React.SetStateAction<any>>,
-  searchKeys: Array<string>
+  allData: unknown[],
+  setData: React.Dispatch<React.SetStateAction<any[]>>,
+  searchKeys: string[]
 }
 
 function SearchBar({ allData, setData, searchKeys }: SearchBarProps) {

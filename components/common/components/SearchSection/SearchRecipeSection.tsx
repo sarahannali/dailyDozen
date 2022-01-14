@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 import { Recipe } from '../../../../utils/propTypes';
 
 type SearchSectionProps = {
-  baseRecipes: Array<Recipe>,
+  baseRecipes: Recipe[],
   setCurrRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>,
   showFavorites: boolean,
   setShowFavorites: React.Dispatch<React.SetStateAction<boolean>>

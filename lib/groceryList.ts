@@ -16,7 +16,7 @@ export const getGroceryList = async () => {
   return {};
 };
 
-export const updateGroceryList = async (newGroceryList: Array<RecipeIngredient>) => {
+export const updateGroceryList = async (newGroceryList: RecipeIngredient[]) => {
   const userDoc = doc(db, `users/${userID}`);
   await updateDoc(userDoc, { groceryList: [...newGroceryList] });
 };

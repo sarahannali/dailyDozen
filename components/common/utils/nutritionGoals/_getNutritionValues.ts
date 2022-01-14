@@ -1,12 +1,12 @@
 import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
 
 const GetNutritionValues = (
-  ingredients: Array<RecipeIngredient>,
+  ingredients: RecipeIngredient[],
   nutritionGoalData: NutritionGoalsWithMacros,
   servings: number,
   servingsRatio: number,
-): NutritionGoals => {
-  const nutritionMap: NutritionGoals = {
+): NutritionGoalsWithMacros => {
+  const nutritionMap: NutritionGoalsWithMacros = {
     beans: 0,
     berries: 0,
     calories: 0,

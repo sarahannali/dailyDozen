@@ -33,7 +33,7 @@ const AmountTypeMultipliers = {
   gal: 0.0625,
 };
 
-const PopulateIngredients = async (ingredients: Array<IngredientRequest>) => { // todo: fix type
+const PopulateIngredients = async (ingredients: IngredientRequest[]) => { // todo: fix type
   const ingredientCollection = collection(db, 'ingredients');
 
   const populatedIngredients = await Promise.all(ingredients.map(async (ingredient) => {

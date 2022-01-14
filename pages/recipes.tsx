@@ -16,8 +16,8 @@ export const getStaticProps = async () => {
 };
 
 type RecipesPageProps = {
-  allRecipeData: Array<Recipe>,
-  nutritionGoalData: Array<NutritionGoals>
+  allRecipeData: Recipe[],
+  nutritionGoalData: NutritionGoals
 }
 
 export default function RecipesPage({ allRecipeData, nutritionGoalData }: RecipesPageProps) {

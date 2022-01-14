@@ -5,7 +5,7 @@ export interface Ingredient {
   grams: number,
   name: string,
   ratio: number,
-  types: Array<Type>
+  types: Type[]
 }
 
 export interface Macros {
@@ -26,7 +26,7 @@ interface Recipe {
   name: string,
   imageURL: string,
   source: string,
-  ingredients: Array<Ingredient>,
+  ingredients: Ingredient[],
   macros: Macros,
   servings: number,
   Rating: number,

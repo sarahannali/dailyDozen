@@ -5,7 +5,7 @@ import {
 } from '../lib';
 import MealPlanner from '../components/mealplanner/MealPlanner';
 import {
-  NutritionGoals, Recipe, MealEvent, GroceryItem,
+  NutritionGoalsWithMacros, Recipe, GroceryItem, MealEventResponse,
 } from '../utils/propTypes';
 import AppLayout from '../components/layout';
 
@@ -26,10 +26,10 @@ export const getStaticProps = async () => {
 };
 
 interface MealPlannerPageProps {
-  allRecipeData: Array<Recipe>,
-  currentWeekMealEvents: Array<MealEvent>,
-  nutritionGoalData: Array<NutritionGoals>,
-  groceryList: Array<GroceryItem>
+  allRecipeData: Recipe[],
+  currentWeekMealEvents: MealEventResponse[],
+  nutritionGoalData: NutritionGoalsWithMacros,
+  groceryList: GroceryItem[]
 }
 
 export default function MealPlannerPage({
