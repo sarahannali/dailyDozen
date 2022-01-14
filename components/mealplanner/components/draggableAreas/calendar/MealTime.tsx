@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Divider } from 'antd';
 import { Droppable } from 'react-beautiful-dnd';
 import { GetColor } from './utils';
-import { Recipe } from '../../common';
+import Recipe from './recipe/Recipe';
 import classes from './calendar.module.css';
 import { Meals, Meal } from '../../../utils/_populateCalendar';
 import { MealEvent } from '../../../../../utils/propTypes';

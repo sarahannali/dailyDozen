@@ -18,11 +18,13 @@ type DatePickerSectionProps = {
 function DatePickerSection({ setDays }: DatePickerSectionProps) {
   const [date, setDate] = useState(moment());
 
-  const handleDateChange = async (momentDate: moment.Moment) => {
-    setDate(new moment(momentDate));
-    const newDays = await getMealEvents(momentDate.toString());
+  const handleDateChange = async (momentDate: moment.Moment | null) => {
+    if (momentDate) {
+      setDate(moment(momentDate));
+      const newDays = await getMealEvents(momentDate.toString());
 
-    setDays(PopulateCalendar(newDays, momentDate.toDate()));
+      setDays(PopulateCalendar(newDays, momentDate.toDate()));
+    }
   };
 
   return (

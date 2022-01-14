@@ -8,6 +8,7 @@ import {
   CaretRightOutlined,
 } from '@ant-design/icons';
 import classes from './recipe.module.css';
+import { Meal } from '../../../../utils/_populateCalendar';
 
 const { Paragraph } = Typography;
 
@@ -15,8 +16,8 @@ type RecipeMealEventProps = {
   name: string,
   index: number,
   listName: string,
-  meal: ,
-  deleteMealEvent: ,
+  meal: Meal,
+  deleteMealEvent: (mealEventID: string, codes: string, sourceIdx: number) => Promise<void>,
   servings: number,
   setServings: React.Dispatch<React.SetStateAction<number>>
 }
@@ -28,7 +29,7 @@ function RecipeMealEvent({
     <>
       <Popconfirm
         title="Are you sure to delete this meal event?"
-        onConfirm={() => deleteMealEvent(meal.id, listName, index)}
+        onConfirm={() => meal.id && deleteMealEvent(meal.id, listName, index)}
         okText="Yes"
         cancelText="No"
         placement="leftTop"
@@ -40,23 +41,23 @@ function RecipeMealEvent({
       <Paragraph style={{ marginBottom: '0px', height: '90px', width: '90px' }} ellipsis={{ rows: 3 }}>
         {name}
       </Paragraph>
-      <span
+      <Button
         className={classes.leftServingArrow}
         onClick={() => servings > 0 && setServings(servings - 1)}
         style={{ color: servings <= 0 ? 'gray' : 'black', zIndex: '1' }}
       >
         <CaretLeftOutlined />
-      </span>
+      </Button>
       <Tooltip title="Servings">
         <div className={classes.servingSize}>{servings}</div>
       </Tooltip>
-      <span
+      <Button
         className={classes.rightServingArrow}
         onClick={() => setServings(servings + 1)}
         style={{ zIndex: '1' }}
       >
         <CaretRightOutlined />
-      </span>
+      </Button>
     </>
   );
 }
