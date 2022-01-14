@@ -1,4 +1,4 @@
-import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
+import { NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
 
 const GetNutritionValues = (
   ingredients: RecipeIngredient[],

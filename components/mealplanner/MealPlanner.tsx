@@ -14,14 +14,14 @@ import {
   PopulateCalendar,
 } from './utils';
 import {
-  GroceryItem, MealEventResponse, NutritionGoals, Recipe,
+  GroceryItem, MealEventResponse, NutritionGoals, NutritionGoalsWithMacros, Recipe,
 } from '../../utils/propTypes';
 import { Calendar } from './utils/_populateCalendar';
 
 interface MealPlannerProps {
   allRecipeData: Recipe[],
   currentWeekMealEvents: MealEventResponse[],
-  nutritionGoalData: NutritionGoals,
+  nutritionGoalData: NutritionGoalsWithMacros,
   groceryList: GroceryItem[]
 }
 

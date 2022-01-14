@@ -6,7 +6,6 @@ import { GetNutritionTotals } from './utils';
 import classes from './dailyNutritionInfo.module.css';
 import { NutritionGoalsWithMacros } from '../../../../../../utils/propTypes';
 import { Meals } from '../../../../utils/_populateCalendar';
-import { Macros } from '../../../../../../utils/propTypes/db/Recipe';
 
 type DailyNutritionInfoProps = {
   nutritionGoalData: NutritionGoalsWithMacros,

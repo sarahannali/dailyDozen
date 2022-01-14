@@ -2,11 +2,11 @@ import React from 'react';
 import { Row } from 'antd';
 import SingleDay from './SingleDay';
 import classes from './calendar.module.css';
-import { Calendar } from '../../../utils/_populateCalendar';
+import { Calendar as CalendarType } from '../../../utils/_populateCalendar';
 import { MealEvent, NutritionGoalsWithMacros } from '../../../../../utils/propTypes';
 
 type CalendarProps = {
-  days: Calendar,
+  days: CalendarType,
   nutritionGoalData: NutritionGoalsWithMacros,
   deleteMealEvent: (mealEventID: string, codes: string, sourceIdx: number) => Promise<void>,
   updateMealEvent: (movedObj: MealEvent, codes: string, sourceIdx: number) => Promise<void>
