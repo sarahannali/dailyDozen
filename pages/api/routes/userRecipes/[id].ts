@@ -1,13 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest } from 'next';
+import { StatusCodes } from 'http-status-codes';
 import { updateUserRecipe } from '../../../../lib/userRecipes';
 import apiHandler from '../../middleware/apiHandler';
+import { ErrorWithStatus } from '../../middleware/errorHandler';
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
-  let result: string;
-
-  if (req.method === 'POST') result = await updateUserRecipe(req.query.id, req.body);
-
-  res.status(200).json(result);
+function handler(req: NextApiRequest) {
+  switch (req.method) {
+    case 'POST':
+      return updateUserRecipe(req.query.id as string, req.body);
+    default:
+      throw ErrorWithStatus(StatusCodes.METHOD_NOT_ALLOWED, 'Method not allowed');
+  }
 }
 
 export default apiHandler(handler);

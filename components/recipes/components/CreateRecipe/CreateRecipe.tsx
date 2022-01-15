@@ -140,6 +140,7 @@ function CreateRecipe() {
                           <Option value="cup">cup</Option>
                           <Option value="tbs">tbs</Option>
                           <Option value="tsp">tsp</Option>
+                          <Option value="g">g</Option>
                         </Select>
                       </Form.Item>
                       <Form.Item

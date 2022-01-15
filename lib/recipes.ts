@@ -53,9 +53,13 @@ const PopulateIngredients = async (ingredients: IngredientRequest[]) => { // tod
 
     const ingrData = ingredientSnapshot.docs[0].data();
 
+    const grams = amountType === 'g'
+      ? amount
+      : (amount * AmountTypeMultipliers[amountType]) * ingrData.ratio;
+
     const ingredientObj = {
       amount: `${amount} ${amountType}`,
-      grams: (amount * AmountTypeMultipliers[amountType]) * ingrData.ratio,
+      grams,
       name,
       ratio: ingrData.ratio,
       types: ingrData.types,

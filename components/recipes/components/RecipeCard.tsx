@@ -48,7 +48,13 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
       <Card className={classes.recipecard} onClick={() => setIsModalVisible(true)} hoverable>
         <Row>
           <Col span={12}>
-            <Image src={recipe.imageURL} className={classes.recipecardimg} />
+            <Image
+              loader={() => recipe.imageURL}
+              width={100}
+              height={100}
+              src={recipe.imageURL}
+              className={classes.recipecardimg}
+            />
           </Col>
           <Col span={12}>
             {recipe.name}
@@ -69,6 +75,10 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
                 Favorite: !recipeInfo.Favorite,
               }))}
             />
+            <Spin
+              spinning={loading}
+              indicator={<LoadingOutlined style={{ fontSize: 10, marginLeft: '10px' }} spin />}
+            />
           </span>
           )}
         visible={isModalVisible}
@@ -77,16 +87,11 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
         style={{ marginTop: '-50px' }}
         bodyStyle={{ maxHeight: '600px', overflowY: 'auto' }}
       >
-        <Spin
-          spinning={loading}
-          indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
-        >
-          <RecipeInfo
-            recipe={recipe}
-            nutritionGoalData={nutritionGoalData}
-            setRecipeInfo={setRecipeInfo}
-          />
-        </Spin>
+        <RecipeInfo
+          recipe={recipe}
+          nutritionGoalData={nutritionGoalData}
+          setRecipeInfo={setRecipeInfo}
+        />
       </Modal>
     </Badge>
   );

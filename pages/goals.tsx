@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import AppLayout from '../components/layout';
 import NutritionGoals from '../components/nutritionGoals/NutritionGoals';
 import { getNutritionGoalData } from '../lib/goals';
-import { NutritionGoals as NutritionGoalsType } from '../utils/propTypes';
+import { NutritionGoalsWithMacros } from '../utils/propTypes';
 
 export const getStaticProps = async () => {
   const nutritionGoalData = await getNutritionGoalData();
@@ -14,9 +15,17 @@ export const getStaticProps = async () => {
 };
 
 type GoalsPageProps = {
-  nutritionGoalData: NutritionGoalsType
+  nutritionGoalData: NutritionGoalsWithMacros
 }
 
-export default function GoalsPagePros({ nutritionGoalData }: GoalsPageProps) {
+export default function GoalsPage({ nutritionGoalData }: GoalsPageProps) {
   return <NutritionGoals allNutritionData={nutritionGoalData} />;
 }
+
+GoalsPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <AppLayout>
+      {page}
+    </AppLayout>
+  );
+};

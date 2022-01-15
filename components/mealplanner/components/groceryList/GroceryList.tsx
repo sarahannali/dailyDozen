@@ -25,7 +25,7 @@ function GroceryList({ days, originalGroceryList }: GroceryListProps) {
     const updatedGroceryList = UpdateGroceryList(groceryList, days);
 
     updateAndPostGroceryList(updatedGroceryList);
-  }, [days, groceryList]);
+  }, [days]);
 
   const handleChange = (amount: number, orgType: AmountType, newType: AmountType, idx: number) => {
     const updatedGroceryList = [...groceryList];
@@ -62,6 +62,7 @@ function GroceryList({ days, originalGroceryList }: GroceryListProps) {
               <Option value="cup">cup</Option>
               <Option value="tbs">tbs</Option>
               <Option value="tsp">tsp</Option>
+              <Option value="g">g</Option>
             </Select>
             {ingredient.name}
           </Row>

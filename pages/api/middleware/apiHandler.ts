@@ -1,13 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { ErrorWithStatus } from '../../../utils/propTypes';
 import errorHandler from './errorHandler';
 
-type Handler = (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
+type Handler = (req: NextApiRequest, res: NextApiResponse) => Promise<any>;
 
 const apiHandler = (handler: Handler) => async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    return await handler(req, res);
+    const result = await handler(req, res);
+    return res.status(200).json(result);
   } catch (err) {
-    return errorHandler(err, res);
+    return errorHandler(err as ErrorWithStatus, res);
   }
 };
 

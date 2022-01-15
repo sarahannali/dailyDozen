@@ -47,6 +47,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </Link>
               </Menu.Item>
             </Menu>
+            <div className={classes.iconCredit}>
+              Icons created by
+              {' '}
+              <a href="https://www.flaticon.com/free-icons/food-waste" title="food waste icons">Flaticon</a>
+            </div>
           </Sider>
           <Content style={{ margin: '16px 0' }}>
             {children}

@@ -1,7 +1,5 @@
 
 .recipeImg {
-  width: 90px;
-  height: 90px;
   object-fit: cover;
   object-position: right bottom;
 }
@@ -49,15 +47,17 @@
 .leftServingArrow {
   position: relative;
   float: left;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 12px;
   cursor: pointer;
+  padding: 0px;
 }
 
 .rightServingArrow {
   position: relative;
   float: right;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-right: -52px;
   cursor: pointer;
+  padding: 0px;
 }

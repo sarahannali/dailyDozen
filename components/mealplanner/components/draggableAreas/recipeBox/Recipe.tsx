@@ -66,7 +66,15 @@ function Recipe({
                 >
                   {hover
                     ? onHoverImg
-                    : <Image src={recipeInfo.imageURL} className={classes.recipeImg} />}
+                    : (
+                      <Image
+                        loader={() => recipeInfo.imageURL}
+                        width={200}
+                        height={200}
+                        src={recipeInfo.imageURL}
+                        className={classes.recipeImg}
+                      />
+                    )}
                 </Card>
               </Badge>
             )
@@ -78,7 +86,15 @@ function Recipe({
               >
                 {hover
                   ? onHoverImg
-                  : <Image src={recipeInfo.imageURL} className={classes.recipeImg} />}
+                  : (
+                    <Image
+                      loader={() => recipeInfo.imageURL}
+                      width={200}
+                      height={200}
+                      src={recipeInfo.imageURL}
+                      className={classes.recipeImg}
+                    />
+                  )}
               </Card>
             )
         }

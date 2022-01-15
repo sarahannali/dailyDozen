@@ -13,7 +13,7 @@ export type Type =
   'protein' |
   'vegetables'
 
-export type AmountType = 'cup' | 'tbs' | 'tsp' | 'gal'
+export type AmountType = 'cup' | 'tbs' | 'tsp' | 'gal' | 'g'
 
 type Ingredient = {
   name: string,

@@ -13,15 +13,11 @@ export const getMealEvents = async (dateStr: string) => {
   const endDate = new Date(dateStr);
   endDate.setDate(endDate.getDate() + 6);
 
-  console.log('START: ', startDate, 'END DATE: ', endDate);
-
   const mealEventsSnapshot = await getDocs(query(
     collection(db, `users/${userID}/mealEvents`),
     where('Date', '>=', startDate),
     where('Date', '<=', endDate),
   ));
-
-  console.log('SNAPSHOT: ', mealEventsSnapshot);
 
   const mealEventsList = mealEventsSnapshot.docs.map((mealEventDoc) => {
     const data = mealEventDoc.data();

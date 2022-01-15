@@ -5,12 +5,12 @@ import {
 import axios from 'axios';
 import GoalCard from './GoalCard';
 import { IsNotMacro } from './utils';
-import { NutritionGoals } from '../../utils/propTypes';
+import { NutritionGoals as NutritionGoalsType, NutritionGoalsWithMacros } from '../../utils/propTypes';
 
 const { Title } = Typography;
 
 type NutritionGoalsProps = {
-  allNutritionData: NutritionGoals
+  allNutritionData: NutritionGoalsWithMacros
 }
 
 function NutritionGoals({ allNutritionData }: NutritionGoalsProps) {
@@ -54,6 +54,8 @@ function NutritionGoals({ allNutritionData }: NutritionGoalsProps) {
           <Row>
             <InputNumber
               defaultValue={nutritionGoals.calories}
+              min={0}
+              type="number"
               onBlur={(e) => updateNutritionGoals('calories', Number(e.target.value))}
             />
           </Row>
@@ -65,6 +67,8 @@ function NutritionGoals({ allNutritionData }: NutritionGoalsProps) {
           <Row>
             <InputNumber
               defaultValue={nutritionGoals.carbs}
+              min={0}
+              type="number"
               onBlur={(e) => updateNutritionGoals('carbs', Number(e.target.value))}
             />
           </Row>
@@ -77,6 +81,8 @@ function NutritionGoals({ allNutritionData }: NutritionGoalsProps) {
           <Row>
             <InputNumber
               defaultValue={nutritionGoals.fat}
+              min={0}
+              type="number"
               onBlur={(e) => updateNutritionGoals('fat', Number(e.target.value))}
             />
           </Row>
@@ -89,6 +95,8 @@ function NutritionGoals({ allNutritionData }: NutritionGoalsProps) {
           <Row>
             <InputNumber
               defaultValue={nutritionGoals.protein}
+              min={0}
+              type="number"
               onBlur={(e) => updateNutritionGoals('protein', Number(e.target.value))}
             />
           </Row>
@@ -97,13 +105,13 @@ function NutritionGoals({ allNutritionData }: NutritionGoalsProps) {
       </Row>
       <Row justify="center" style={{ marginTop: '40px' }}>
         {
-          (Object.keys(nutritionGoals) as Array<keyof NutritionGoals>)
+          (Object.keys(nutritionGoals) as Array<keyof NutritionGoalsWithMacros>)
             .sort()
             .map((goal) => (IsNotMacro(goal)
               ? (
                 <Col xs={9} key={goal}>
                   <GoalCard
-                    name={goal}
+                    name={goal as keyof NutritionGoalsType}
                     amount={nutritionGoals[goal]}
                     updateNutritionGoals={updateNutritionGoals}
                   />

@@ -84,7 +84,15 @@ function Recipe({
             onMouseLeave={onMouseLeave}
             className={classes.card}
           >
-            {hover ? onHoverImg : <Image src={recipeInfo.imageURL} className={classes.recipeImg} />}
+            {hover ? onHoverImg : (
+              <Image
+                loader={() => recipeInfo.imageURL}
+                width={90}
+                height={90}
+                src={recipeInfo.imageURL}
+                className={classes.recipeImg}
+              />
+            )}
           </Card>
         </div>
       )}

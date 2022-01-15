@@ -3,7 +3,7 @@ import { Tooltip, Progress } from 'antd';
 import Image from 'next/image';
 import { GetBorderColor, GetNutritionGoalImg, GetNutritionValues } from '../../../common';
 import classes from './recipeInfo.module.css';
-import { NutritionGoals, RecipeIngredient } from '../../../../utils/propTypes';
+import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
 
 type NutritionValuesProps = {
   ingredients: RecipeIngredient[],
@@ -17,7 +17,7 @@ function NutritionValues({
 }: NutritionValuesProps) {
   const nutritionValues = GetNutritionValues(
     ingredients,
-    nutritionGoalData,
+    nutritionGoalData as NutritionGoalsWithMacros,
     servings,
     servingsRatio,
   );
@@ -26,7 +26,14 @@ function NutritionValues({
     <div className={classes.nutritionValues}>
       {
         (Object.keys(nutritionValues) as Array<keyof NutritionGoals>).map((val) => {
-          const img = <Image className={classes.goalImg} src={GetNutritionGoalImg(val)} />;
+          const img = (
+            <Image
+              width={30}
+              height={30}
+              src={GetNutritionGoalImg(val)}
+              className={classes.goalImg}
+            />
+          );
 
           return nutritionValues[val] !== 0 && (
             <div className={classes.nutritionValueImg} key={val}>

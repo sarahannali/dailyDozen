@@ -5,6 +5,7 @@ const typesInCups = {
   cup: 1,
   tbs: 0.0625,
   tsp: (1 / 48),
+  g: 1,
 };
 
 export const ConvertAmount = (amount: number, orgType: AmountType, newType: AmountType) => {

@@ -5,17 +5,25 @@ import {
 import Image from 'next/image';
 import { Capitalize, GetBorderColor, GetNutritionGoalImg } from '../common';
 import classes from '../css/nutritionGoals.module.css';
+import { NutritionGoals } from '../../utils/propTypes';
 
 const { Text } = Typography;
 
 type GoalCardProps = {
-  name: string,
+  name: keyof NutritionGoals,
   amount: number,
   updateNutritionGoals: (type: string, value: number) => void
 }
 
 function GoalCard({ name, amount, updateNutritionGoals }: GoalCardProps) {
-  const img = <Image className={classes.goalImg} src={GetNutritionGoalImg(name)} />;
+  const img = (
+    <Image
+      className={classes.goalImg}
+      src={GetNutritionGoalImg(name)}
+      width={40}
+      height={40}
+    />
+  );
 
   return (
     <div>
@@ -41,6 +49,7 @@ function GoalCard({ name, amount, updateNutritionGoals }: GoalCardProps) {
                 type="number"
                 addonAfter="g"
                 defaultValue={amount}
+                min={0}
                 onBlur={(e) => updateNutritionGoals(name, Number(e.target.value))}
               />
             </Row>

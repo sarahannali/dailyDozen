@@ -26,7 +26,13 @@ function RecipeInfo({ recipe, nutritionGoalData, setRecipeInfo }: RecipeInfoProp
       <div style={{ height: '80vh', width: '60vw' }}>
         <Row style={{ marginBottom: '15px' }}>
           <Col>
-            <Image src={recipe.imageURL} className={classes.recipeInfoImg} />
+            <Image
+              loader={() => recipe.imageURL}
+              width={200}
+              height={200}
+              src={recipe.imageURL}
+              className={classes.recipeInfoImg}
+            />
           </Col>
           <Col span={10}>
             <NutritionValues
@@ -65,11 +71,13 @@ function RecipeInfo({ recipe, nutritionGoalData, setRecipeInfo }: RecipeInfoProp
           servings={servings}
           servingsRatio={servingsRatio}
         />
-        <Row>
-          <Title level={4}>Steps:</Title>
-        </Row>
-        <Row>
-          <Button href={recipe.source}>View Recipe</Button>
+        <Row justify="center">
+          <Button
+            type="primary"
+            href={recipe.source}
+          >
+            View Recipe
+          </Button>
         </Row>
       </div>
     </Row>

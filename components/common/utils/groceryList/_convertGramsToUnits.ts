@@ -7,7 +7,7 @@ const ConvertGramsToUnits = (
 ): [number, AmountType] => {
   const amountInCups = amountInGrams / ratio; // todo: rewrite?
   let amount = amountInCups;
-  let amountType = givenAmountType || 'cup';
+  let amountType = givenAmountType || 'cup' || 'g';
 
   if (!givenAmountType) {
     if (amountInCups < 0.25) {

@@ -14,7 +14,7 @@ import {
   PopulateCalendar,
 } from './utils';
 import {
-  GroceryItem, MealEventResponse, NutritionGoals, NutritionGoalsWithMacros, Recipe,
+  GroceryItem, MealEventResponse, NutritionGoalsWithMacros, Recipe,
 } from '../../utils/propTypes';
 import { Calendar } from './utils/_populateCalendar';
 
