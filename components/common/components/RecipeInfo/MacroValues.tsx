@@ -1,6 +1,6 @@
 import React from 'react';
 import { Macros } from '../../../../utils/propTypes/db/Recipe';
-import { Capitalize } from '../../../common';
+import Capitalize from '../../utils/_capitalize';
 import classes from './recipeInfo.module.css';
 
 type MacroValuesProps = {

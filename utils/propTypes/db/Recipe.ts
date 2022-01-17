@@ -17,6 +17,7 @@ export interface Macros {
 
 export interface UserRecipe {
   id?: string,
+  RecipeID?: string,
   Rating: number,
   Favorite: boolean
 }
@@ -31,7 +32,8 @@ interface Recipe {
   servings: number,
   Rating: number,
   Favorite: boolean,
-  userRecipeID?: string
+  userRecipeID?: string,
+  steps: string[]
 }
 
 export default Recipe;

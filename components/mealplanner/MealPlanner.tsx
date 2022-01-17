@@ -64,7 +64,7 @@ function MealPlanner({
         performRequest={performRequest}
         setDays={setDays}
       />
-      <GroceryListSection days={days} groceryList={groceryList} />
+      <GroceryListSection days={days} originalGroceryList={groceryList} />
     </div>
   );
 }

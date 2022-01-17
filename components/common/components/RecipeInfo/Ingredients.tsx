@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography } from 'antd';
 import classes from './recipeInfo.module.css';
-import { ConvertGramsToUnits } from '../../../common';
 import { RecipeIngredient } from '../../../../utils/propTypes';
 
 const { Title } = Typography;
@@ -13,11 +12,10 @@ type IngredientsProps = {
 }
 
 function Ingredients({ ingredients, servings, servingsRatio }: IngredientsProps) {
-  const GetAmount = (strAmount: number, grams: number, ratio: number) => {
+  const GetAmount = (strAmount: number, grams: number) => {
     if (servings === servingsRatio) return strAmount;
 
-    const [amount, amountType] = ConvertGramsToUnits((grams / servingsRatio) * servings, ratio);
-    return `${parseFloat(amount.toFixed(2))} ${amountType}`;
+    return `${((grams / servingsRatio) * servings).toFixed(2)}g`;
   };
 
   return (
@@ -26,7 +24,7 @@ function Ingredients({ ingredients, servings, servingsRatio }: IngredientsProps)
       <ul>
         {ingredients.map((ingr) => (
           <li key={ingr.name}>
-            {GetAmount(ingr.amount, ingr.grams, ingr.ratio)}
+            {GetAmount(ingr.amount, ingr.grams)}
             {' '}
             {ingr.name}
           </li>

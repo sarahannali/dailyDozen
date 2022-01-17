@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Typography, Row, Col, Rate, InputNumber, Button,
+  Row, Col, Rate, InputNumber, Typography,
 } from 'antd';
 import Image from 'next/image';
 import MacroValues from './MacroValues';
@@ -14,10 +14,10 @@ const { Title } = Typography;
 type RecipeInfoProps = {
   recipe: Recipe,
   nutritionGoalData: NutritionGoals,
-  setRecipeInfo: React.Dispatch<React.SetStateAction<UserRecipe>>
+  setUserRecipeInfo: React.Dispatch<React.SetStateAction<UserRecipe>>
 }
 
-function RecipeInfo({ recipe, nutritionGoalData, setRecipeInfo }: RecipeInfoProps) {
+function RecipeInfo({ recipe, nutritionGoalData, setUserRecipeInfo }: RecipeInfoProps) {
   const [servings, setServings] = useState(recipe.servings);
   const servingsRatio = recipe.servings;
 
@@ -63,7 +63,7 @@ function RecipeInfo({ recipe, nutritionGoalData, setRecipeInfo }: RecipeInfoProp
         <Row justify="center">
           <Rate
             defaultValue={recipe.Rating}
-            onChange={(e) => setRecipeInfo(() => ({ Favorite: recipe.Favorite, Rating: e }))}
+            onChange={(e) => setUserRecipeInfo(() => ({ Favorite: recipe.Favorite, Rating: e }))}
           />
         </Row>
         <Ingredients
@@ -71,13 +71,26 @@ function RecipeInfo({ recipe, nutritionGoalData, setRecipeInfo }: RecipeInfoProp
           servings={servings}
           servingsRatio={servingsRatio}
         />
-        <Row justify="center">
-          <Button
-            type="primary"
-            href={recipe.source}
-          >
-            View Recipe
-          </Button>
+        <Row>
+          <Col>
+            <Row>
+              <Title level={4}>Steps:</Title>
+            </Row>
+            <Row>
+              {recipe.steps.map((step, idx) => (
+                <div key={step}>
+                  {idx + 1}
+                  .
+                  {' '}
+                  {step}
+                  <p />
+                </div>
+              ))}
+            </Row>
+          </Col>
+        </Row>
+        <Row justify="center" className={classes.sourceLink}>
+          <a href={recipe.source} target="_blank" rel="noreferrer">SOURCE</a>
         </Row>
       </div>
     </Row>

@@ -7,10 +7,10 @@ import {
   LoadingOutlined,
 } from '@ant-design/icons';
 import Image from 'next/image';
-import RecipeInfo from './RecipeInfo/RecipeInfo';
-import { putUserRecipe } from '../requests';
+import RecipeInfo from '../../common/components/RecipeInfo/RecipeInfo';
+import { putUserRecipe, postUserRecipe } from '../requests';
 import classes from './recipes.module.css';
-import { NutritionGoals, Recipe } from '../../../utils/propTypes';
+import { NutritionGoals, Recipe, UserRecipe } from '../../../utils/propTypes';
 
 type RecipeCardProps = {
   recipe: Recipe,
@@ -20,21 +20,32 @@ type RecipeCardProps = {
 
 function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [recipeInfo, setRecipeInfo] = useState({
+  const [userRecipeInfo, setUserRecipeInfo] = useState<UserRecipe>({
+    id: recipe.userRecipeID,
     Favorite: recipe.Favorite,
     Rating: recipe.Rating,
   });
   const [loading, setLoading] = useState(false);
 
   const onCancel = async () => {
-    if (recipeInfo.Favorite !== recipe.Favorite || recipeInfo.Rating !== recipe.Rating) {
+    if (userRecipeInfo.Favorite !== recipe.Favorite || userRecipeInfo.Rating !== recipe.Rating) {
       setLoading(true);
 
-      await putUserRecipe({
-        id: recipe.userRecipeID,
-        Rating: recipeInfo.Rating,
-        Favorite: recipeInfo.Favorite,
-      });
+      if (userRecipeInfo.id) {
+        await putUserRecipe({
+          id: recipe.userRecipeID,
+          Rating: userRecipeInfo.Rating,
+          Favorite: userRecipeInfo.Favorite,
+        });
+      } else {
+        const id = await postUserRecipe({
+          RecipeID: recipe.id,
+          Rating: userRecipeInfo.Rating,
+          Favorite: userRecipeInfo.Favorite,
+        });
+
+        setUserRecipeInfo({ ...userRecipeInfo, id });
+      }
 
       updateRecipes();
     }
@@ -44,7 +55,7 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
   };
 
   return (
-    <Badge count={recipeInfo.Favorite ? <HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} /> : 0}>
+    <Badge count={userRecipeInfo.Favorite ? <HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} /> : 0}>
       <Card className={classes.recipecard} onClick={() => setIsModalVisible(true)} hoverable>
         <Row>
           <Col span={12}>
@@ -67,12 +78,12 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
             {recipe.name}
             <Rate
               count={1}
-              value={+recipeInfo.Favorite}
+              value={+userRecipeInfo.Favorite}
               character={<HeartFilled />}
               style={{ color: '#eb2f96', marginLeft: '10px' }}
-              onChange={() => setRecipeInfo(() => ({
-                ...recipeInfo,
-                Favorite: !recipeInfo.Favorite,
+              onChange={() => setUserRecipeInfo(() => ({
+                ...userRecipeInfo,
+                Favorite: !userRecipeInfo.Favorite,
               }))}
             />
             <Spin
@@ -90,7 +101,7 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
         <RecipeInfo
           recipe={recipe}
           nutritionGoalData={nutritionGoalData}
-          setRecipeInfo={setRecipeInfo}
+          setUserRecipeInfo={setUserRecipeInfo}
         />
       </Modal>
     </Badge>

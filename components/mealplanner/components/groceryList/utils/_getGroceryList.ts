@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ConvertGramsToUnits } from '../../../../common';
 import { GroceryItem } from '../../../../../utils/propTypes';
 import { Calendar, Meals } from '../../../utils/_populateCalendar';
+import { ConvertAmount } from '.';
 
 const UpdateGroceryList = (groceryList: GroceryItem[], days: Calendar) => {
   const ingredientMap = new Map<string, {amount: number, ratio: number}>();
@@ -26,21 +25,33 @@ const UpdateGroceryList = (groceryList: GroceryItem[], days: Calendar) => {
 
   const ingredients: GroceryItem[] = [];
 
-  Object.keys(ingredientMap).forEach((key) => {
+  ingredientMap.forEach((value, key) => {
     const groceryIngredient = groceryList.find((entry) => entry.name === key);
 
-    if (ingredientMap.get(key)?.amount !== 0) {
-      const [amount, amountType] = ConvertGramsToUnits(
-        ingredientMap.get(key)!.amount,
-        ingredientMap.get(key)!.ratio,
-        groceryIngredient ? groceryIngredient.amountType : '',
+    if (groceryIngredient) {
+      const { amountType } = groceryIngredient;
+
+      const amount = ConvertAmount(
+        value.amount,
+        'g',
+        amountType,
+        value.ratio,
       );
 
       ingredients.push({
         name: key,
         amount,
         amountType,
-        checked: groceryIngredient ? groceryIngredient.checked : false,
+        checked: false,
+        ratio: value.ratio,
+      });
+    } else {
+      ingredients.push({
+        name: key,
+        amount: value.amount,
+        amountType: 'g',
+        checked: false,
+        ratio: value.ratio,
       });
     }
   });

@@ -23,7 +23,7 @@ function SearchBar({ allData, setData, searchKeys }: SearchBarProps) {
       const foundData = fuse.search(search).map((i) => i.item);
       setData(foundData);
     }
-  }, [search, allData, setData, searchKeys]);
+  }, [search]);
 
   return (
     <Search

@@ -1,5 +1,5 @@
 import {
-  collection, getDocs, doc, updateDoc,
+  collection, getDocs, doc, updateDoc, addDoc,
 } from 'firebase/firestore/lite';
 import db from '../firebase/clientApp';
 import { UserRecipe } from '../utils/propTypes';
@@ -32,4 +32,17 @@ export const updateUserRecipe = async (userRecipeID: string, userRecipe: UserRec
   });
 
   return userRecipeID;
+};
+
+export const createUserRecipe = async (userRecipe: UserRecipe) => {
+  const userRecipesCollection = collection(db, `users/${userID}/userRecipes`);
+  const recipeDoc = doc(db, `recipes/${userRecipe.RecipeID}`);
+
+  const result = await addDoc(userRecipesCollection, {
+    Recipe: recipeDoc,
+    Favorite: userRecipe.Favorite,
+    Rating: userRecipe.Rating,
+  });
+
+  return result.id;
 };
