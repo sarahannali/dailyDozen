@@ -1,11 +1,24 @@
 import React from 'react';
 import Image from 'next/image';
 import { Button, Typography, Row } from 'antd';
+import {
+  GoogleAuthProvider, signInWithPopup,
+} from 'firebase/auth';
+import { auth } from '../../firebase/clientApp';
 import classes from './login.module.css';
 
 const { Title, Text } = Typography;
 
 function Login() {
+  console.log(auth);
+  const provider = new GoogleAuthProvider();
+
+  const handleLogIn = (): void => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result.user);
+      });
+  };
   return (
     <div style={{
       height: '100vh', overflow: 'hidden', position: 'relative', backgroundColor: '#f2f9ff',
@@ -47,13 +60,16 @@ function Login() {
                   </span>
               )}
                 className={classes.loginButton}
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  handleLogIn();
+                }}
               >
                 <span className={classes.loginText}>
                   Sign in with Google
                 </span>
               </Button>
             </Row>
-
           </div>
         </div>
       </div>
