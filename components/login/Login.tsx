@@ -10,7 +10,6 @@ import classes from './login.module.css';
 const { Title, Text } = Typography;
 
 function Login() {
-  console.log(auth);
   const provider = new GoogleAuthProvider();
 
   const handleLogIn = (): void => {
@@ -19,6 +18,7 @@ function Login() {
         console.log(result.user);
       });
   };
+
   return (
     <div style={{
       height: '100vh', overflow: 'hidden', position: 'relative', backgroundColor: '#f2f9ff',

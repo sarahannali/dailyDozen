@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import type { ReactElement } from 'react';
 import {
   getAllRecipeData, getMealEvents, getNutritionGoalData, getGroceryList,
@@ -8,6 +8,7 @@ import {
   NutritionGoalsWithMacros, Recipe, GroceryItem, MealEventResponse,
 } from '../utils/propTypes';
 import AppLayout from '../components/layout';
+import { AuthContext } from '../components/contexts/AuthContext';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData();
@@ -35,6 +36,9 @@ interface MealPlannerPageProps {
 export default function MealPlannerPage({
   allRecipeData, currentWeekMealEvents, nutritionGoalData, groceryList,
 }: MealPlannerPageProps) {
+  const [user, setUser] = useContext(AuthContext);
+  console.log(user);
+
   return (
     <MealPlanner
       allRecipeData={allRecipeData}

@@ -12,13 +12,9 @@ const clientCredentials = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-let app: firebase.FirebaseApp;
-
-if (getApps().length === 0) {
-  app = initializeApp(clientCredentials);
-} else {
-  app = getApp();
-}
+const app: firebase.FirebaseApp = getApps().length === 0
+  ? initializeApp(clientCredentials)
+  : getApp();
 
 export const auth = getAuth(app);
 
