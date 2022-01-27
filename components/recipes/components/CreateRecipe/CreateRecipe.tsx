@@ -12,7 +12,7 @@ import {
 import Modal from 'antd/lib/modal/Modal';
 import classes from './createRecipe.module.css';
 import { postRecipe } from '../../requests/post';
-import { RecipeRequest } from '../../../../utils/propTypes';
+import { macros, RecipeRequest } from '../../../../utils/propTypes';
 
 const { Option } = Select;
 
@@ -20,8 +20,6 @@ function CreateRecipe() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const macros = ['Calories', 'Carbs', 'Fat', 'Protein'];
 
   const onFinish = async (values: RecipeRequest) => {
     setLoading(true);

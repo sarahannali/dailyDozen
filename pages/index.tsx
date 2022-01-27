@@ -36,9 +36,6 @@ interface MealPlannerPageProps {
 export default function MealPlannerPage({
   allRecipeData, currentWeekMealEvents, nutritionGoalData, groceryList,
 }: MealPlannerPageProps) {
-  const [user, setUser] = useContext(AuthContext);
-  console.log(user);
-
   return (
     <MealPlanner
       allRecipeData={allRecipeData}

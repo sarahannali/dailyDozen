@@ -1,8 +1,7 @@
-import { Type } from '../../../utils/propTypes';
+import { macros } from '../../../utils/constants/goals';
+import { NutritionGoalsWithMacros } from '../../../utils/propTypes';
 
-const Macros = ['calories', 'protein', 'carbs', 'fat'];
-
-const isNotMacro = (goal: Type) => Macros.findIndex(
+const isNotMacro = (goal: keyof NutritionGoalsWithMacros) => macros.findIndex(
   (macro) => macro === goal,
 ) === -1;
 

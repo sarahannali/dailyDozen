@@ -1,3 +1,4 @@
+import { EmptyNutritionGoals } from '../../../../utils/constants/goals';
 import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
 
 const GetNutritionValues = (
@@ -6,17 +7,7 @@ const GetNutritionValues = (
   servings: number,
   servingsRatio: number,
 ): NutritionGoals => {
-  const nutritionMap: NutritionGoals = {
-    beans: 0,
-    berries: 0,
-    cruciferous: 0,
-    flaxseed: 0,
-    fruit: 0,
-    grains: 0,
-    greens: 0,
-    nuts: 0,
-    vegetables: 0,
-  };
+  const nutritionMap: NutritionGoals = EmptyNutritionGoals;
 
   ingredients.forEach((ingr) => {
     const { types } = ingr;

@@ -27,8 +27,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <Layout style={{ minHeight: '100vh' }}>
           <Sider theme="dark">
             <div className={classes.sidebarTitle}>
-              Welcome back,
-              <h2>Sarah Ali</h2>
+              Daily Dozen
+              <h2>Meal Planner</h2>
             </div>
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
