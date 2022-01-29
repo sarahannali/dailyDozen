@@ -12,7 +12,8 @@ import {
 import Modal from 'antd/lib/modal/Modal';
 import classes from './createRecipe.module.css';
 import { postRecipe } from '../../requests/post';
-import { macros, RecipeRequest } from '../../../../utils/propTypes';
+import { RecipeRequest } from '../../../../utils/propTypes';
+import { macros } from '../../../../utils/constants/goals';
 
 const { Option } = Select;
 

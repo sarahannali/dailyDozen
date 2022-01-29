@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const getRecipes = () => axios.get('/api/routes/recipes')
+export const getRecipes = () => axios.get('/api/routes/recipes')
   .then((res) => res.data);
 
-export default getRecipes;
+export const getNutritionGoals = () => axios.get('/api/routes/goals')
+  .then((res) => res.data);

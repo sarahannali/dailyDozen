@@ -6,23 +6,20 @@ import AppLayout from '../components/layout';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData();
-  const nutritionGoalData = await getNutritionGoalData();
 
   return {
     props: {
       allRecipeData,
-      nutritionGoalData,
     },
   };
 };
 
 type RecipesPageProps = {
   allRecipeData: Recipe[],
-  nutritionGoalData: NutritionGoals
 }
 
-export default function RecipesPage({ allRecipeData, nutritionGoalData }: RecipesPageProps) {
-  return <Recipes recipes={allRecipeData} nutritionGoalData={nutritionGoalData} />;
+export default function RecipesPage({ allRecipeData }: RecipesPageProps) {
+  return <Recipes recipes={allRecipeData} />;
 }
 
 RecipesPage.getLayout = function getLayout(page: ReactElement) {

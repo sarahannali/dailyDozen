@@ -4,17 +4,19 @@ import { RecipeCard, CreateRecipe } from './components';
 import { getRecipes } from './requests';
 import { SearchRecipeSection } from '../common';
 import { NutritionGoals, Recipe } from '../../utils/propTypes';
+import { EmptyNutritionGoalsWithMacros } from '../../utils/constants/goals';
+import { getNutritionGoals } from './requests/get';
 
 const { Title } = Typography;
 
 type RecipesProps = {
-  recipes: Recipe[],
-  nutritionGoalData: NutritionGoals
+  recipes: Recipe[]
 }
 
-function Recipes({ recipes, nutritionGoalData }: RecipesProps) {
+function Recipes({ recipes }: RecipesProps) {
   const [baseRecipes, setBaseRecipes] = useState(recipes);
   const [currRecipes, setCurrRecipes] = useState(recipes);
+  const [nutritionGoalData, setNutritionGoalData] = useState(EmptyNutritionGoalsWithMacros);
   const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
@@ -25,6 +27,13 @@ function Recipes({ recipes, nutritionGoalData }: RecipesProps) {
     const upToDateRecipes = await getRecipes();
     setBaseRecipes(upToDateRecipes);
   };
+
+  useEffect(() => {
+    getNutritionGoals()
+      .then((res) => {
+        setNutritionGoalData(res);
+      });
+  }, []);
 
   return (
     <div>
