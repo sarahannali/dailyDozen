@@ -1,47 +1,34 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import type { ReactElement } from 'react';
 import {
-  getAllRecipeData, getMealEvents, getNutritionGoalData, getGroceryList,
+  getAllRecipeData,
 } from '../lib';
 import MealPlanner from '../components/mealplanner/MealPlanner';
 import {
-  NutritionGoalsWithMacros, Recipe, GroceryItem, MealEventResponse,
+  Recipe,
 } from '../utils/propTypes';
 import AppLayout from '../components/layout';
-import { AuthContext } from '../components/contexts/AuthContext';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData();
-  const currentWeekMealEvents = await getMealEvents(new Date().toDateString());
-  const nutritionGoalData = await getNutritionGoalData();
-  const groceryList = await getGroceryList();
 
   return {
     props: {
       allRecipeData,
-      currentWeekMealEvents,
-      nutritionGoalData,
-      groceryList,
     },
   };
 };
 
 interface MealPlannerPageProps {
-  allRecipeData: Recipe[],
-  currentWeekMealEvents: MealEventResponse[],
-  nutritionGoalData: NutritionGoalsWithMacros,
-  groceryList: GroceryItem[]
+  allRecipeData: Recipe[]
 }
 
 export default function MealPlannerPage({
-  allRecipeData, currentWeekMealEvents, nutritionGoalData, groceryList,
+  allRecipeData,
 }: MealPlannerPageProps) {
   return (
     <MealPlanner
       allRecipeData={allRecipeData}
-      currentWeekMealEvents={currentWeekMealEvents}
-      nutritionGoalData={nutritionGoalData}
-      groceryList={groceryList}
     />
   );
 }

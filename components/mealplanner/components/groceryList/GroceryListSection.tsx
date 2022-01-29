@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Spin } from 'antd';
 import { ProfileOutlined } from '@ant-design/icons';
 import GroceryList from './GroceryList';
 import classes from './groceryList.module.css';
@@ -7,15 +7,16 @@ import { GroceryItem } from '../../../../utils/propTypes';
 import { Calendar } from '../../utils/_populateCalendar';
 import { UpdateGroceryList } from './utils';
 import { postGroceryList } from './requests/post';
+import { getGroceryList } from './requests/get';
 
 type GroceryListSectionProps = {
-  days: Calendar,
-  originalGroceryList: GroceryItem[]
+  days: Calendar
 }
 
-function GroceryListSection({ days, originalGroceryList }: GroceryListSectionProps) {
+function GroceryListSection({ days }: GroceryListSectionProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [groceryList, setGroceryList] = useState(originalGroceryList);
+  const [loading, setLoading] = useState(true);
+  const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
 
   const updateAndPostGroceryList = (updatedGroceryList: GroceryItem[]) => {
     setGroceryList(updatedGroceryList);
@@ -28,6 +29,14 @@ function GroceryListSection({ days, originalGroceryList }: GroceryListSectionPro
       updateAndPostGroceryList(updatedGroceryList);
     }
   }, [isModalVisible]);
+
+  useEffect(() => {
+    getGroceryList()
+      .then((res) => {
+        setGroceryList(res);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div>
@@ -45,10 +54,12 @@ function GroceryListSection({ days, originalGroceryList }: GroceryListSectionPro
         style={{ marginTop: '-50px' }}
         bodyStyle={{ maxHeight: '600px', overflowY: 'auto' }}
       >
-        <GroceryList
-          groceryList={groceryList}
-          updateAndPostGroceryList={updateAndPostGroceryList}
-        />
+        <Spin spinning={loading}>
+          <GroceryList
+            groceryList={groceryList}
+            updateAndPostGroceryList={updateAndPostGroceryList}
+          />
+        </Spin>
       </Modal>
     </div>
   );

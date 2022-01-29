@@ -3,12 +3,8 @@ import { Button, DatePicker } from 'antd';
 import moment from 'moment';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import classes from './datePicker.module.css';
-import {
-  getMealEvents,
-} from '../../requests';
-import {
-  PopulateCalendar,
-} from '../../utils';
+import { getMealEvents } from '../../requests';
+import { PopulateCalendar } from '../../utils';
 import { Calendar } from '../../utils/_populateCalendar';
 
 type DatePickerSectionProps = {
