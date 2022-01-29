@@ -25,7 +25,15 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
       <main>
         <Layout style={{ minHeight: '100vh' }}>
-          <Sider theme="dark">
+          <Sider
+            theme="dark"
+            style={{
+              position: 'fixed',
+              left: 0,
+              top: 0,
+              bottom: 0,
+            }}
+          >
             <div className={classes.sidebarTitle}>
               Daily Dozen
               <h2>Meal Planner</h2>
@@ -53,7 +61,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <a href="https://www.flaticon.com/free-icons/food-waste" title="food waste icons">Flaticon</a>
             </div>
           </Sider>
-          <Content style={{ margin: '16px 0' }}>
+          <Content style={{ marginLeft: 200, marginTop: 16 }}>
             {children}
           </Content>
         </Layout>

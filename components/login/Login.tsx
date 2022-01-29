@@ -24,10 +24,9 @@ function Login() {
     signInWithPopup(auth, provider)
       .then((result) => {
         if (setUser) {
-          console.log('RESULT: ', result.user);
           setUser(result.user);
           setLoading(true);
-          router.push('/');
+          router.push('/goals');
         }
       });
   };

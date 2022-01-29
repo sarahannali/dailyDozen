@@ -60,15 +60,17 @@ function NutritionGoals() {
             </Row>
             <Row>
               {
-                loading ? <Skeleton.Input active style={{ width: '100px' }} /> : (
-                  <InputNumber
-                    defaultValue={nutritionGoals[macro]}
-                    style={{ width: '100px' }}
-                    min={0}
-                    type="number"
-                    onBlur={(e) => updateNutritionGoals(macro, Number(e.target.value))}
-                  />
-                )
+                loading
+                  ? <Skeleton.Input style={{ width: '100px' }} />
+                  : (
+                    <InputNumber
+                      defaultValue={nutritionGoals[macro]}
+                      style={{ width: '100px' }}
+                      min={0}
+                      type="number"
+                      onBlur={(e) => updateNutritionGoals(macro, Number(e.target.value))}
+                    />
+                  )
               }
             </Row>
           </Col>
@@ -83,6 +85,7 @@ function NutritionGoals() {
                 <Col xs={9} key={goal}>
                   <GoalCard
                     name={goal as keyof NutritionGoalsType}
+                    loading={loading}
                     amount={nutritionGoals[goal]}
                     updateNutritionGoals={updateNutritionGoals}
                   />

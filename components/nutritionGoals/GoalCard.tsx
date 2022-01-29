@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, Row, Col, Typography, Input, Progress,
+  Card, Row, Col, Typography, Input, Progress, Skeleton,
 } from 'antd';
 import Image from 'next/image';
 import { Capitalize, GetBorderColor, GetNutritionGoalImg } from '../common';
@@ -12,10 +12,13 @@ const { Text } = Typography;
 type GoalCardProps = {
   name: keyof NutritionGoals,
   amount: number,
+  loading: boolean,
   updateNutritionGoals: (type: string, value: number) => void
 }
 
-function GoalCard({ name, amount, updateNutritionGoals }: GoalCardProps) {
+function GoalCard({
+  name, amount, loading, updateNutritionGoals,
+}: GoalCardProps) {
   const img = (
     <Image
       className={classes.goalImg}
@@ -45,13 +48,19 @@ function GoalCard({ name, amount, updateNutritionGoals }: GoalCardProps) {
           </Col>
           <Col>
             <Row style={{ margin: '5px', width: '150px' }}>
-              <Input
-                type="number"
-                addonAfter="g"
-                defaultValue={amount}
-                min={0}
-                onBlur={(e) => updateNutritionGoals(name, Number(e.target.value))}
-              />
+              {
+                loading
+                  ? <Skeleton.Input style={{ width: '150px' }} />
+                  : (
+                    <Input
+                      type="number"
+                      addonAfter="g"
+                      defaultValue={amount}
+                      min={0}
+                      onBlur={(e) => updateNutritionGoals(name, Number(e.target.value))}
+                    />
+                  )
+              }
             </Row>
           </Col>
         </Row>
