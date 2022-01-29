@@ -13,12 +13,11 @@ import {
 } from '../../requests';
 import { Calendar } from './calendar';
 import { RecipeBox } from './recipeBox';
-import { Recipe, NutritionGoalsWithMacros, MealEvent } from '../../../../utils/propTypes';
+import { Recipe, MealEvent } from '../../../../utils/propTypes';
 import { Calendar as CalendarType } from '../../utils/_populateCalendar';
 
 type DraggableAreasProps = {
   allRecipeData: Recipe[],
-  nutritionGoalData: NutritionGoalsWithMacros,
   days: CalendarType,
   setDays: React.Dispatch<React.SetStateAction<CalendarType>>,
   performRequest: (request: (x: any) => Promise<boolean>, body: unknown) => Promise<any>
@@ -26,7 +25,7 @@ type DraggableAreasProps = {
 }
 
 function DraggableAreas({
-  allRecipeData, nutritionGoalData, days, setDays, performRequest,
+  allRecipeData, days, setDays, performRequest,
 }: DraggableAreasProps) {
   const [draggingRecipe, setDraggingRecipe] = useState(false);
 
@@ -80,7 +79,7 @@ function DraggableAreas({
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <Calendar
         days={days}
-        nutritionGoalData={nutritionGoalData}
+        setDays={setDays}
         deleteMealEvent={deleteMealEventHandler}
         updateMealEvent={updateMealEvent}
       />

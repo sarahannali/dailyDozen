@@ -26,7 +26,7 @@ function Login() {
         if (setUser) {
           setUser(result.user);
           setLoading(true);
-          router.push('/goals');
+          router.push('/');
         }
       });
   };

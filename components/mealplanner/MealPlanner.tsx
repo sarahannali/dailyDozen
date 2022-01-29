@@ -10,30 +10,19 @@ import {
   GroceryListSection,
   DraggableAreas,
 } from './components';
-import {
-  PopulateCalendar,
-} from './utils';
-import {
-  GroceryItem, MealEventResponse, NutritionGoalsWithMacros, Recipe,
-} from '../../utils/propTypes';
+import { PopulateCalendar } from './utils';
+import { Recipe } from '../../utils/propTypes';
 import { Calendar } from './utils/_populateCalendar';
 
 interface MealPlannerProps {
-  allRecipeData: Recipe[],
-  currentWeekMealEvents: MealEventResponse[],
-  nutritionGoalData: NutritionGoalsWithMacros,
-  groceryList: GroceryItem[]
+  allRecipeData: Recipe[]
 }
 
 function MealPlanner({
-  allRecipeData, currentWeekMealEvents, nutritionGoalData, groceryList,
+  allRecipeData,
 }: MealPlannerProps) {
   const [days, setDays] = useState<Calendar>([]);
   const [loadingSymbol, setLoadingSymbol] = useState<ReactElement | null>(null);
-
-  useEffect(() => {
-    setDays(PopulateCalendar(currentWeekMealEvents, moment().toDate()));
-  }, [currentWeekMealEvents]);
 
   const performRequest = async (request: (x: any) => Promise<boolean>, body: unknown) => {
     let result = false;
@@ -59,12 +48,11 @@ function MealPlanner({
       </div>
       <DraggableAreas
         allRecipeData={allRecipeData}
-        nutritionGoalData={nutritionGoalData}
         days={days}
         performRequest={performRequest}
         setDays={setDays}
       />
-      <GroceryListSection days={days} originalGroceryList={groceryList} />
+      <GroceryListSection days={days} />
     </div>
   );
 }
