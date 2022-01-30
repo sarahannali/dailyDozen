@@ -24,7 +24,6 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider value={value}>
-      {console.log('AUTH PROVIDER: ', value)}
       {children}
     </AuthContext.Provider>
   );
