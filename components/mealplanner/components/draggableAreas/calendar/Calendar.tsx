@@ -3,11 +3,11 @@ import { Row, Spin } from 'antd';
 import SingleDay from './SingleDay';
 import classes from './calendar.module.css';
 import { Calendar as CalendarType } from '../../../utils/_populateCalendar';
-import { MealEvent, NutritionGoalsWithMacros } from '../../../../../utils/propTypes';
+import { MealEvent } from '../../../../../utils/propTypes';
 import { getMealEvents } from '../../../requests';
 import { PopulateCalendar } from '../../../utils';
-import { getNutritionGoals } from './requests/get';
 import { EmptyNutritionGoalsWithMacros } from '../../../../../utils/constants/goals';
+import { getNutritionGoalData } from '../../../../requests';
 
 type CalendarProps = {
   days: CalendarType,
@@ -31,7 +31,7 @@ function Calendar({
         setLoading(false);
       });
 
-    getNutritionGoals()
+    getNutritionGoalData()
       .then((res) => {
         setNutritionGoalData(res);
       });

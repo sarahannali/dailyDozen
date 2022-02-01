@@ -6,8 +6,7 @@ import classes from './groceryList.module.css';
 import { GroceryItem } from '../../../../utils/propTypes';
 import { Calendar } from '../../utils/_populateCalendar';
 import { UpdateGroceryList } from './utils';
-import { postGroceryList } from './requests/post';
-import { getGroceryList } from './requests/get';
+import { getGroceryList, postGroceryList } from '../../../requests';
 
 type GroceryListSectionProps = {
   days: Calendar

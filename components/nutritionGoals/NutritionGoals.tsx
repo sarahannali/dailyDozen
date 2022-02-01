@@ -5,11 +5,10 @@ import {
 import GoalCard from './GoalCard';
 import { IsNotMacro } from './utils';
 import { NutritionGoals as NutritionGoalsType } from '../../utils/propTypes';
-import { postNutritionGoals } from './requests/post';
-import { getNutritionGoalData } from '../../lib';
 import { EmptyNutritionGoalsWithMacros, macros } from '../../utils/constants/goals';
 import { Macros } from '../../utils/propTypes/db/Recipe';
 import { Capitalize } from '../common';
+import { getNutritionGoalData, postNutritionGoalData } from '../requests';
 
 const { Title } = Typography;
 
@@ -22,7 +21,7 @@ function NutritionGoals() {
 
     setNutritionGoals(updatedGoals);
 
-    postNutritionGoals(updatedGoals)
+    postNutritionGoalData(updatedGoals)
       .then(() => {
         notification.success({
           message: 'Changes Saved',

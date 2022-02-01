@@ -1,5 +1,4 @@
-import React, { useState, useEffect, ReactElement } from 'react';
-import moment from 'moment';
+import React, { useState, ReactElement } from 'react';
 import {
   SyncOutlined,
   CheckCircleTwoTone,
@@ -10,7 +9,6 @@ import {
   GroceryListSection,
   DraggableAreas,
 } from './components';
-import { PopulateCalendar } from './utils';
 import { Recipe } from '../../utils/propTypes';
 import { Calendar } from './utils/_populateCalendar';
 
@@ -24,7 +22,7 @@ function MealPlanner({
   const [days, setDays] = useState<Calendar>([]);
   const [loadingSymbol, setLoadingSymbol] = useState<ReactElement | null>(null);
 
-  const performRequest = async (request: (x: any) => Promise<boolean>, body: unknown) => {
+  const performRequest = async (request: (...args: any[]) => Promise<any>, body: unknown) => {
     let result = false;
     setLoadingSymbol(<SyncOutlined spin style={{ color: 'gray' }} />);
 

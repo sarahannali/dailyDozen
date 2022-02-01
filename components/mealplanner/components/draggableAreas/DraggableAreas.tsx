@@ -6,21 +6,17 @@ import {
   UpdateMeal,
   getRequestObj,
 } from './utils';
-import {
-  postMealEvent,
-  putMealEvent,
-  deleteMealEvent,
-} from '../../requests';
 import { Calendar } from './calendar';
 import { RecipeBox } from './recipeBox';
 import { Recipe, MealEvent } from '../../../../utils/propTypes';
 import { Calendar as CalendarType } from '../../utils/_populateCalendar';
+import { deleteMealEvent, postMealEvent, putMealEvent } from '../../../requests';
 
 type DraggableAreasProps = {
   allRecipeData: Recipe[],
   days: CalendarType,
   setDays: React.Dispatch<React.SetStateAction<CalendarType>>,
-  performRequest: (request: (x: any) => Promise<boolean>, body: unknown) => Promise<any>
+  performRequest: (request: (...args: any[]) => Promise<any>, body: unknown) => Promise<any>
 
 }
 
@@ -69,7 +65,7 @@ function DraggableAreas({
 
   const updateMealEvent = async (movedObj: MealEvent, codes: string, sourceIdx: number) => {
     const reqObj = getRequestObj(movedObj, codes);
-    await performRequest(putMealEvent, reqObj);
+    await performRequest(postMealEvent, reqObj);
 
     const newDays = UpdateMeal(codes, sourceIdx, days, movedObj);
     setDays([...newDays]);

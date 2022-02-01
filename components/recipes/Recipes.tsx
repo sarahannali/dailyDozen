@@ -5,7 +5,7 @@ import { getRecipes } from './requests';
 import { SearchRecipeSection } from '../common';
 import { NutritionGoals, Recipe } from '../../utils/propTypes';
 import { EmptyNutritionGoalsWithMacros } from '../../utils/constants/goals';
-import { getNutritionGoals } from './requests/get';
+import { getNutritionGoalData } from '../requests';
 
 const { Title } = Typography;
 
@@ -29,7 +29,7 @@ function Recipes({ recipes }: RecipesProps) {
   };
 
   useEffect(() => {
-    getNutritionGoals()
+    getNutritionGoalData()
       .then((res) => {
         setNutritionGoalData(res);
       });
