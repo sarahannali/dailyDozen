@@ -9,7 +9,7 @@ import {
   GroceryListSection,
   DraggableAreas,
 } from './components';
-import { Recipe } from '../../utils/propTypes';
+import { Recipe } from '../../../utils/propTypes';
 import { Calendar } from './utils/_populateCalendar';
 
 interface MealPlannerProps {

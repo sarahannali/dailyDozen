@@ -5,6 +5,7 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import '../styles.css';
 import AuthProvider from '../components/contexts/AuthContext';
+import RouteGuard from '../components/common/RouteGuard';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -19,9 +20,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <AuthProvider>
-      <>
+      <RouteGuard>
         {getLayout(<Component {...pageProps} />)}
-      </>
+      </RouteGuard>
     </AuthProvider>
   );
 }

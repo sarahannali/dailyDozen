@@ -6,7 +6,6 @@ import {
 import {
   GoogleAuthProvider, signInWithPopup,
 } from 'firebase/auth';
-import { useRouter } from 'next/dist/client/router';
 import { auth } from '../../../firebase/clientApp';
 import classes from './login.module.css';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -18,15 +17,15 @@ function Login() {
   const { setUser } = useContext(AuthContext);
 
   const provider = new GoogleAuthProvider();
-  const router = useRouter();
 
   const handleLogIn = (): void => {
+    setLoading(true);
+
     signInWithPopup(auth, provider)
       .then((result) => {
         if (setUser) {
           setUser(result.user);
-          setLoading(true);
-          router.push('/');
+          setLoading(false);
         }
       });
   };

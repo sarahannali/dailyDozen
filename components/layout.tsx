@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import {
   PieChartOutlined,
   FolderOpenOutlined,
   LineChartOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
+import { signOut } from 'firebase/auth';
 import classes from './css/layout.module.css';
+import { auth } from '../firebase/clientApp';
+import { AuthContext } from './contexts/AuthContext';
 
 const { Sider, Content } = Layout;
 
@@ -16,6 +20,14 @@ type AppLayoutProps = {
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
+  const { setUser } = useContext(AuthContext);
+
+  const handleLogOut = (): void => {
+    signOut(auth).then(() => {
+      if (setUser) setUser(null);
+    });
+  };
+
   return (
     <div className="container">
       <Head>
@@ -55,6 +67,18 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </Link>
               </Menu.Item>
             </Menu>
+            <div style={{
+              width: '100%', position: 'absolute', bottom: '40px', marginLeft: '30%',
+            }}
+            >
+              <Button
+                danger
+                type="primary"
+                onClick={handleLogOut}
+              >
+                Logout
+              </Button>
+            </div>
             <div className={classes.iconCredit}>
               Icons created by
               {' '}
