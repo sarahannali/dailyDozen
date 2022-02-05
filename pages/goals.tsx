@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import AppLayout from '../components/layout';
-import NutritionGoals from '../components/nutritionGoals/NutritionGoals';
+import NutritionGoals from '../components/pages/nutritionGoals/NutritionGoals';
 
 export default function GoalsPage() {
   return <NutritionGoals />;

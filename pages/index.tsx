@@ -3,11 +3,11 @@ import type { ReactElement } from 'react';
 import {
   getAllRecipeData,
 } from '../lib';
-import MealPlanner from '../components/mealplanner/MealPlanner';
 import {
   Recipe,
 } from '../utils/propTypes';
 import AppLayout from '../components/layout';
+import MealPlanner from '../components/pages/mealplanner/MealPlanner';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData();

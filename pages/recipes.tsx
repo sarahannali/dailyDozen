@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
-import { getAllRecipeData, getNutritionGoalData } from '../lib';
-import Recipes from '../components/recipes/Recipes';
-import { NutritionGoals, Recipe } from '../utils/propTypes';
+import { getAllRecipeData } from '../lib';
+import { Recipe } from '../utils/propTypes';
 import AppLayout from '../components/layout';
+import Recipes from '../components/pages/recipes/Recipes';
 
 export const getStaticProps = async () => {
   const allRecipeData = await getAllRecipeData();

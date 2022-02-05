@@ -3,25 +3,14 @@ import {
 } from 'firebase/firestore/lite';
 import { StatusCodes } from 'http-status-codes';
 import db from '../firebase/clientApp';
-import { getAllUserRecipeData } from './userRecipes';
 import { ErrorWithStatus, IngredientRequest, RecipeRequest } from '../utils/propTypes';
 
 export const getAllRecipeData = async () => {
-  const userRecipes = await getAllUserRecipeData();
-
   const recipesCollection = collection(db, 'recipes');
   const recipesSnapshot = await getDocs(recipesCollection);
-  const recipesList = recipesSnapshot.docs.map((doc) => {
-    const userRecipe = userRecipes.filter((u) => u.RecipeID === doc.id)[0];
-    if (userRecipe) {
-      return {
-        ...doc.data(), ...userRecipe, id: doc.id, userRecipeID: userRecipe.id,
-      };
-    }
-    return {
-      id: doc.id, ...doc.data(), Rating: 0, Favorite: false,
-    };
-  });
+  const recipesList = recipesSnapshot.docs.map((doc) => ({
+    id: doc.id, ...doc.data(), Rating: 0, Favorite: false,
+  }));
 
   return recipesList;
 };
