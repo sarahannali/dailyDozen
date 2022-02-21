@@ -1,6 +1,6 @@
 import { DraggableLocation } from 'react-beautiful-dnd';
 import { Calendar, Meals, Meal } from '../../../utils/_populateCalendar';
-import { Recipe, MealEvent } from '../../../../../utils/propTypes';
+import { Recipe, MealEvent } from '../../../../../../utils/propTypes';
 
 export const DeleteMeal = (key: string, sourceIdx: number, days: Calendar): [Meal, Calendar] => {
   const codes = key.split(':');

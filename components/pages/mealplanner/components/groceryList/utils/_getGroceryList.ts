@@ -1,5 +1,5 @@
 import { Calendar, Meals } from '../../../utils/_populateCalendar';
-import { ConvertAmount } from '.';
+import { ConvertAmount } from './_convertAmount';
 import { GroceryItem } from '../../../../../../utils/propTypes';
 
 const UpdateGroceryList = (groceryList: GroceryItem[], days: Calendar) => {
@@ -12,12 +12,6 @@ const UpdateGroceryList = (groceryList: GroceryItem[], days: Calendar) => {
           const amountNeeded = (
             ingredient.grams / mealEvent.RecipeInfo.servings
           ) * mealEvent.Servings;
-          if (ingredient.name == 'chickpeas') {
-            console.log('RECIPE INFO: ', mealEvent.RecipeInfo);
-            console.log('SERVINGS: ', mealEvent.Servings);
-            console.log('AMOUNT IN INGREDIENTS: ', ingredient);
-            console.log('AMOUNT NEEDED: ', amountNeeded);
-          }
           if (ingredientMap.has(ingredient.name)) {
             ingredientMap.get(ingredient.name)!.amount += amountNeeded;
           } else {

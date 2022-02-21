@@ -5,7 +5,7 @@ import { DailyNutritionInfo } from './dailyNutritionInfo';
 import { CalendarDays } from '../../../utils';
 import classes from './calendar.module.css';
 import { Meals } from '../../../utils/_populateCalendar';
-import { MealEvent, NutritionGoalsWithMacros } from '../../../../../utils/propTypes';
+import { MealEvent, NutritionGoalsWithMacros } from '../../../../../../utils/propTypes';
 
 const { Title } = Typography;
 

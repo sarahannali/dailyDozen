@@ -5,7 +5,7 @@ import { GetColor } from './utils';
 import Recipe from './recipe/Recipe';
 import classes from './calendar.module.css';
 import { Meals, Meal } from '../../../utils/_populateCalendar';
-import { MealEvent } from '../../../../../utils/propTypes';
+import { MealEvent } from '../../../../../../utils/propTypes';
 
 type MealTimeProps = {
   day: string,

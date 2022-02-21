@@ -21,8 +21,6 @@ function RecipeInfo({ recipe, nutritionGoalData, setUserRecipeInfo }: RecipeInfo
   const [servings, setServings] = useState(recipe.servings);
   const servingsRatio = recipe.servings;
 
-  console.log('RECIPE INGREDIENTS: ', recipe.ingredients);
-
   return (
     <Row justify="center">
       <div style={{ height: '80vh', width: '60vw' }}>

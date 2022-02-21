@@ -3,7 +3,9 @@ import {
 } from 'firebase/firestore/lite';
 import { StatusCodes } from 'http-status-codes';
 import db from '../firebase/clientApp';
-import { ErrorWithStatus, IngredientRequest, RecipeRequest } from '../utils/propTypes';
+import {
+  ErrorWithStatus, Ingredient, IngredientRequest, RecipeRequest,
+} from '../utils/propTypes';
 
 export const getAllRecipeData = async () => {
   const recipesCollection = collection(db, 'recipes');
@@ -41,7 +43,7 @@ const PopulateIngredients = async (ingredients: IngredientRequest[]) => {
       throw err;
     }
 
-    const ingrData = ingredientSnapshot.docs[0].data();
+    const ingrData = ingredientSnapshot.docs[0].data() as Ingredient;
 
     const grams = amountType === 'g'
       ? amount
@@ -52,9 +54,8 @@ const PopulateIngredients = async (ingredients: IngredientRequest[]) => {
       grams,
       name,
       ratio: ingrData.ratio,
+      types: [] as string[],
     };
-
-    if (ingrData.types) ingredientObj.types = ingrData.types;
 
     if (ingrData.types) ingredientObj.types = ingrData.types;
 
