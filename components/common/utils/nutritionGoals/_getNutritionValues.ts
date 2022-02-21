@@ -7,7 +7,7 @@ const GetNutritionValues = (
   servings: number,
   servingsRatio: number,
 ): NutritionGoals => {
-  const nutritionMap: NutritionGoals = EmptyNutritionGoals;
+  const nutritionMap: NutritionGoals = { ...EmptyNutritionGoals };
 
   ingredients.forEach((ingr) => {
     const { types } = ingr;

@@ -6,8 +6,8 @@ import { MealEvent } from '../../../utils/propTypes';
 import zeroedDate from './util/zeroedDate';
 
 // eslint-disable-next-line import/prefer-default-export
-export const putMealEvent = async (mealEventID: string, mealEvent: MealEvent) => {
-  const mealDoc = doc(db, `users/${auth.currentUser?.uid}/mealEvents/${mealEventID}`);
+export const putMealEvent = async (mealEvent: MealEvent) => {
+  const mealDoc = doc(db, `users/${auth.currentUser?.uid}/mealEvents/${mealEvent.id}`);
 
   await updateDoc(mealDoc, {
     Date: zeroedDate(mealEvent.Date.toString()),
@@ -15,5 +15,5 @@ export const putMealEvent = async (mealEventID: string, mealEvent: MealEvent) =>
     Servings: mealEvent.Servings,
   });
 
-  return mealEventID;
+  return mealEvent.id;
 };

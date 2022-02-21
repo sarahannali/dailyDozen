@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress } from 'antd';
+import { Progress, Col } from 'antd';
 import Image from 'next/image';
 import { GetBorderColor, GetNutritionGoalImg, GetNutritionValues } from '../../utils/nutritionGoals';
 import classes from './recipeInfo.module.css';
@@ -23,7 +23,7 @@ function NutritionValues({
   );
 
   return (
-    <div className={classes.nutritionValues}>
+    <>
       {
         (Object.keys(nutritionValues) as Array<keyof NutritionGoals>).map((val) => {
           const img = (
@@ -36,7 +36,7 @@ function NutritionValues({
           );
 
           return nutritionValues[val] !== 0 && (
-            <div className={classes.nutritionValueImg} key={val}>
+            <Col span={4}>
               <Progress
                 type="circle"
                 percent={nutritionValues[val] * 100}
@@ -44,11 +44,11 @@ function NutritionValues({
                 strokeColor={GetBorderColor(val)}
                 width={70}
               />
-            </div>
+            </Col>
           );
         })
       }
-    </div>
+    </>
   );
 }
 

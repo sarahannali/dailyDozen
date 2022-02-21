@@ -23,7 +23,8 @@ function GroceryListSection({ days }: GroceryListSectionProps) {
   };
 
   useEffect(() => {
-    if (isModalVisible) {
+    if (isModalVisible && groceryList) {
+      console.log('UPDATING: ');
       const updatedGroceryList = UpdateGroceryList(groceryList, days);
       updateAndPostGroceryList(updatedGroceryList);
     }
@@ -54,10 +55,12 @@ function GroceryListSection({ days }: GroceryListSectionProps) {
         bodyStyle={{ maxHeight: '600px', overflowY: 'auto' }}
       >
         <Spin spinning={loading}>
+          {groceryList && (
           <GroceryList
             groceryList={groceryList}
             updateAndPostGroceryList={updateAndPostGroceryList}
           />
+          )}
         </Spin>
       </Modal>
     </div>

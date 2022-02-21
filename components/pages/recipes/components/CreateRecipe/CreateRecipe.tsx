@@ -10,6 +10,7 @@ import {
   LoadingOutlined,
 } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
+import axios from 'axios';
 import classes from './createRecipe.module.css';
 import { RecipeRequest } from '../../../../../utils/propTypes';
 import { macros } from '../../../../../utils/constants/goals';
@@ -24,7 +25,14 @@ function CreateRecipe() {
   const onFinish = async (values: RecipeRequest) => {
     setLoading(true);
 
-    // const { err, data } = await postRecipe(values);
+    await axios.get('/api/recipe/fix');
+
+    // axios.post('/api/recipe', values)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     return { err: false, data: res.data };
+    //   });
+
     setLoading(false);
 
     // if (err) {

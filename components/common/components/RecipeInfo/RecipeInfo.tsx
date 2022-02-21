@@ -21,11 +21,13 @@ function RecipeInfo({ recipe, nutritionGoalData, setUserRecipeInfo }: RecipeInfo
   const [servings, setServings] = useState(recipe.servings);
   const servingsRatio = recipe.servings;
 
+  console.log('RECIPE INGREDIENTS: ', recipe.ingredients);
+
   return (
     <Row justify="center">
       <div style={{ height: '80vh', width: '60vw' }}>
         <Row style={{ marginBottom: '15px' }}>
-          <Col>
+          <Col span={11}>
             <Image
               loader={() => recipe.imageURL}
               width={200}
@@ -34,13 +36,15 @@ function RecipeInfo({ recipe, nutritionGoalData, setUserRecipeInfo }: RecipeInfo
               className={classes.recipeInfoImg}
             />
           </Col>
-          <Col span={10}>
-            <NutritionValues
-              ingredients={recipe.ingredients}
-              nutritionGoalData={nutritionGoalData}
-              servings={servings}
-              servingsRatio={servingsRatio}
-            />
+          <Col span={13}>
+            <Row gutter={[80, 16]} style={{ marginLeft: '-30px', marginRight: 0 }}>
+              <NutritionValues
+                ingredients={recipe.ingredients}
+                nutritionGoalData={nutritionGoalData}
+                servings={servings}
+                servingsRatio={servingsRatio}
+              />
+            </Row>
           </Col>
         </Row>
         <Row justify="center">

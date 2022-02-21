@@ -17,9 +17,9 @@ export const getAllRecipeData = async () => {
 
 const AmountTypeMultipliers = {
   cup: 1,
-  tbs: 16,
-  tsp: 48,
-  gal: 0.0625,
+  tbs: (1 / 16),
+  tsp: (1 / 48),
+  gal: 16,
 };
 
 const PopulateIngredients = async (ingredients: IngredientRequest[]) => {
@@ -52,8 +52,9 @@ const PopulateIngredients = async (ingredients: IngredientRequest[]) => {
       grams,
       name,
       ratio: ingrData.ratio,
-      types: ingrData.types,
     };
+
+    if (ingrData.types) ingredientObj.types = ingrData.types;
 
     if (ingrData.types) ingredientObj.types = ingrData.types;
 
