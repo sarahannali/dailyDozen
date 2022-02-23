@@ -6,7 +6,6 @@ import {
   PieChartOutlined,
   FolderOpenOutlined,
   LineChartOutlined,
-  LogoutOutlined,
 } from '@ant-design/icons';
 import { signOut } from 'firebase/auth';
 import classes from './css/layout.module.css';
