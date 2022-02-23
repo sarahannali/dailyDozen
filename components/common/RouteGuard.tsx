@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import React, {
   useContext, ReactNode,
 } from 'react';
@@ -7,9 +8,8 @@ import Login from '../pages/login/Login';
 function RouteGuard({ children }: { children: ReactNode}) {
   const { user } = useContext(AuthContext);
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  if (user) return <>{children}</>;
-  return <Login />;
+  if (user === null) return <Login />;
+  return <Spin spinning={user === undefined}>{children}</Spin>;
 }
 
 export default RouteGuard;
