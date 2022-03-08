@@ -22,7 +22,7 @@ function RouteGuard({ children }: { children: ReactNode}) {
       </div>
     );
   }
-  return <Spin spinning={user === undefined}>{children}</Spin>;
+  return { children };
 }
 
 export default RouteGuard;
