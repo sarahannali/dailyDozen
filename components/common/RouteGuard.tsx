@@ -22,7 +22,7 @@ function RouteGuard({ children }: { children: ReactNode}) {
       </div>
     );
   }
-  return { children };
+  return <span>{children}</span>;
 }
 
 export default RouteGuard;
