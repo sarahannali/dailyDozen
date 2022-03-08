@@ -9,7 +9,20 @@ function RouteGuard({ children }: { children: ReactNode}) {
   const { user } = useContext(AuthContext);
 
   if (user === null) return <Login />;
-  return <Spin spinning={user === undefined}>{children}</Spin>;
+  if (user === undefined) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+      }}
+      >
+        <Spin spinning size="large" />
+      </div>
+    );
+  }
+  return <span>{children}</span>;
 }
 
 export default RouteGuard;
