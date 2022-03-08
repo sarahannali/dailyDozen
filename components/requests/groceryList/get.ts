@@ -8,7 +8,7 @@ export const getGroceryList = async () => {
 
   if (snapshot.exists()) {
     const data = snapshot.data();
-    if (data.groceryIngredient) return data.groceryList;
+    return data.groceryList;
   }
 
   return [];
