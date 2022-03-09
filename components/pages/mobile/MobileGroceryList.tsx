@@ -1,16 +1,29 @@
-import { Row, Spin, Typography } from 'antd';
-import React, { useEffect, useState } from 'react';
+import {
+  Button, Row, Spin, Typography,
+} from 'antd';
+import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { signOut } from 'firebase/auth';
 import { GroceryItem } from '../../../utils/propTypes';
 import { getGroceryList, postGroceryList } from '../../requests';
 import GroceryList from '../mealplanner/components/groceryList/GroceryList';
 import classes from '../login/login.module.css';
+import { AuthContext } from '../../contexts/AuthContext';
+import { auth } from '../../../firebase/clientApp';
 
 const { Title } = Typography;
 
 function MobileGroceryList() {
   const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const { setUser } = useContext(AuthContext);
+
+  const handleLogOut = (): void => {
+    signOut(auth).then(() => {
+      if (setUser) setUser(null);
+    });
+  };
 
   const updateAndPostGroceryList = (updatedGroceryList: GroceryItem[]) => {
     setGroceryList(updatedGroceryList);
@@ -46,6 +59,17 @@ function MobileGroceryList() {
               updateAndPostGroceryList={updateAndPostGroceryList}
             />
           </div>
+          <Button
+            danger
+            type="primary"
+            onClick={handleLogOut}
+            style={{
+              position: 'absolute',
+              bottom: '15px',
+            }}
+          >
+            Logout
+          </Button>
         </div>
       </Spin>
     </div>
