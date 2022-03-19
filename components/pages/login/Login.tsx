@@ -45,7 +45,8 @@ function Login() {
           <Image src="/svgs/blob1.svg" height={700} width={700} />
         </div>
       </div>
-      <Spin spinning={loading}>
+      <div />
+      <Spin spinning={loading} size="large" style={{ marginTop: '170px', marginLeft: '5px' }}>
         <div className={classes.fullScreen}>
           <div className={classes.loginModal}>
             <div>

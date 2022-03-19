@@ -24,7 +24,6 @@ function GroceryListSection({ days }: GroceryListSectionProps) {
 
   useEffect(() => {
     if (isModalVisible && groceryList) {
-      console.log('UPDATING: ');
       const updatedGroceryList = UpdateGroceryList(groceryList, days);
       updateAndPostGroceryList(updatedGroceryList);
     }
