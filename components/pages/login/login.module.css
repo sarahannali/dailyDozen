@@ -9,11 +9,12 @@
 .background {
   position: absolute;
   width: 100vw;
+  height: 100vh;
 }
 
 .blob1 {
   position: absolute;
-  margin-top: 15%;
+  bottom: -15%;
   left: -15%;
 }
 
@@ -27,13 +28,15 @@
   background: #fff;
   border-radius: 10px;
   display: inline-block;
-  height: 380px;
+  min-height: 380px;
   margin: auto;
   position: absolute;
-  width: 500px;
+  max-width: 500px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   overflow: hidden;
   padding-top: 40px;
+  width: 80%;
+  padding-bottom: 40px;
 }
 
 .loginButton {
