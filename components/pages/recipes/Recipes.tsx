@@ -25,9 +25,20 @@ function Recipes({ recipes }: RecipesProps) {
   }, [baseRecipes]);
 
   const updateRecipes = async () => {
-    console.log('UPDATE REIPCES');
-    // const upToDateRecipes = await getRecipes();
-    // setBaseRecipes(upToDateRecipes);
+    const refreshedUserData = await getAllUserRecipeData();
+
+    setBaseRecipes(baseRecipes.map((recipe) => {
+      const existingUserData = refreshedUserData.find((ud) => ud.RecipeID === recipe.id);
+      if (existingUserData) {
+        return {
+          ...recipe,
+          userRecipeID: existingUserData.id,
+          Favorite: existingUserData.Favorite,
+          Rating: existingUserData.Rating,
+        };
+      }
+      return recipe;
+    }));
   };
 
   useEffect(() => {

@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Card, Col, Row, Modal, Rate, Badge, Spin,
+  Card, Col, Row, Modal, Rate, Badge,
 } from 'antd';
-import {
-  HeartFilled,
-  LoadingOutlined,
-} from '@ant-design/icons';
+import { HeartFilled } from '@ant-design/icons';
 import Image from 'next/image';
 import RecipeInfo from '../../../common/components/RecipeInfo/RecipeInfo';
 import classes from './recipes.module.css';
-import { NutritionGoals, Recipe, UserRecipe } from '../../../../utils/propTypes';
+import { NutritionGoals, Recipe } from '../../../../utils/propTypes';
 import { putUserRecipe } from '../../../requests/userRecipes/put';
 import { postUserRecipe } from '../../../requests/userRecipes/post';
 
@@ -21,41 +18,32 @@ type RecipeCardProps = {
 
 function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [userRecipeInfo, setUserRecipeInfo] = useState<UserRecipe>({
-    id: recipe.userRecipeID,
-    Favorite: recipe.Favorite,
+  const [localUserData, setLocalUserData] = useState({
     Rating: recipe.Rating,
+    Favorite: recipe.Favorite,
   });
-  const [loading, setLoading] = useState(false);
 
-  const onCancel = async () => {
-    if (userRecipeInfo.Favorite !== recipe.Favorite || userRecipeInfo.Rating !== recipe.Rating) {
-      setLoading(true);
+  const updateUserRecipe = async (favorite: boolean, rating: number) => {
+    const newUserRecipe = {
+      Rating: rating,
+      Favorite: favorite,
+    };
 
-      if (userRecipeInfo.id) {
-        await putUserRecipe(userRecipeInfo.id, {
-          Rating: userRecipeInfo.Rating,
-          Favorite: userRecipeInfo.Favorite,
-        });
-      } else {
-        const id = await postUserRecipe({
-          RecipeID: recipe.id,
-          Rating: userRecipeInfo.Rating,
-          Favorite: userRecipeInfo.Favorite,
-        });
-
-        setUserRecipeInfo({ ...userRecipeInfo, id });
-      }
-
-      updateRecipes();
+    if (recipe.userRecipeID) {
+      await putUserRecipe(recipe.userRecipeID, newUserRecipe);
+    } else {
+      await postUserRecipe({
+        RecipeID: recipe.id,
+        ...newUserRecipe,
+      });
     }
 
-    setIsModalVisible(false);
-    setLoading(false);
+    setLocalUserData(newUserRecipe);
+    updateRecipes();
   };
 
   return (
-    <Badge count={userRecipeInfo.Favorite ? <HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} /> : 0}>
+    <Badge count={localUserData.Favorite ? <HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} /> : 0}>
       <Card className={classes.recipecard} onClick={() => setIsModalVisible(true)} hoverable>
         <Row>
           <Col span={12}>
@@ -78,22 +66,15 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
             {recipe.name}
             <Rate
               count={1}
-              value={+userRecipeInfo.Favorite}
+              value={+localUserData.Favorite}
               character={<HeartFilled />}
               style={{ color: '#eb2f96', marginLeft: '10px' }}
-              onChange={() => setUserRecipeInfo(() => ({
-                ...userRecipeInfo,
-                Favorite: !userRecipeInfo.Favorite,
-              }))}
-            />
-            <Spin
-              spinning={loading}
-              indicator={<LoadingOutlined style={{ fontSize: 10, marginLeft: '10px' }} spin />}
+              onChange={() => updateUserRecipe(!localUserData.Favorite, localUserData.Rating)}
             />
           </span>
           )}
         visible={isModalVisible}
-        onCancel={onCancel}
+        onCancel={() => setIsModalVisible(false)}
         footer={null}
         style={{ marginTop: '-50px' }}
         bodyStyle={{ maxHeight: '600px', overflowY: 'auto' }}
@@ -101,7 +82,8 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
         <RecipeInfo
           recipe={recipe}
           nutritionGoalData={nutritionGoalData}
-          setUserRecipeInfo={setUserRecipeInfo}
+          updateUserRecipe={updateUserRecipe}
+          localUserData={localUserData}
         />
       </Modal>
     </Badge>

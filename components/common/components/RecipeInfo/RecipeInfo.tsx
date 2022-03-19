@@ -7,17 +7,20 @@ import MacroValues from './MacroValues';
 import Ingredients from './Ingredients';
 import NutritionValues from './NutritionValues';
 import classes from './recipeInfo.module.css';
-import { NutritionGoals, Recipe, UserRecipe } from '../../../../utils/propTypes';
+import { NutritionGoals, Recipe } from '../../../../utils/propTypes';
 
 const { Title } = Typography;
 
 type RecipeInfoProps = {
   recipe: Recipe,
   nutritionGoalData: NutritionGoals,
-  setUserRecipeInfo: React.Dispatch<React.SetStateAction<UserRecipe>>
+  updateUserRecipe: (favorite: boolean, rating: number) => void,
+  localUserData: { Favorite: boolean, Rating: number }
 }
 
-function RecipeInfo({ recipe, nutritionGoalData, setUserRecipeInfo }: RecipeInfoProps) {
+function RecipeInfo({
+  recipe, nutritionGoalData, updateUserRecipe, localUserData,
+}: RecipeInfoProps) {
   const [servings, setServings] = useState(recipe.servings);
   const servingsRatio = recipe.servings;
 
@@ -64,8 +67,8 @@ function RecipeInfo({ recipe, nutritionGoalData, setUserRecipeInfo }: RecipeInfo
         </Row>
         <Row justify="center">
           <Rate
-            defaultValue={recipe.Rating}
-            onChange={(e) => setUserRecipeInfo(() => ({ Favorite: recipe.Favorite, Rating: e }))}
+            defaultValue={localUserData.Rating}
+            onChange={(e) => updateUserRecipe(localUserData.Favorite, e)}
           />
         </Row>
         <Ingredients
@@ -73,24 +76,29 @@ function RecipeInfo({ recipe, nutritionGoalData, setUserRecipeInfo }: RecipeInfo
           servings={servings}
           servingsRatio={servingsRatio}
         />
-        <Row>
-          <Col>
-            <Row>
-              <Title level={4}>Steps:</Title>
-            </Row>
-            <Row>
-              {recipe.steps.map((step, idx) => (
-                <div key={step}>
-                  {idx + 1}
-                  .
-                  {' '}
-                  {step}
-                  <p />
-                </div>
-              ))}
-            </Row>
-          </Col>
-        </Row>
+        {
+          recipe.steps && (
+          <Row>
+            <Col>
+              <Row>
+                <Title level={4}>Steps:</Title>
+              </Row>
+              <Row>
+                {recipe.steps.map((step, idx) => (
+                  <div key={step}>
+                    {idx + 1}
+                    .
+                    {' '}
+                    {step}
+                    <p />
+                  </div>
+                ))}
+              </Row>
+            </Col>
+          </Row>
+          )
+        }
+
         <Row justify="center" className={classes.sourceLink}>
           <a href={recipe.source} target="_blank" rel="noreferrer">SOURCE</a>
         </Row>
