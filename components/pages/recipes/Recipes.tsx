@@ -43,7 +43,7 @@ function Recipes({ recipes }: RecipesProps) {
   }, []);
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh' }}>
       <Row justify="center" style={{ marginBottom: '10px' }}>
         <Title level={2}>Recipes</Title>
       </Row>
