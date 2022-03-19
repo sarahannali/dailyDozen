@@ -6,6 +6,7 @@ import {
 import {
   GoogleAuthProvider, signInWithPopup,
 } from 'firebase/auth';
+import Head from 'next/head';
 import { auth } from '../../../firebase/clientApp';
 import classes from './login.module.css';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -38,6 +39,10 @@ function Login() {
       height: '100vh', overflow: 'hidden', position: 'relative', backgroundColor: '#f2f9ff',
     }}
     >
+      <Head>
+        <title>Meal Planner</title>
+        <link rel="icon" href="/images/Icon.png" />
+      </Head>
       <div className={classes.background}>
         <div className={classes.blob2}>
           <Image src="/svgs/blob2.svg" height={700} width={700} />
