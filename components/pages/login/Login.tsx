@@ -27,6 +27,9 @@ function Login() {
           setUser(result.user);
           setLoading(false);
         }
+      })
+      .catch((err) => {
+        setLoading(false);
       });
   };
 
