@@ -59,7 +59,7 @@ function Login() {
                 <Text>
                   A meal planning website that integrates plant-based recipes with the
                   {' '}
-                  <a href="https://nutritionfacts.org/daily-dozen-challenge/">Daily Dozen</a>
+                  <a href="https://nutritionfacts.org/daily-dozen-challenge/" target="_blank" rel="noreferrer">Daily Dozen</a>
                   {' '}
                   nutrition guide.
                 </Text>
