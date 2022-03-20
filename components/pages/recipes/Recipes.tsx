@@ -21,7 +21,13 @@ function Recipes({ recipes }: RecipesProps) {
   const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
-    setCurrRecipes(baseRecipes);
+    const updatedRecipes = currRecipes.map((curr) => {
+      const updatedBase = baseRecipes.find((recipe) => recipe.id === curr.id);
+      if (updatedBase) return updatedBase;
+      return curr;
+    });
+
+    setCurrRecipes(updatedRecipes);
   }, [baseRecipes]);
 
   const updateRecipes = async () => {
