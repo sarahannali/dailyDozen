@@ -39,7 +39,7 @@ function MealPlanner({
   };
 
   return (
-    <div>
+    <div style={{ overflowX: 'scroll', minHeight: '100vh' }}>
       <div style={{ display: 'flex' }}>
         <DatePickerSection setDays={setDays} />
         <span style={{ margin: '3px 0px 0px 10px', fontSize: '20px' }}>{loadingSymbol}</span>
