@@ -64,7 +64,7 @@ function RecipeBox({ items, droppableId, isDragging }: RecipeBoxProps) {
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...provided.droppableProps}
               >
-                {recipes.map((recipe, index) => {
+                {recipes.map((recipe) => {
                   const recipeInfo = {
                     imageURL: recipe.imageURL,
                     name: recipe.name,
@@ -75,7 +75,7 @@ function RecipeBox({ items, droppableId, isDragging }: RecipeBoxProps) {
                     <Recipe
                       listName={droppableId}
                       recipeInfo={recipeInfo}
-                      index={index}
+                      index={items.findIndex((i) => i.id === recipe.id)}
                       favorite={recipe.Favorite}
                     />
                     );
