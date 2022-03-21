@@ -3,7 +3,8 @@ import { AmountType } from '../db/Ingredient';
 export interface IngredientRequest {
   amount: number,
   amountType: AmountType,
-  name: string
+  name: string,
+  types?: string[]
 }
 
 interface RecipeRequest {

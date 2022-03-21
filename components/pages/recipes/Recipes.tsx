@@ -20,31 +20,11 @@ function Recipes({ recipes }: RecipesProps) {
   const [nutritionGoalData, setNutritionGoalData] = useState(EmptyNutritionGoalsWithMacros);
   const [showFavorites, setShowFavorites] = useState(false);
 
-  useEffect(() => {
-    const updatedRecipes = currRecipes.map((curr) => {
-      const updatedBase = baseRecipes.find((recipe) => recipe.id === curr.id);
-      if (updatedBase) return updatedBase;
-      return curr;
-    });
-
-    setCurrRecipes(updatedRecipes);
-  }, [baseRecipes]);
-
   const updateRecipes = async () => {
     const refreshedUserData = await getAllUserRecipeData();
 
-    setBaseRecipes(baseRecipes.map((recipe) => {
-      const existingUserData = refreshedUserData.find((ud) => ud.RecipeID === recipe.id);
-      if (existingUserData) {
-        return {
-          ...recipe,
-          userRecipeID: existingUserData.id,
-          Favorite: existingUserData.Favorite,
-          Rating: existingUserData.Rating,
-        };
-      }
-      return recipe;
-    }));
+    setBaseRecipes(addUserRecipeData(baseRecipes, refreshedUserData));
+    setCurrRecipes(addUserRecipeData(currRecipes, refreshedUserData));
   };
 
   useEffect(() => {
@@ -56,6 +36,7 @@ function Recipes({ recipes }: RecipesProps) {
     getAllUserRecipeData()
       .then((res) => {
         setBaseRecipes(addUserRecipeData(recipes, res));
+        setCurrRecipes(addUserRecipeData(recipes, res));
       });
   }, []);
 
