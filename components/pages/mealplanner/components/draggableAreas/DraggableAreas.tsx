@@ -75,7 +75,7 @@ function DraggableAreas({
 
   const updateMealEvent = async (movedObj: MealEvent, codes: string, sourceIdx: number) => {
     const reqObj = getRequestObj(movedObj, codes);
-    await performRequest(postMealEvent, reqObj);
+    await performRequest(putMealEvent, reqObj);
 
     const newDays = UpdateMeal(codes, sourceIdx, days, movedObj);
     setDays([...newDays]);
