@@ -14,12 +14,11 @@ const { Title } = Typography;
 type RecipeInfoProps = {
   recipe: Recipe,
   nutritionGoalData: NutritionGoals,
-  updateUserRecipe: (favorite: boolean, rating: number) => void,
-  localUserData: { Favorite: boolean, Rating: number }
+  updateRating: (rating: number) => void
 }
 
 function RecipeInfo({
-  recipe, nutritionGoalData, updateUserRecipe, localUserData,
+  recipe, nutritionGoalData, updateRating,
 }: RecipeInfoProps) {
   const [servings, setServings] = useState(recipe.servings);
   const servingsRatio = recipe.servings;
@@ -67,8 +66,8 @@ function RecipeInfo({
         </Row>
         <Row justify="center">
           <Rate
-            defaultValue={localUserData.Rating}
-            onChange={(e) => updateUserRecipe(localUserData.Favorite, e)}
+            defaultValue={recipe.Rating}
+            onChange={(e) => updateRating(e)}
           />
         </Row>
         <Ingredients

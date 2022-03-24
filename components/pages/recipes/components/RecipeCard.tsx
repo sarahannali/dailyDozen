@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Card, Col, Row, Modal, Rate, Badge,
+  Card, Col, Row, Modal, Rate, Badge, Spin,
 } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
 import Image from 'next/image';
@@ -18,32 +18,41 @@ type RecipeCardProps = {
 
 function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [localUserData, setLocalUserData] = useState({
-    Rating: recipe.Rating,
+  const [userData, setUserData] = useState({
     Favorite: recipe.Favorite,
+    Rating: recipe.Rating,
   });
+  const [loading, setLoading] = useState(false);
 
-  const updateUserRecipe = async (favorite: boolean, rating: number) => {
-    const newUserRecipe = {
-      Rating: rating,
-      Favorite: favorite,
-    };
+  const updateUserRecipe = async () => {
+    setLoading(true);
 
     if (recipe.userRecipeID) {
-      await putUserRecipe(recipe.userRecipeID, newUserRecipe);
+      await putUserRecipe(recipe.userRecipeID, userData);
     } else {
       await postUserRecipe({
         RecipeID: recipe.id,
-        ...newUserRecipe,
+        ...userData,
       });
     }
 
-    setLocalUserData(newUserRecipe);
-    updateRecipes();
+    await updateRecipes();
+    setLoading(false);
   };
 
+  const onModalClose = async () => {
+    if (userData.Favorite !== recipe.Favorite || userData.Rating !== recipe.Rating) {
+      await updateUserRecipe();
+    }
+
+    setIsModalVisible(false);
+  };
+
+  const updateRating = (rating: number) => setUserData({ ...userData, Rating: rating });
+  const updateFavorite = (favorite: boolean) => setUserData({ ...userData, Favorite: favorite });
+
   return (
-    <Badge count={localUserData.Favorite ? <HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} /> : 0}>
+    <Badge count={recipe.Favorite ? <HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} /> : 0}>
       <Card className={classes.recipecard} onClick={() => setIsModalVisible(true)} hoverable>
         <Row>
           <Col span={12}>
@@ -66,25 +75,26 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
             {recipe.name}
             <Rate
               count={1}
-              value={+localUserData.Favorite}
+              defaultValue={+recipe.Favorite}
               character={<HeartFilled />}
               style={{ color: '#eb2f96', marginLeft: '10px' }}
-              onChange={() => updateUserRecipe(!localUserData.Favorite, localUserData.Rating)}
+              onChange={(e) => updateFavorite(e === 1)}
             />
           </span>
           )}
         visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
+        onCancel={onModalClose}
         footer={null}
         style={{ marginTop: '-50px' }}
         bodyStyle={{ maxHeight: '600px', overflowY: 'auto' }}
       >
-        <RecipeInfo
-          recipe={recipe}
-          nutritionGoalData={nutritionGoalData}
-          updateUserRecipe={updateUserRecipe}
-          localUserData={localUserData}
-        />
+        <Spin spinning={loading}>
+          <RecipeInfo
+            recipe={recipe}
+            nutritionGoalData={nutritionGoalData}
+            updateRating={updateRating}
+          />
+        </Spin>
       </Modal>
     </Badge>
   );
