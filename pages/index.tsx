@@ -1,11 +1,7 @@
 import React from 'react';
 import type { ReactElement } from 'react';
-import {
-  getAllRecipeData,
-} from '../lib';
-import {
-  Recipe,
-} from '../utils/propTypes';
+import getAllRecipeData from '../lib/recipes';
+import { Recipe } from '../utils/propTypes';
 import AppLayout from '../components/layout';
 import MealPlanner from '../components/pages/mealplanner/MealPlanner';
 
@@ -23,13 +19,9 @@ interface MealPlannerPageProps {
   allRecipeData: Recipe[]
 }
 
-export default function MealPlannerPage({
-  allRecipeData,
-}: MealPlannerPageProps) {
+export default function MealPlannerPage({ allRecipeData }: MealPlannerPageProps) {
   return (
-    <MealPlanner
-      allRecipeData={allRecipeData}
-    />
+    <MealPlanner allRecipeData={allRecipeData} />
   );
 }
 

@@ -1,5 +1,6 @@
-import React, { ReactElement } from 'react';
-import { getAllRecipeData } from '../lib';
+import React from 'react';
+import type { ReactElement } from 'react';
+import getAllRecipeData from '../lib/recipes';
 import { Recipe } from '../utils/propTypes';
 import AppLayout from '../components/layout';
 import Recipes from '../components/pages/recipes/Recipes';
