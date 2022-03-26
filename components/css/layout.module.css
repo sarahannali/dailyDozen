@@ -1,3 +1,14 @@
+.layout {
+  min-height: 100vh;
+}
+
+.sider {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
 .sidebarTitle {
   color: rgba(255, 255, 255, 0.65);;
   margin-left: 25px;
@@ -9,6 +20,13 @@
   color: #FFFFFF;
 }
 
+.logoutButton {
+  width: 100%;
+  position: absolute;
+  bottom: 40px;
+  margin-left: 30%;
+}
+
 .iconCredit {
   color: rgba(236, 236, 236, 0.65);
   font-size: 10px;
@@ -16,4 +34,9 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
+}
+
+.content {
+  margin-left: 200;
+  margin-top: 16;
 }
