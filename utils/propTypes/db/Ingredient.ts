@@ -12,6 +12,7 @@ export type Type =
 export type AmountType = 'cup' | 'tbs' | 'tsp' | 'gal' | 'g'
 
 type Ingredient = {
+  id?: string,
   name: string,
   ratio: number,
   types: Type[]
