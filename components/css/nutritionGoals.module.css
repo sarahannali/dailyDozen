@@ -1,3 +1,19 @@
+.titleRow {
+  margin-bottom: '10px';
+}
+
+.skeletonInput {
+  width: '100px';
+}
+
+.inputNumber {
+  width: '100px';
+}
+
+.nutritionGoalsRow {
+  margin-top: '40px'
+}
+
 .card {
   margin: 30px;
   width: 430px;

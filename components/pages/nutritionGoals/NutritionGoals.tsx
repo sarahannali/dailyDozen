@@ -3,11 +3,12 @@ import {
   Typography, Row, Col, InputNumber, notification, Skeleton,
 } from 'antd';
 import { NutritionGoals as NutritionGoalsType, Macros } from 'utils/propTypes/db';
+import { EmptyNutritionGoalsWithMacros, macros } from 'utils/constants/goals';
 import { getNutritionGoalData, postNutritionGoalData } from 'components/requests';
+import { Capitalize } from 'components/common';
+import classes from 'components/css/nutritionGoals.module.css';
 import GoalCard from './GoalCard';
-import { IsNotMacro } from './utils';
-import { EmptyNutritionGoalsWithMacros, macros } from '../../../utils/constants/goals';
-import { Capitalize } from '../../common';
+import IsNotMacro from './utils/_isNotMacro';
 
 const { Title } = Typography;
 
@@ -36,14 +37,14 @@ function NutritionGoals() {
   useEffect(() => {
     getNutritionGoalData()
       .then((res) => {
-        setNutritionGoals(res);
+        if (res) setNutritionGoals(res);
         setLoading(false);
       });
   }, []);
 
   return (
     <div>
-      <Row justify="center" style={{ marginBottom: '10px' }}>
+      <Row justify="center" className={classes.titleRow}>
         <Title level={2}>Nutrition Goals</Title>
       </Row>
       <Row justify="center">
@@ -59,11 +60,11 @@ function NutritionGoals() {
             <Row>
               {
                 loading
-                  ? <Skeleton.Input style={{ width: '100px' }} />
+                  ? <Skeleton.Input className={classes.skeletonInput} />
                   : (
                     <InputNumber
                       defaultValue={nutritionGoals[macro]}
-                      style={{ width: '100px' }}
+                      className={classes.InputNumber}
                       min={0}
                       type="number"
                       onBlur={(e) => updateNutritionGoals(macro, Number(e.target.value))}
@@ -74,12 +75,12 @@ function NutritionGoals() {
           </Col>
         ))}
       </Row>
-      <Row justify="center" style={{ marginTop: '40px' }}>
+      <Row justify="center" className={classes.nutritionGoalsRow}>
         {
           (Object.keys(nutritionGoals) as Array<keyof NutritionGoalsType>)
             .sort()
-            .map((goal) => (IsNotMacro(goal)
-              ? (
+            .map((goal) => IsNotMacro(goal)
+              && (
                 <Col xs={9} key={goal}>
                   <GoalCard
                     name={goal as keyof NutritionGoalsType}
@@ -88,8 +89,7 @@ function NutritionGoals() {
                     updateNutritionGoals={updateNutritionGoals}
                   />
                 </Col>
-              )
-              : null))
+              ))
         }
       </Row>
     </div>

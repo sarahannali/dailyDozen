@@ -4,8 +4,8 @@ import {
 } from 'antd';
 import Image from 'next/image';
 import { NutritionGoals } from 'utils/propTypes/db';
-import { Capitalize, GetBorderColor, GetNutritionGoalImg } from '../../common';
-import classes from '../../css/nutritionGoals.module.css';
+import classes from 'components/css/nutritionGoals.module.css';
+import { Capitalize, GetBorderColor, GetNutritionGoalImg } from 'components/common';
 
 const { Text } = Typography;
 
