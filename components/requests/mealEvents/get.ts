@@ -3,7 +3,7 @@ import {
 } from 'firebase/firestore/lite';
 import { MealEvent } from 'utils/propTypes/db';
 import { MealEventResponse } from 'utils/propTypes/requests';
-import db, { auth } from '../../../firebase/clientApp';
+import db, { auth } from 'firebase/clientApp';
 
 const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
   const startDate = new Date(dateStr);

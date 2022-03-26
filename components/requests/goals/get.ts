@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore/lite';
 import { NutritionGoalsWithMacros } from 'utils/propTypes/db';
-import db, { auth } from '../../../firebase/clientApp';
+import db, { auth } from 'firebase/clientApp';
 
 const getNutritionGoalData = async (): Promise<NutritionGoalsWithMacros | null> => {
   const userDoc = doc(db, `users/${auth.currentUser?.uid}`);

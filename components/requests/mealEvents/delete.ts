@@ -1,5 +1,5 @@
 import { doc, deleteDoc } from 'firebase/firestore/lite';
-import db, { auth } from '../../../firebase/clientApp';
+import db, { auth } from 'firebase/clientApp';
 
 const deleteMealEvent = async (mealEventID: string) => {
   const mealDoc = doc(

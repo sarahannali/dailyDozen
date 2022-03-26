@@ -7,9 +7,9 @@ import {
   GoogleAuthProvider, signInWithPopup,
 } from 'firebase/auth';
 import Head from 'next/head';
-import { auth } from '../../../firebase/clientApp';
-import classes from './login.module.css';
-import { AuthContext } from '../../contexts/AuthContext';
+import { auth } from 'firebase/clientApp';
+import { AuthContext } from 'components/contexts/AuthContext';
+import classes from 'components/css/login.module.css';
 
 const { Title, Text } = Typography;
 
@@ -29,16 +29,19 @@ function Login() {
           setLoading(false);
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
       });
   };
 
+  const loginIcon = (
+    <span className={classes.loginIconDiv}>
+      <Image src="/svgs/GoogleIcon.svg" height={50} width={50} className={classes.loginIcon} />
+    </span>
+  );
+
   return (
-    <div style={{
-      height: '100vh', overflow: 'hidden', position: 'relative', backgroundColor: '#f2f9ff',
-    }}
-    >
+    <div className={classes.loginDiv}>
       <Head>
         <title>Meal Planner</title>
         <link rel="icon" href="/images/Icon.png" />
@@ -54,11 +57,11 @@ function Login() {
         </div>
       </div>
       <div />
-      <Spin spinning={loading} size="large" style={{ marginTop: '170px', marginLeft: '5px' }}>
+      <Spin spinning={loading} size="large" className={classes.spin}>
         <div className={classes.fullScreen}>
           <div className={classes.loginModal}>
             <div>
-              <Row justify="center" style={{ marginBottom: '10px' }}>
+              <Row justify="center" className={classes.iconRow}>
                 <Image src="/images/Icon.png" height={100} width={100} />
               </Row>
               <Row justify="center">
@@ -68,18 +71,20 @@ function Login() {
                 <Text>
                   A meal planning website that integrates plant-based recipes with the
                   {' '}
-                  <a href="https://nutritionfacts.org/daily-dozen-challenge/" target="_blank" rel="noreferrer">Daily Dozen</a>
+                  <a
+                    href="https://nutritionfacts.org/daily-dozen-challenge/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Daily Dozen
+                  </a>
                   {' '}
                   nutrition guide.
                 </Text>
               </Row>
               <Row justify="center">
                 <Button
-                  icon={(
-                    <span className={classes.loginIconDiv}>
-                      <Image src="/svgs/GoogleIcon.svg" height={50} width={50} className={classes.loginIcon} />
-                    </span>
-                )}
+                  icon={loginIcon}
                   className={classes.loginButton}
                   onClick={(ev) => {
                     ev.preventDefault();

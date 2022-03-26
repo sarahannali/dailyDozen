@@ -1,3 +1,10 @@
+.loginDiv {
+  height: 100vh;
+  overflow: 'hidden';
+  position: 'relative';
+  background-color: '#f2f9ff';
+}
+
 .fullScreen {
   display: flex;
   justify-content: center;
@@ -24,6 +31,11 @@
   right: -15%;
 }
 
+.spin {
+  margin-top: '170px';
+  margin-left: '5px';
+}
+
 .loginModal {
   background: #fff;
   border-radius: 10px;
@@ -36,6 +48,10 @@
   overflow: hidden;
   width: 80%;
   padding: 40px;
+}
+
+.iconRow {
+  margin-bottom: '10px';
 }
 
 .loginButton {
