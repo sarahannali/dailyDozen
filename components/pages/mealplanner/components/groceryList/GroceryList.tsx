@@ -34,18 +34,19 @@ function GroceryList({ groceryList, updateAndPostGroceryList }: GroceryListProps
 
   return (
     <div>
-      <ul>
+      <ul style={{ padding: '0px' }}>
         {groceryList.map((ingredient, idx) => (
-          <Row>
+          <Row style={{ backgroundColor: idx % 2 === 0 ? '#F2F9FF' : 'white', lineHeight: '3' }}>
             <Checkbox
-              defaultChecked={ingredient.checked}
+              checked={ingredient.checked}
               onChange={(e) => handleChecked(e, idx)}
+              style={{ paddingLeft: '10px' }}
             >
               {ingredient.amount.toFixed(1)}
             </Checkbox>
             <Select
               value={ingredient.amountType}
-              style={{ margin: '-5px 10px 10px 0px' }}
+              style={{ margin: '5px 10px 5px 0px' }}
               onChange={(type) => handleChange(ingredient, type, idx)}
             >
               <Option value="gal">gal</Option>

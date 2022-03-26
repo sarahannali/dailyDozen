@@ -20,14 +20,11 @@ function Recipes({ recipes }: RecipesProps) {
   const [nutritionGoalData, setNutritionGoalData] = useState(EmptyNutritionGoalsWithMacros);
   const [showFavorites, setShowFavorites] = useState(false);
 
-  useEffect(() => {
-    setCurrRecipes(baseRecipes);
-  }, [baseRecipes]);
-
   const updateRecipes = async () => {
-    console.log('UPDATE REIPCES');
-    // const upToDateRecipes = await getRecipes();
-    // setBaseRecipes(upToDateRecipes);
+    const refreshedUserData = await getAllUserRecipeData();
+
+    setBaseRecipes(addUserRecipeData(baseRecipes, refreshedUserData));
+    setCurrRecipes(addUserRecipeData(currRecipes, refreshedUserData));
   };
 
   useEffect(() => {
@@ -39,11 +36,12 @@ function Recipes({ recipes }: RecipesProps) {
     getAllUserRecipeData()
       .then((res) => {
         setBaseRecipes(addUserRecipeData(recipes, res));
+        setCurrRecipes(addUserRecipeData(recipes, res));
       });
   }, []);
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh' }}>
       <Row justify="center" style={{ marginBottom: '10px' }}>
         <Title level={2}>Recipes</Title>
       </Row>

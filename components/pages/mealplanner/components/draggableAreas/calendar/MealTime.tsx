@@ -30,7 +30,13 @@ function MealTime({
             data-isDraggingOver={snapshot.isDraggingOver}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
-            style={{ backgroundColor: bgColor }}
+            style={{
+              backgroundColor:
+                (meals.length > 0 || snapshot.isDraggingOver)
+                  ? bgColor
+                  : 'transparent',
+              minHeight: '1px',
+            }}
           >
             {meals
               ? meals.map((meal, index) => (

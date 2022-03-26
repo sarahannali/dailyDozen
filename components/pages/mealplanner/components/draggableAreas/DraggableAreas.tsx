@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import {
   ReorderMeals,
@@ -11,6 +11,8 @@ import { RecipeBox } from './recipeBox';
 import { Calendar as CalendarType } from '../../utils/_populateCalendar';
 import { deleteMealEvent, postMealEvent, putMealEvent } from '../../../../requests';
 import { MealEvent, Recipe } from '../../../../../utils/propTypes';
+import { getAllUserRecipeData } from '../../../../requests/userRecipes/get';
+import addUserRecipeData from '../../../recipes/utils/addUserRecipeData';
 
 type DraggableAreasProps = {
   allRecipeData: Recipe[],
@@ -24,6 +26,14 @@ function DraggableAreas({
   allRecipeData, days, setDays, performRequest,
 }: DraggableAreasProps) {
   const [draggingRecipe, setDraggingRecipe] = useState(false);
+  const [recipes, setRecipes] = useState(allRecipeData);
+
+  useEffect(() => {
+    getAllUserRecipeData()
+      .then((res) => {
+        setRecipes(addUserRecipeData(allRecipeData, res));
+      });
+  }, []);
 
   const onDragStart = (result: DropResult) => {
     if (result.source.droppableId === 'Recipes') setDraggingRecipe(true);
@@ -40,7 +50,7 @@ function DraggableAreas({
     const [movedObj, newDays] = ReorderMeals(
       result.source,
       result.destination,
-      allRecipeData,
+      recipes,
       days,
     );
 
@@ -65,7 +75,7 @@ function DraggableAreas({
 
   const updateMealEvent = async (movedObj: MealEvent, codes: string, sourceIdx: number) => {
     const reqObj = getRequestObj(movedObj, codes);
-    await performRequest(postMealEvent, reqObj);
+    await performRequest(putMealEvent, reqObj);
 
     const newDays = UpdateMeal(codes, sourceIdx, days, movedObj);
     setDays([...newDays]);
@@ -80,7 +90,7 @@ function DraggableAreas({
         updateMealEvent={updateMealEvent}
       />
       <RecipeBox
-        items={allRecipeData}
+        recipes={recipes}
         droppableId="Recipes"
         isDragging={draggingRecipe}
       />

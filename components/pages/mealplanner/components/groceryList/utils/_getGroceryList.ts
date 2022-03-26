@@ -2,7 +2,7 @@ import { Calendar, Meals } from '../../../utils/_populateCalendar';
 import { ConvertAmount } from './_convertAmount';
 import { GroceryItem } from '../../../../../../utils/propTypes';
 
-const UpdateGroceryList = (groceryList: GroceryItem[], days: Calendar) => {
+const getIngredientToGramsMap = (days: Calendar) => {
   const ingredientMap = new Map<string, {amount: number, ratio: number}>();
 
   days.forEach((day) => {
@@ -25,37 +25,58 @@ const UpdateGroceryList = (groceryList: GroceryItem[], days: Calendar) => {
     });
   });
 
+  return ingredientMap;
+};
+
+const convertIngredientToSelectedType = (
+  name: string,
+  amount: number,
+  ratio: number,
+  groceryList: GroceryItem[],
+): GroceryItem => {
+  const groceryIngredient = groceryList.find((entry) => entry.name === name);
+
+  if (groceryIngredient) {
+    const { amountType } = groceryIngredient;
+
+    const newAmount = ConvertAmount(
+      amount,
+      'g',
+      amountType,
+      ratio,
+    );
+
+    return {
+      name,
+      amount: newAmount,
+      amountType,
+      checked: !!(groceryIngredient.checked && amount <= groceryIngredient.amount),
+      ratio,
+    };
+  }
+  return {
+    name,
+    amount,
+    amountType: 'g',
+    checked: false,
+    ratio,
+  };
+};
+
+const UpdateGroceryList = (groceryList: GroceryItem[], days: Calendar) => {
+  const ingredientMap = getIngredientToGramsMap(days);
+
   const ingredients: GroceryItem[] = [];
 
   ingredientMap.forEach((value, key) => {
-    const groceryIngredient = groceryList.find((entry) => entry.name === key);
+    const ingredientGroceryItem = convertIngredientToSelectedType(
+      key,
+      value.amount,
+      value.ratio,
+      groceryList,
+    );
 
-    if (groceryIngredient) {
-      const { amountType } = groceryIngredient;
-
-      const amount = ConvertAmount(
-        value.amount,
-        'g',
-        amountType,
-        value.ratio,
-      );
-
-      ingredients.push({
-        name: key,
-        amount,
-        amountType,
-        checked: false,
-        ratio: value.ratio,
-      });
-    } else {
-      ingredients.push({
-        name: key,
-        amount: value.amount,
-        amountType: 'g',
-        checked: false,
-        ratio: value.ratio,
-      });
-    }
+    ingredients.push(ingredientGroceryItem);
   });
 
   return ingredients;

@@ -10,13 +10,15 @@ import classes from './recipeBox.module.css';
 import { Recipe as RecipeType } from '../../../../../../utils/propTypes';
 
 type RecipeBoxProps = {
-  items: RecipeType[]
+  recipes: RecipeType[],
   droppableId: string,
   isDragging: boolean
 }
 
-function RecipeBox({ items, droppableId, isDragging }: RecipeBoxProps) {
-  const [recipes, setRecipes] = useState(items);
+function RecipeBox({
+  recipes, droppableId, isDragging,
+}: RecipeBoxProps) {
+  const [currRecipes, setCurrRecipes] = useState(recipes);
   const [visible, setVisible] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
 
@@ -42,8 +44,8 @@ function RecipeBox({ items, droppableId, isDragging }: RecipeBoxProps) {
           isDragging ? classes.transition : {}}`}
       >
         <SearchRecipeSection
-          baseRecipes={items}
-          setCurrRecipes={setRecipes}
+          baseRecipes={recipes}
+          setCurrRecipes={setCurrRecipes}
           showFavorites={showFavorites}
           setShowFavorites={setShowFavorites}
         />
@@ -64,7 +66,7 @@ function RecipeBox({ items, droppableId, isDragging }: RecipeBoxProps) {
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...provided.droppableProps}
               >
-                {recipes.map((recipe, index) => {
+                {currRecipes.map((recipe) => {
                   const recipeInfo = {
                     imageURL: recipe.imageURL,
                     name: recipe.name,
@@ -75,7 +77,7 @@ function RecipeBox({ items, droppableId, isDragging }: RecipeBoxProps) {
                     <Recipe
                       listName={droppableId}
                       recipeInfo={recipeInfo}
-                      index={index}
+                      index={recipes.findIndex((i) => i.id === recipe.id)}
                       favorite={recipe.Favorite}
                     />
                     );

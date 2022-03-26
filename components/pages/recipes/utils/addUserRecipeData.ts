@@ -5,9 +5,13 @@ const addUserRecipeData = (
   userRecipes: UserRecipe[],
 ) => recipes.map((recipe) => {
   const userRecipe = userRecipes.filter((u) => u.RecipeID === recipe.id)[0];
+
   if (userRecipe) {
     return {
-      ...recipe, ...userRecipe, userRecipeID: userRecipe.id,
+      ...recipe,
+      Favorite: userRecipe.Favorite,
+      Rating: userRecipe.Rating,
+      userRecipeID: userRecipe.id,
     };
   }
   return recipe;

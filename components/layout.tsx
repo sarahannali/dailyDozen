@@ -31,7 +31,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <div className="container">
       <Head>
         <title>Meal Planner</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/Icon.png" />
       </Head>
 
       <main>
