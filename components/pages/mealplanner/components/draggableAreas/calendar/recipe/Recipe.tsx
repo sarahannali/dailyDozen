@@ -3,7 +3,7 @@ import React, { CSSProperties, useState } from 'react';
 import { Draggable, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd';
 import { Card } from 'antd';
 import Image from 'next/image';
-import { MealEvent } from '../../../../../../../utils/propTypes';
+import { MealEvent } from 'utils/propTypes/db';
 import { Meal } from '../../../../utils/_populateCalendar';
 import classes from './recipe.module.css';
 import RecipeMealEvent from './RecipeMealEvent';

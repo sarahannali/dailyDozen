@@ -1,4 +1,4 @@
-import { MealEventRecipe, MealEventResponse } from '../../../../utils/propTypes';
+import { MealEventRecipe, MealEventResponse } from 'utils/propTypes/requests';
 
 export const CalendarDays = [
   'Sunday',

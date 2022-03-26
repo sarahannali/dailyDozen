@@ -1,11 +1,11 @@
-import { Ingredient, Macros } from '../db/Recipe';
+import { RecipeIngredient, Macros } from '../db/recipes/Recipe';
 
 export interface MealEventRecipe {
   recipeID: string,
   imageURL: string,
   name: string,
   macros: Macros,
-  ingredients: Ingredient[],
+  ingredients: RecipeIngredient[],
   servings: number,
 }
 

@@ -4,9 +4,8 @@ import {
 } from 'antd';
 import GoalCard from './GoalCard';
 import { IsNotMacro } from './utils';
-import { NutritionGoals as NutritionGoalsType } from '../../../utils/propTypes';
+import { NutritionGoals as NutritionGoalsType, Macros } from 'utils/propTypes/db';
 import { EmptyNutritionGoalsWithMacros, macros } from '../../../utils/constants/goals';
-import { Macros } from '../../../utils/propTypes/db/Recipe';
 import { Capitalize } from '../../common';
 import { getNutritionGoalData, postNutritionGoalData } from '../../requests';
 

@@ -11,8 +11,8 @@ import {
 } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import axios from 'axios';
+import { RecipeRequest } from 'utils/propTypes/requests';
 import classes from './createRecipe.module.css';
-import { RecipeRequest } from '../../../../../utils/propTypes';
 import { macros } from '../../../../../utils/constants/goals';
 
 const { Option } = Select;
@@ -25,21 +25,18 @@ function CreateRecipe() {
   const onFinish = async (values: RecipeRequest) => {
     setLoading(true);
 
-    await axios.get('/api/recipe/fix');
+    // await axios.get('/api/recipe/fix');
 
-    // axios.post('/api/recipe', values)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     return { err: false, data: res.data };
-    //   });
+    axios.post('/api/recipe', values)
+      .then((res) => {
+        console.log(res.data);
+        return { err: false, data: res.data };
+      })
+      .catch((err) => {
+        setError(err);
+      });
 
     setLoading(false);
-
-    // if (err) {
-    //   setError(data);
-    //   return;
-    // }
-
     setIsModalVisible(false);
   };
 
@@ -153,6 +150,12 @@ function CreateRecipe() {
                         {...field}
                         name={[field.name, 'name']}
                         style={{ marginTop: '-20px' }}
+                      >
+                        <Input style={{ width: '90%' }} />
+                      </Form.Item>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, 'types']}
                       >
                         <Input style={{ width: '90%' }} />
                       </Form.Item>

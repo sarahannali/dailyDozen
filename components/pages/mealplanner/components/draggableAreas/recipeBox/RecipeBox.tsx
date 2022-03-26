@@ -4,10 +4,10 @@ import { Droppable } from 'react-beautiful-dnd';
 import {
   PlusOutlined,
 } from '@ant-design/icons';
+import { Recipe as RecipeType } from 'utils/propTypes/db';
 import Recipe from './Recipe';
 import { SearchRecipeSection } from '../../../../../common';
 import classes from './recipeBox.module.css';
-import { Recipe as RecipeType } from '../../../../../../utils/propTypes';
 
 type RecipeBoxProps = {
   recipes: RecipeType[],

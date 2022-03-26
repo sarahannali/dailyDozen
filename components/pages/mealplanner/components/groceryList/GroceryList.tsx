@@ -1,8 +1,8 @@
 import React from 'react';
 import { Select, Checkbox, Row } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { AmountType, GroceryItem } from 'utils/propTypes/db';
 import { ConvertAmount } from './utils';
-import { AmountType, GroceryItem } from '../../../../../utils/propTypes';
 
 const { Option } = Select;
 

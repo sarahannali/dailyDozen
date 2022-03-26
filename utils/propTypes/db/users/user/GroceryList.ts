@@ -1,4 +1,4 @@
-import { AmountType } from './Ingredient';
+import { AmountType } from '../../ingredients/Ingredient';
 
 interface GroceryItem {
   amount: number,

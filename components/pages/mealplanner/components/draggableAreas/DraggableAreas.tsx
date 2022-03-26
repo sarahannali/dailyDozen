@@ -10,7 +10,7 @@ import { Calendar } from './calendar';
 import { RecipeBox } from './recipeBox';
 import { Calendar as CalendarType } from '../../utils/_populateCalendar';
 import { deleteMealEvent, postMealEvent, putMealEvent } from '../../../../requests';
-import { MealEvent, Recipe } from '../../../../../utils/propTypes';
+import { MealEvent, Recipe } from 'utils/propTypes/db';
 import { getAllUserRecipeData } from '../../../../requests/userRecipes/get';
 import addUserRecipeData from '../../../recipes/utils/addUserRecipeData';
 

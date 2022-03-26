@@ -3,9 +3,9 @@ import {
   Card, Row, Col, Typography, Input, Progress, Skeleton,
 } from 'antd';
 import Image from 'next/image';
+import { NutritionGoals } from 'utils/propTypes/db';
 import { Capitalize, GetBorderColor, GetNutritionGoalImg } from '../../common';
 import classes from '../../css/nutritionGoals.module.css';
-import { NutritionGoals } from '../../../utils/propTypes';
 
 const { Text } = Typography;
 

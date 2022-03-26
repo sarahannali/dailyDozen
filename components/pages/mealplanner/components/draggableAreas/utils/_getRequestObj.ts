@@ -1,4 +1,4 @@
-import { MealEvent } from '../../../../../../utils/propTypes';
+import { MealEvent } from 'utils/propTypes/db';
 import { Meal } from '../../../utils/_populateCalendar';
 
 const getRequestObj = (movedObj: Meal, strCodes: string): MealEvent => {

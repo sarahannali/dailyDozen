@@ -1,6 +1,6 @@
-import { Type } from './Ingredient';
+import { Type } from '../ingredients/Ingredient';
 
-export interface Ingredient {
+export interface RecipeIngredient {
   amount: number,
   grams: number,
   name: string,
@@ -15,19 +15,12 @@ export interface Macros {
   protein: number
 }
 
-export interface UserRecipe {
-  id?: string,
-  RecipeID?: string,
-  Rating: number,
-  Favorite: boolean
-}
-
 interface Recipe {
   id: string,
   name: string,
   imageURL: string,
   source: string,
-  ingredients: Ingredient[],
+  ingredients: RecipeIngredient[],
   macros: Macros,
   servings: number,
   Rating: number,

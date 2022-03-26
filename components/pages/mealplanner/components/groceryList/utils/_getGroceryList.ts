@@ -1,6 +1,6 @@
 import { Calendar, Meals } from '../../../utils/_populateCalendar';
 import { ConvertAmount } from './_convertAmount';
-import { GroceryItem } from '../../../../../../utils/propTypes';
+import { GroceryItem } from 'utils/propTypes/db';
 
 const getIngredientToGramsMap = (days: Calendar) => {
   const ingredientMap = new Map<string, {amount: number, ratio: number}>();

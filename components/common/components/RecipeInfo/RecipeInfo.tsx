@@ -3,11 +3,11 @@ import {
   Row, Col, Rate, InputNumber, Typography,
 } from 'antd';
 import Image from 'next/image';
+import { NutritionGoals, Recipe } from 'utils/propTypes/db';
 import MacroValues from './MacroValues';
 import Ingredients from './Ingredients';
 import NutritionValues from './NutritionValues';
 import classes from './recipeInfo.module.css';
-import { NutritionGoals, Recipe } from '../../../../utils/propTypes';
 
 const { Title } = Typography;
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Row, Col } from 'antd';
 import { RecipeCard, CreateRecipe } from './components';
 import { SearchRecipeSection } from '../../common';
-import { Recipe } from '../../../utils/propTypes';
+import { Recipe } from 'utils/propTypes/db';
 import { EmptyNutritionGoalsWithMacros } from '../../../utils/constants/goals';
 import { getAllUserRecipeData } from '../../requests/userRecipes/get';
 import addUserRecipeData from './utils/addUserRecipeData';

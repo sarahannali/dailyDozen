@@ -1,4 +1,4 @@
-import { AmountType } from '../db/Ingredient';
+import { AmountType } from '../db/ingredients/Ingredient';
 
 export interface IngredientRequest {
   amount: number,

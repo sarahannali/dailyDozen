@@ -1,9 +1,9 @@
 import React from 'react';
 import { Progress, Col } from 'antd';
 import Image from 'next/image';
+import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from 'utils/propTypes/db';
 import { GetBorderColor, GetNutritionGoalImg, GetNutritionValues } from '../../utils/nutritionGoals';
 import classes from './recipeInfo.module.css';
-import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
 
 type NutritionValuesProps = {
   ingredients: RecipeIngredient[],

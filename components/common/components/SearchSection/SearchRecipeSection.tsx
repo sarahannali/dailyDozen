@@ -3,8 +3,8 @@ import { Row, Col, Rate } from 'antd';
 import {
   HeartFilled,
 } from '@ant-design/icons';
+import { Recipe } from 'utils/propTypes/db';
 import SearchBar from './SearchBar';
-import { Recipe } from '../../../../utils/propTypes';
 
 type SearchSectionProps = {
   baseRecipes: Recipe[],

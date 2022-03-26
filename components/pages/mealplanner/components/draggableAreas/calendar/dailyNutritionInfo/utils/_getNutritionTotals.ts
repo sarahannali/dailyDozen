@@ -1,5 +1,4 @@
-import { NutritionGoalsWithMacros } from '../../../../../../../../utils/propTypes';
-import { Macros } from '../../../../../../../../utils/propTypes/db/Recipe';
+import { NutritionGoalsWithMacros, Macros } from 'utils/propTypes/db';
 import { GetNutritionValues } from '../../../../../../../common';
 import { Meals, Meal } from '../../../../../utils/_populateCalendar';
 

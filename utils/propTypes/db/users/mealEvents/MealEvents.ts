@@ -1,5 +1,5 @@
 import { DocumentReference } from 'firebase/firestore/lite';
-import { Ingredient, Macros } from './Recipe';
+import { RecipeIngredient, Macros } from '../../recipes/Recipe';
 
 interface MealEvent {
   id?: string,
@@ -8,7 +8,7 @@ interface MealEvent {
   Recipe?: DocumentReference,
   RecipeInfo: {
     imageURL: string,
-    ingredients: Ingredient[],
+    ingredients: RecipeIngredient[],
     macros: Macros,
     name: string,
     recipeID: string,

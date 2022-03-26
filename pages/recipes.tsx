@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ReactElement } from 'react';
+import { Recipe } from 'utils/propTypes/db';
 import getAllRecipeData from '../lib/recipes';
-import { Recipe } from '../utils/propTypes';
 import AppLayout from '../components/layout';
 import Recipes from '../components/pages/recipes/Recipes';
 

@@ -6,7 +6,7 @@ import { HeartFilled } from '@ant-design/icons';
 import Image from 'next/image';
 import RecipeInfo from '../../../common/components/RecipeInfo/RecipeInfo';
 import classes from './recipes.module.css';
-import { NutritionGoals, Recipe } from '../../../../utils/propTypes';
+import { NutritionGoals, Recipe } from 'utils/propTypes/db';
 import { putUserRecipe } from '../../../requests/userRecipes/put';
 import { postUserRecipe } from '../../../requests/userRecipes/post';
 

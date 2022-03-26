@@ -3,7 +3,7 @@ import { Button, Modal, Spin } from 'antd';
 import { ProfileOutlined } from '@ant-design/icons';
 import GroceryList from './GroceryList';
 import classes from './groceryList.module.css';
-import { GroceryItem } from '../../../../../utils/propTypes';
+import { GroceryItem } from 'utils/propTypes/db';
 import { Calendar } from '../../utils/_populateCalendar';
 import { UpdateGroceryList } from './utils';
 import { getGroceryList, postGroceryList } from '../../../../requests';

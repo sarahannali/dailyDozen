@@ -4,9 +4,8 @@ import Image from 'next/image';
 import { GetNutritionGoalImg, GetBorderColor, Capitalize } from '../../../../../../common';
 import { GetNutritionTotals } from './utils';
 import classes from './dailyNutritionInfo.module.css';
-import { NutritionGoals, NutritionGoalsWithMacros } from '../../../../../../../utils/propTypes';
+import { NutritionGoals, NutritionGoalsWithMacros, Macros } from 'utils/propTypes/db';
 import { Meals } from '../../../../utils/_populateCalendar';
-import { Macros } from '../../../../../../../utils/propTypes/db/Recipe';
 
 type DailyNutritionInfoProps = {
   nutritionGoalData: NutritionGoalsWithMacros,

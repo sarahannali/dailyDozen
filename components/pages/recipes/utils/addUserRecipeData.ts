@@ -1,4 +1,4 @@
-import { Recipe, UserRecipe } from '../../../../utils/propTypes';
+import { Recipe, UserRecipe } from 'utils/propTypes/db';
 
 const addUserRecipeData = (
   recipes: Recipe[],

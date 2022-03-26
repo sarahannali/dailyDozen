@@ -1,4 +1,4 @@
-import { AmountType } from '../../../../../../utils/propTypes';
+import { AmountType } from 'utils/propTypes/db';
 
 const typesInCups = (ratio: number) => ({
   gal: 16,

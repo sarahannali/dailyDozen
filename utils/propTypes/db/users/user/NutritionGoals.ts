@@ -1,4 +1,4 @@
-import { Macros } from './Recipe';
+import { Macros } from '../../recipes/Recipe';
 
 interface NutritionGoals {
   beans: number,

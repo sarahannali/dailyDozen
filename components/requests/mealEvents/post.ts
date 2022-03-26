@@ -1,8 +1,8 @@
 import {
   collection, doc, addDoc,
 } from 'firebase/firestore/lite';
+import { MealEvent } from 'utils/propTypes/db';
 import db, { auth } from '../../../firebase/clientApp';
-import { MealEvent } from '../../../utils/propTypes';
 import zeroedDate from './util/zeroedDate';
 
 // eslint-disable-next-line import/prefer-default-export

@@ -1,6 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore/lite';
+import { Recipe } from 'utils/propTypes/db';
 import db from '../firebase/clientApp';
-import { Recipe } from '../utils/propTypes';
 
 const getAllRecipeData = async () => {
   const recipesSnapshot = await getDocs(collection(db, 'recipes'));

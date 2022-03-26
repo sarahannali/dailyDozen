@@ -5,7 +5,7 @@ import classes from './calendar.module.css';
 import { Calendar as CalendarType } from '../../../utils/_populateCalendar';
 import { PopulateCalendar } from '../../../utils';
 import { getMealEvents, getNutritionGoalData } from '../../../../../requests';
-import { MealEvent } from '../../../../../../utils/propTypes';
+import { MealEvent } from 'utils/propTypes/db';
 import { EmptyNutritionGoalsWithMacros } from '../../../../../../utils/constants/goals';
 
 type CalendarProps = {
