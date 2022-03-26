@@ -1,15 +1,17 @@
 import { doc, getDoc } from 'firebase/firestore/lite';
+import { NutritionGoalsWithMacros } from 'utils/propTypes/db';
 import db, { auth } from '../../../firebase/clientApp';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getNutritionGoalData = async () => {
+const getNutritionGoalData = async (): Promise<NutritionGoalsWithMacros | null> => {
   const userDoc = doc(db, `users/${auth.currentUser?.uid}`);
   const snapshot = await getDoc(userDoc);
 
   if (snapshot.exists()) {
     const data = snapshot.data();
-    return data.nutritionGoals;
+    return data.nutritionGoals as NutritionGoalsWithMacros;
   }
 
-  return {};
+  return null;
 };
+
+export default getNutritionGoalData;

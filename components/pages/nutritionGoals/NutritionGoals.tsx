@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {
   Typography, Row, Col, InputNumber, notification, Skeleton,
 } from 'antd';
+import { NutritionGoals as NutritionGoalsType, Macros } from 'utils/propTypes/db';
+import { getNutritionGoalData, postNutritionGoalData } from 'components/requests';
 import GoalCard from './GoalCard';
 import { IsNotMacro } from './utils';
-import { NutritionGoals as NutritionGoalsType, Macros } from 'utils/propTypes/db';
 import { EmptyNutritionGoalsWithMacros, macros } from '../../../utils/constants/goals';
 import { Capitalize } from '../../common';
-import { getNutritionGoalData, postNutritionGoalData } from '../../requests';
 
 const { Title } = Typography;
 

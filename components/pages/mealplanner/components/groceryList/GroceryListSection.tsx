@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Spin } from 'antd';
 import { ProfileOutlined } from '@ant-design/icons';
+import { GroceryItem } from 'utils/propTypes/db';
+import { getGroceryList, postGroceryList } from 'components/requests';
 import GroceryList from './GroceryList';
 import classes from './groceryList.module.css';
-import { GroceryItem } from 'utils/propTypes/db';
 import { Calendar } from '../../utils/_populateCalendar';
 import { UpdateGroceryList } from './utils';
-import { getGroceryList, postGroceryList } from '../../../../requests';
 
 type GroceryListSectionProps = {
   days: Calendar
@@ -32,7 +32,7 @@ function GroceryListSection({ days }: GroceryListSectionProps) {
   useEffect(() => {
     getGroceryList()
       .then((res) => {
-        setGroceryList(res);
+        if (res) setGroceryList(res);
         setLoading(false);
       });
   }, []);

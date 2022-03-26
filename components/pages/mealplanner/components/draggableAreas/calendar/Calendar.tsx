@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Spin } from 'antd';
+import { MealEvent } from 'utils/propTypes/db';
+import { getMealEvents, getNutritionGoalData } from 'components/requests';
 import SingleDay from './SingleDay';
 import classes from './calendar.module.css';
 import { Calendar as CalendarType } from '../../../utils/_populateCalendar';
 import { PopulateCalendar } from '../../../utils';
-import { getMealEvents, getNutritionGoalData } from '../../../../../requests';
-import { MealEvent } from 'utils/propTypes/db';
 import { EmptyNutritionGoalsWithMacros } from '../../../../../../utils/constants/goals';
 
 type CalendarProps = {
@@ -32,7 +32,7 @@ function Calendar({
 
     getNutritionGoalData()
       .then((res) => {
-        setNutritionGoalData(res);
+        if (res) setNutritionGoalData(res);
       });
   }, [setDays]);
 

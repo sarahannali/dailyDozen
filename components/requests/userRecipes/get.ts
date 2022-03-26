@@ -1,22 +1,25 @@
-import {
-  collection, getDocs,
-} from 'firebase/firestore/lite';
+import { collection, getDocs } from 'firebase/firestore/lite';
+import { UserRecipe } from 'utils/propTypes/db';
 import db, { auth } from '../../../firebase/clientApp';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getAllUserRecipeData = async () => {
+const getAllUserRecipeData = async (): Promise<UserRecipe[]> => {
   const userRecipesCollection = collection(db, `users/${auth.currentUser?.uid}/userRecipes`);
   const userRecipesSnapshot = await getDocs(userRecipesCollection);
   const userRecipesList = userRecipesSnapshot.docs.map((userRecipeDoc) => {
-    const data = userRecipeDoc.data();
+    const data = userRecipeDoc.data() as UserRecipe;
+    const {
+      id, Recipe, Rating, Favorite,
+    } = data;
 
     return {
-      id: userRecipeDoc.id,
-      RecipeID: data.Recipe.id,
-      Rating: data.Rating,
-      Favorite: data.Favorite,
+      id,
+      RecipeID: Recipe?.id,
+      Rating,
+      Favorite,
     };
   });
 
   return userRecipesList;
 };
+
+export default getAllUserRecipeData;

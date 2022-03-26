@@ -1,13 +1,4 @@
-import { RecipeIngredient, Macros } from '../db/recipes/Recipe';
-
-export interface MealEventRecipe {
-  recipeID: string,
-  imageURL: string,
-  name: string,
-  macros: Macros,
-  ingredients: RecipeIngredient[],
-  servings: number,
-}
+import { MealEventRecipe } from '../db';
 
 interface MealEventResponse {
   id: string,

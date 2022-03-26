@@ -1,8 +1,8 @@
 import { getDoc, doc } from 'firebase/firestore/lite';
+import { GroceryItem } from 'utils/propTypes/db';
 import db, { auth } from '../../../firebase/clientApp';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getGroceryList = async () => {
+const getGroceryList = async (): Promise<GroceryItem[] | null> => {
   const userDoc = doc(db, `users/${auth.currentUser?.uid}`);
   const snapshot = await getDoc(userDoc);
 
@@ -11,5 +11,7 @@ export const getGroceryList = async () => {
     return data.groceryList;
   }
 
-  return [];
+  return null;
 };
+
+export default getGroceryList;

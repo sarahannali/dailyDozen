@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import {
+  deleteMealEvent, postMealEvent, putMealEvent, getAllUserRecipeData,
+} from 'components/requests';
+import { MealEvent, Recipe } from 'utils/propTypes/db';
+import {
   ReorderMeals,
   DeleteMeal,
   UpdateMeal,
@@ -9,9 +13,6 @@ import {
 import { Calendar } from './calendar';
 import { RecipeBox } from './recipeBox';
 import { Calendar as CalendarType } from '../../utils/_populateCalendar';
-import { deleteMealEvent, postMealEvent, putMealEvent } from '../../../../requests';
-import { MealEvent, Recipe } from 'utils/propTypes/db';
-import { getAllUserRecipeData } from '../../../../requests/userRecipes/get';
 import addUserRecipeData from '../../../recipes/utils/addUserRecipeData';
 
 type DraggableAreasProps = {
