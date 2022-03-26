@@ -1,12 +1,12 @@
-import beansImg from '../../../../public/images/beans.png';
-import berriesImg from '../../../../public/images/berries.png';
-import cruciferousImg from '../../../../public/images/cruciferous.png';
-import flaxseedImg from '../../../../public/images/flaxseed.png';
-import fruitImg from '../../../../public/images/fruit.png';
-import grainsImg from '../../../../public/images/grains.png';
-import greensImg from '../../../../public/images/greens.png';
-import nutsImg from '../../../../public/images/nuts.png';
-import vegetablesImg from '../../../../public/images/vegetables.png';
+import beansImg from '../../../../public/images/goals/beans.png';
+import berriesImg from '../../../../public/images/goals/berries.png';
+import cruciferousImg from '../../../../public/images/goals/cruciferous.png';
+import flaxseedImg from '../../../../public/images/goals/flaxseed.png';
+import fruitImg from '../../../../public/images/goals/fruit.png';
+import grainsImg from '../../../../public/images/goals/grains.png';
+import greensImg from '../../../../public/images/goals/greens.png';
+import nutsImg from '../../../../public/images/goals/nuts.png';
+import vegetablesImg from '../../../../public/images/goals/vegetables.png';
 import { NutritionGoals } from '../../../../utils/propTypes';
 
 const GoalImgMap = {

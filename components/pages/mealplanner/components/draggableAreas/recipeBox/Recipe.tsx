@@ -22,7 +22,7 @@ const getItemStyle = (
 
 type RecipeProps = {
   recipeInfo: {
-    imageURL: string;
+    id: string;
     name: string;
   },
   favorite: boolean,
@@ -68,10 +68,10 @@ function Recipe({
                     ? onHoverImg
                     : (
                       <Image
-                        loader={() => recipeInfo.imageURL}
                         width={200}
                         height={200}
-                        src={recipeInfo.imageURL}
+                        src={`/images/recipes/${recipeInfo.id}.png`}
+                        alt={recipeInfo.name}
                         className={classes.recipeImg}
                       />
                     )}
@@ -88,10 +88,10 @@ function Recipe({
                   ? onHoverImg
                   : (
                     <Image
-                      loader={() => recipeInfo.imageURL}
                       width={200}
                       height={200}
-                      src={recipeInfo.imageURL}
+                      src={`/images/recipes/${recipeInfo.id}.png`}
+                      alt={recipeInfo.name}
                       className={classes.recipeImg}
                     />
                   )}

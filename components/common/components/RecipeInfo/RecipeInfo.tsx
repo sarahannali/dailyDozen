@@ -29,10 +29,10 @@ function RecipeInfo({
         <Row style={{ marginBottom: '15px' }}>
           <Col span={11}>
             <Image
-              loader={() => recipe.imageURL}
               width={200}
               height={200}
-              src={recipe.imageURL}
+              src={`/images/recipes/${recipe.id}.png`}
+              alt={recipe.name}
               className={classes.recipeInfoImg}
             />
           </Col>

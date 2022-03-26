@@ -68,7 +68,7 @@ function RecipeBox({
               >
                 {currRecipes.map((recipe) => {
                   const recipeInfo = {
-                    imageURL: recipe.imageURL,
+                    id: recipe.id,
                     name: recipe.name,
                   };
 

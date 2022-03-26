@@ -36,7 +36,10 @@ function GroceryList({ groceryList, updateAndPostGroceryList }: GroceryListProps
     <div>
       <ul style={{ padding: '0px' }}>
         {groceryList.map((ingredient, idx) => (
-          <Row style={{ backgroundColor: idx % 2 === 0 ? '#F2F9FF' : 'white', lineHeight: '3' }}>
+          <Row
+            style={{ backgroundColor: idx % 2 === 0 ? '#F2F9FF' : 'white', lineHeight: '3' }}
+            key={ingredient.name}
+          >
             <Checkbox
               checked={ingredient.checked}
               onChange={(e) => handleChecked(e, idx)}

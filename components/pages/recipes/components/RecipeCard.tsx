@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card, Col, Row, Modal, Rate, Badge, Spin,
 } from 'antd';
@@ -23,6 +23,13 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
     Rating: recipe.Rating,
   });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setUserData({
+      Favorite: recipe.Favorite,
+      Rating: recipe.Rating,
+    });
+  }, [recipe.Favorite, recipe.Rating]);
 
   const updateUserRecipe = async () => {
     setLoading(true);
@@ -57,10 +64,10 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
         <Row>
           <Col span={12}>
             <Image
-              loader={() => recipe.imageURL}
               width={100}
               height={100}
-              src={recipe.imageURL}
+              src={`/images/recipes/${recipe.id}.png`}
+              alt={recipe.name}
               className={classes.recipecardimg}
             />
           </Col>

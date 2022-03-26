@@ -20,7 +20,7 @@ const getItemStyle = (
 
 type RecipeProps = {
   recipeInfo: {
-    imageURL: string;
+    id: string;
     name: string;
   },
   index: number,
@@ -86,10 +86,10 @@ function Recipe({
           >
             {hover ? onHoverImg : (
               <Image
-                loader={() => recipeInfo.imageURL}
                 width={90}
                 height={90}
-                src={recipeInfo.imageURL}
+                src={`/images/recipes/${recipeInfo.id}.png`}
+                alt={recipeInfo.name}
                 className={classes.recipeImg}
               />
             )}
