@@ -1,0 +1,38 @@
+.recipeDiv {
+  min-height: 100vh;
+}
+
+.recipeTitle {
+  margin-bottom: 10px;
+}
+
+.recipesRow {
+  margin-top: 40px;
+}
+
+.recipesCol {
+  margin-bottom: 20px;
+}
+
+.recipecard {
+  width: 300px;
+}
+
+.recipecardimg {
+  object-fit: cover;
+  object-position: right bottom;
+}
+
+.favoriteHeart {
+  color: #EB2F96;
+  font-size: 20px;
+}
+
+.favoriteHeartModal {
+  color: #EB2F96;
+  margin-left: 10px;
+}
+
+.recipeModal {
+  margin-top: -50px;
+}
