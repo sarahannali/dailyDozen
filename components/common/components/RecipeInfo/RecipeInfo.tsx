@@ -4,10 +4,10 @@ import {
 } from 'antd';
 import Image from 'next/image';
 import type { NutritionGoals, Recipe } from 'utils/propTypes/db';
+import classes from 'components/css/recipeInfo.module.css';
 import MacroValues from './MacroValues';
 import Ingredients from './Ingredients';
 import NutritionValues from './NutritionValues';
-import classes from './recipeInfo.module.css';
 
 const { Title } = Typography;
 
@@ -25,8 +25,8 @@ function RecipeInfo({
 
   return (
     <Row justify="center">
-      <div style={{ height: '80vh', width: '60vw' }}>
-        <Row style={{ marginBottom: '15px' }}>
+      <div className={classes.recipeInfoDiv}>
+        <Row className={classes.recipeImgRow}>
           <Col span={11}>
             <Image
               width={200}
@@ -37,7 +37,7 @@ function RecipeInfo({
             />
           </Col>
           <Col span={13}>
-            <Row gutter={[80, 16]} style={{ marginLeft: '-30px', marginRight: 0 }}>
+            <Row gutter={[80, 16]} className={classes.nutritionValuesGutter}>
               <NutritionValues
                 ingredients={recipe.ingredients}
                 nutritionGoalData={nutritionGoalData}
@@ -60,7 +60,7 @@ function RecipeInfo({
           <InputNumber
             defaultValue={servings}
             onChange={(e) => setServings(e)}
-            style={{ width: '75px', marginLeft: '10px' }}
+            className={classes.input}
             min={1}
           />
         </Row>
@@ -86,8 +86,7 @@ function RecipeInfo({
                 {recipe.steps.map((step, idx) => (
                   <div key={step}>
                     {idx + 1}
-                    .
-                    {' '}
+                    {'. '}
                     {step}
                     <p />
                   </div>

@@ -4,6 +4,7 @@ import {
   HeartFilled,
 } from '@ant-design/icons';
 import type { Recipe } from 'utils/propTypes/db';
+import classes from 'components/css/searchSection.module.css';
 import SearchBar from './SearchBar';
 
 type SearchSectionProps = {
@@ -29,7 +30,7 @@ function SearchRecipeSection({
         count={1}
         value={+showFavorites}
         character={<HeartFilled style={{ color: showFavorites ? '#eb2f96' : '#caccce' }} />}
-        style={{ color: '#eb2f96', marginLeft: '10px', lineHeight: '1.3' }}
+        className={classes.favoriteHeart}
         onChange={() => setShowFavorites(!showFavorites)}
       />
     </Row>

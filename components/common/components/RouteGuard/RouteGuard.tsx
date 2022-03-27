@@ -2,8 +2,9 @@ import { Spin } from 'antd';
 import React, {
   useContext, ReactNode,
 } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-import Login from '../pages/login/Login';
+import { AuthContext } from 'components/contexts/AuthContext';
+import Login from 'components/pages/login';
+import classes from 'components/css/routeGurad.module.css';
 
 function RouteGuard({ children }: { children: ReactNode}) {
   const { user } = useContext(AuthContext);
@@ -11,13 +12,7 @@ function RouteGuard({ children }: { children: ReactNode}) {
   if (user === null) return <Login />;
   if (user === undefined) {
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      }}
-      >
+      <div className={classes.spinningDiv}>
         <Spin spinning size="large" />
       </div>
     );

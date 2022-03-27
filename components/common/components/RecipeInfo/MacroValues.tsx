@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Macros } from 'utils/propTypes/db';
+import classes from 'components/css/recipeInfo.module.css';
 import Capitalize from '../../utils/_capitalize';
-import classes from './recipeInfo.module.css';
 
 type MacroValuesProps = {
   values: Macros,
@@ -15,12 +15,14 @@ function MacroValues({ values, servings, servingsRatio }: MacroValuesProps) {
       {(Object.keys(values) as Array<keyof Macros>).sort().map((value) => {
         const keyFormatted = Capitalize(value);
 
-        const amount = parseFloat((values[value] * (servings / servingsRatio)).toFixed(2));
+        const amount = parseFloat(
+          (values[value] * (servings / servingsRatio)).toFixed(2),
+        );
+
         return (
           <div className={classes.nutritionGoal} key={value}>
             <strong>{keyFormatted}</strong>
-            :
-            {' '}
+            {': '}
             {amount}
             {value !== 'calories' ? 'g' : ''}
           </div>

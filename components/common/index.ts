@@ -4,3 +4,4 @@ export { default as GetBorderColor } from './utils/nutritionGoals/_getBorderColo
 export { default as SearchRecipeSection } from './components/SearchSection/SearchRecipeSection';
 export { default as GetNutritionValues } from './utils/nutritionGoals/_getNutritionValues';
 export { default as RecipeInfo } from './components/RecipeInfo/RecipeInfo';
+export { default as RouteGuard } from './components/RouteGuard/RouteGuard';

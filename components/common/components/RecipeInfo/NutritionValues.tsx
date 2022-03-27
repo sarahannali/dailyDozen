@@ -6,8 +6,12 @@ import type {
   NutritionGoalsWithMacros,
   RecipeIngredient,
 } from 'utils/propTypes/db';
-import { GetBorderColor, GetNutritionGoalImg, GetNutritionValues } from '../../utils/nutritionGoals';
-import classes from './recipeInfo.module.css';
+import classes from 'components/css/recipeInfo.module.css';
+import {
+  GetBorderColor,
+  GetNutritionGoalImg,
+  GetNutritionValues,
+} from '../../utils/nutritionGoals';
 
 type NutritionValuesProps = {
   ingredients: RecipeIngredient[],

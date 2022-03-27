@@ -4,9 +4,9 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import '../styles.css';
-import AuthProvider from '../components/contexts/AuthContext';
-import RouteGuard from '../components/common/RouteGuard';
-import MobileGroceryList from '../components/pages/mobile/MobileGroceryList';
+import { RouteGuard } from 'components/common';
+import AuthProvider from 'components/contexts/AuthContext';
+import MobileGroceryList from 'components/pages/mobile/MobileGroceryList';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
