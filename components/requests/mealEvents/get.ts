@@ -1,8 +1,8 @@
 import {
   collection, getDocs, query, where,
 } from 'firebase/firestore/lite';
-import { MealEvent } from 'utils/propTypes/db';
-import { MealEventResponse } from 'utils/propTypes/requests';
+import type { MealEvent } from 'utils/propTypes/db';
+import type { MealEventResponse } from 'utils/propTypes/requests';
 import db, { auth } from 'firebase/clientApp';
 
 const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
@@ -33,7 +33,7 @@ const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
       Date,
       MealTime,
       Recipe: {
-        recipeID: Recipe?.id,
+        id: Recipe?.id,
         name,
         macros,
         ingredients,

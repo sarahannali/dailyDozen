@@ -1,15 +1,17 @@
 import { DocumentReference } from 'firebase/firestore/lite';
 import { RecipeIngredient, Macros } from '../../recipes/Recipe';
 
-export interface MealEventRecipe {
-  recipeID?: string,
+export type MealTime = 'Breakfast' | 'Lunch' | 'Dinner';
+
+export type MealEventRecipe = {
+  id?: string,
   name: string,
   macros: Macros,
   ingredients: RecipeIngredient[],
   servings: number,
 }
 
-interface MealEvent {
+type MealEvent = {
   id?: string,
   Date: Date,
   MealTime: 'Breakfast' | 'Lunch' | 'Dinner',

@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import axios from 'axios';
-import { RecipeRequest } from 'utils/propTypes/requests';
+import type { RecipeRequest } from 'utils/propTypes/requests';
 import classes from './createRecipe.module.css';
 import { macros } from '../../../../../utils/constants/goals';
 

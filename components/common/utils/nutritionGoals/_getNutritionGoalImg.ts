@@ -1,4 +1,4 @@
-import { NutritionGoals } from 'utils/propTypes/db';
+import type { NutritionGoals } from 'utils/propTypes/db';
 import beansImg from '../../../../public/images/goals/beans.png';
 import berriesImg from '../../../../public/images/goals/berries.png';
 import cruciferousImg from '../../../../public/images/goals/cruciferous.png';

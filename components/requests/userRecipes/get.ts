@@ -1,5 +1,5 @@
 import { collection, getDocs } from 'firebase/firestore/lite';
-import { UserRecipe } from 'utils/propTypes/db';
+import type { UserRecipe } from 'utils/propTypes/db';
 import db, { auth } from 'firebase/clientApp';
 
 const getAllUserRecipeData = async (): Promise<UserRecipe[]> => {

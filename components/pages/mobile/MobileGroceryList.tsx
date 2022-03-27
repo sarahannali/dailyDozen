@@ -4,7 +4,7 @@ import {
 import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { signOut } from 'firebase/auth';
-import { GroceryItem } from 'utils/propTypes/db';
+import type { GroceryItem } from 'utils/propTypes/db';
 import { getGroceryList, postGroceryList } from 'components/requests';
 import classes from 'components/css/login.module.css';
 import { AuthContext } from 'components/contexts/AuthContext';

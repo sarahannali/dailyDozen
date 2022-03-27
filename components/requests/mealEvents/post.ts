@@ -1,7 +1,7 @@
 import {
   collection, doc, addDoc,
 } from 'firebase/firestore/lite';
-import { MealEvent } from 'utils/propTypes/db';
+import type { MealEvent } from 'utils/propTypes/db';
 import db, { auth } from 'firebase/clientApp';
 import zeroedDate from './util/zeroedDate';
 

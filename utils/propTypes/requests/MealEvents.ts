@@ -1,6 +1,6 @@
 import { MealEventRecipe } from '../db';
 
-interface MealEventResponse {
+type MealEventResponse = {
   id: string,
   Date: Date,
   MealTime: 'Breakfast' | 'Lunch' | 'Dinner',

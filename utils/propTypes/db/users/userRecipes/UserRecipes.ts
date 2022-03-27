@@ -1,6 +1,6 @@
 import { DocumentReference } from 'firebase/firestore/lite';
 
-interface UserRecipe {
+type UserRecipe = {
   id?: string,
   RecipeID?: string,
   Recipe?: DocumentReference,

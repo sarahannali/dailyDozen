@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
 import Image from 'next/image';
-import { NutritionGoals, Recipe } from 'utils/propTypes/db';
+import type { NutritionGoals, Recipe } from 'utils/propTypes/db';
 import { putUserRecipe, postUserRecipe } from 'components/requests';
 import RecipeInfo from '../../../common/components/RecipeInfo/RecipeInfo';
 import classes from './recipes.module.css';

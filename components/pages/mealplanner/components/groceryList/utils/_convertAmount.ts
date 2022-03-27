@@ -1,4 +1,4 @@
-import { AmountType } from 'utils/propTypes/db';
+import type { AmountType } from 'utils/propTypes/db';
 
 const typesInCups = (ratio: number) => ({
   gal: 16,
@@ -8,7 +8,7 @@ const typesInCups = (ratio: number) => ({
   g: (1 / ratio),
 });
 
-export const ConvertAmount = (
+const ConvertAmount = (
   amount: number,
   orgType: AmountType,
   newType: AmountType,

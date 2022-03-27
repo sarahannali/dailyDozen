@@ -1,4 +1,4 @@
-import { Meals } from '../../../../utils/_populateCalendar';
+import { Meals } from 'components/pages/mealplanner/types';
 
 const MealMap = {
   Breakfast: '#A8DBE9',

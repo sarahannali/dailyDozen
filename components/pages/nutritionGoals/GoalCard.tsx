@@ -3,7 +3,7 @@ import {
   Card, Row, Col, Typography, Input, Progress, Skeleton,
 } from 'antd';
 import Image from 'next/image';
-import { NutritionGoals } from 'utils/propTypes/db';
+import type { NutritionGoals } from 'utils/propTypes/db';
 import classes from 'components/css/nutritionGoals.module.css';
 import { Capitalize, GetBorderColor, GetNutritionGoalImg } from 'components/common';
 

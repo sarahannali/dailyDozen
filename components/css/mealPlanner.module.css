@@ -1,0 +1,253 @@
+.mealPlannerDiv {
+  overflow-x: scroll;
+  min-height: 100vh;
+}
+
+.datePicker {
+  display: flex;
+}
+
+.loadingSymbol {
+  margin: 3px 0px 0px 10px;
+  font-size: 20px;
+}
+
+.infoDiv {
+  margin-left: 50px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.weekButtons {
+  font-size: 15px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.groceryul {
+  padding: 0px;
+}
+
+.listRow {
+  line-height: 3;
+}
+
+.listCheckbox {
+  padding-left: 10px;
+}
+
+.listSelect {
+  margin: 5px 10px 5px 0px;
+}
+
+.groceryButton {
+  position: fixed;
+  bottom: 20px;
+  left: 200px;
+  font-size: 30px;
+  border-radius: 5%;
+  height: 80px;
+  width: 80px;
+  padding: 0px;
+  margin-left: 20px;
+}
+
+.groceryModal {
+  margin-top: -50px;
+}
+
+.addButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 24px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+}
+
+.drawer {
+  width: calc(100vw - 200px);
+  margin-left: 200px;
+}
+
+.transition:last-child {
+  width: 0px;
+}
+
+
+.recipeImg {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  object-position: right bottom;
+}
+
+.card {
+  width: 138px;
+  height: 138px;
+}
+
+.recipeDroppableDiv {
+  margin-top: 20px;
+}
+
+.recipeDiv {
+  display: flex;
+  padding: 8;
+}
+
+.hoverImg {
+  margin-bottom: 0px;
+  height: 90px;
+  width: 90px;
+}
+
+.heart {
+  color: #eb2f96;
+  font-size: 20px;
+}
+
+.calendar {
+  display: flex;
+  min-width: 80vw;
+  margin-left: 50px;
+  margin-right: 50px;
+  border: 1px solid lightgray;
+}
+
+.singleDayCol {
+  width: 145px;
+  margin: 1vw;
+}
+
+.singleDayTitleDiv {
+  text-align: center;
+}
+
+.singleDayTitle {
+  margin-bottom: 0px;
+}
+
+.singleDayTitle:hover {
+  color: #1890FF;
+  cursor: pointer;
+}
+
+.singleDaySubtitle {
+  margin-top: 0px;
+}
+
+.dailyNutritionModal {
+  margin-top: -50px;
+}
+
+.mealCol {
+  min-width: 140px;
+}
+
+
+.recipeImg {
+  object-fit: cover;
+  object-position: right bottom;
+}
+
+.card {
+  width: 138px;
+  height: 138px;
+}
+
+.cropped {
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.deleteButton {
+  float: right;
+  margin-top: -35px;
+  margin-right: -40px;
+  cursor: pointer;
+  line-height: 0px;
+  padding: 1px 1px;
+  border-radius: 5%;
+  width: 24px;
+  height: 24px;
+  z-index: 1;
+}
+
+.servingSize {
+  width: 25px;
+  padding: 0px 1px 0px 0px;
+  text-align: center;
+  background-color: #153756;
+  color: white;
+  border-radius: 50%;
+  height: 24px;
+  z-index: 1;
+  float: right;
+  margin-right: 25px;
+  margin-top: 10px;
+  position: relative;
+  cursor: default;
+}
+
+.recipeServingButtons {
+  position: relative;
+  z-index: 1;
+  margin-top: 5px;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.leftServingArrow {
+  float: left;
+  margin-left: 12px;
+}
+
+.rightServingArrow {
+  float: right;
+  margin-right: -52px;
+}
+
+.recipeMealEventName {
+  margin-bottom: 0px;
+  height: 90px;
+  width: 90px;
+}
+
+.dailyNutritionDiv {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.macroTitle {
+  color: black;
+}
+
+.macroText {
+  margin-bottom: -30px;
+}
+
+.noMealsFoundText {
+  color: #8c8c8c
+}
+
+.goalImg {
+  max-width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.goalImgBorder {
+  border: 8px solid rgb(192, 192, 192);
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+}

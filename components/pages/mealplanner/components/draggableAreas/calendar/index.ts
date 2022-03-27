@@ -1,2 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-export { default as Calendar } from './Calendar';
+import Calendar from './Calendar';
+
+export default Calendar;

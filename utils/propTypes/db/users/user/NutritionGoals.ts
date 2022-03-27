@@ -1,6 +1,6 @@
 import { Macros } from '../../recipes/Recipe';
 
-interface NutritionGoals {
+type NutritionGoals = {
   beans: number,
   berries: number,
   cruciferous: number,

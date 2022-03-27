@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Typography, Row, Col, InputNumber, notification, Skeleton,
 } from 'antd';
-import { NutritionGoals as NutritionGoalsType, Macros } from 'utils/propTypes/db';
+import type { NutritionGoals as NutritionGoalsType, Macros } from 'utils/propTypes/db';
 import { EmptyNutritionGoalsWithMacros, macros } from 'utils/constants/goals';
 import { getNutritionGoalData, postNutritionGoalData } from 'components/requests';
 import { Capitalize } from 'components/common';

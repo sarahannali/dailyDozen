@@ -4,10 +4,10 @@ import { Droppable } from 'react-beautiful-dnd';
 import {
   PlusOutlined,
 } from '@ant-design/icons';
-import { Recipe as RecipeType } from 'utils/propTypes/db';
+import type { Recipe as RecipeType } from 'utils/propTypes/db';
+import classes from 'components/css/mealPlanner.module.css';
+import { SearchRecipeSection } from 'components/common';
 import Recipe from './Recipe';
-import { SearchRecipeSection } from '../../../../../common';
-import classes from './recipeBox.module.css';
 
 type RecipeBoxProps = {
   recipes: RecipeType[],
@@ -40,8 +40,7 @@ function RecipeBox({
         onClose={() => setVisible(false)}
         visible={visible}
         height="300px"
-        className={`${classes.drawer} ${
-          isDragging ? classes.transition : {}}`}
+        className={`${classes.drawer} ${isDragging ? classes.transition : {}}`}
       >
         <SearchRecipeSection
           baseRecipes={recipes}
@@ -49,7 +48,7 @@ function RecipeBox({
           showFavorites={showFavorites}
           setShowFavorites={setShowFavorites}
         />
-        <div style={{ marginTop: '20px' }}>
+        <div className={classes.recipeDroppableDiv}>
           <Droppable
             droppableId={droppableId}
             direction="horizontal"
@@ -59,10 +58,7 @@ function RecipeBox({
               <div
                 ref={provided.innerRef}
                 data-isDraggingOver={snapshot.isDraggingOver}
-                style={{
-                  display: 'flex',
-                  padding: '8',
-                }}
+                className={classes.recipeDiv}
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...provided.droppableProps}
               >

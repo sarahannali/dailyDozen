@@ -3,17 +3,17 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import {
   deleteMealEvent, postMealEvent, putMealEvent, getAllUserRecipeData,
 } from 'components/requests';
-import { MealEvent, Recipe } from 'utils/propTypes/db';
+import type { MealEvent, Recipe } from 'utils/propTypes/db';
+import { addUserRecipeData } from 'components/common/utils';
 import {
   ReorderMeals,
   DeleteMeal,
   UpdateMeal,
   getRequestObj,
 } from './utils';
-import { Calendar } from './calendar';
-import { RecipeBox } from './recipeBox';
-import { Calendar as CalendarType } from '../../utils/_populateCalendar';
-import addUserRecipeData from '../../../recipes/utils/addUserRecipeData';
+import Calendar from './calendar';
+import RecipeBox from './recipeBox';
+import { Calendar as CalendarType } from '../../types';
 
 type DraggableAreasProps = {
   allRecipeData: Recipe[],
@@ -34,7 +34,7 @@ function DraggableAreas({
       .then((res) => {
         setRecipes(addUserRecipeData(allRecipeData, res));
       });
-  }, []);
+  }, [allRecipeData]);
 
   const onDragStart = (result: DropResult) => {
     if (result.source.droppableId === 'Recipes') setDraggingRecipe(true);

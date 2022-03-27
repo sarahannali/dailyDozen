@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ReactElement } from 'react';
-import { Recipe } from 'utils/propTypes/db';
+import type { Recipe } from 'utils/propTypes/db';
 import getAllRecipeData from '../lib/recipes';
 import AppLayout from '../components/layout';
 import MealPlanner from '../components/pages/mealplanner/MealPlanner';

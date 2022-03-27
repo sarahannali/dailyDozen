@@ -3,7 +3,7 @@ import {
   Row, Col, Rate, InputNumber, Typography,
 } from 'antd';
 import Image from 'next/image';
-import { NutritionGoals, Recipe } from 'utils/propTypes/db';
+import type { NutritionGoals, Recipe } from 'utils/propTypes/db';
 import MacroValues from './MacroValues';
 import Ingredients from './Ingredients';
 import NutritionValues from './NutritionValues';

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Spin } from 'antd';
-import { MealEvent } from 'utils/propTypes/db';
+import type { MealEvent } from 'utils/propTypes/db';
 import { getMealEvents, getNutritionGoalData } from 'components/requests';
+import { EmptyNutritionGoalsWithMacros } from 'utils/constants/goals';
+import classes from 'components/css/mealPlanner.module.css';
+import { PopulateCalendar } from 'components/pages/mealplanner/utils';
 import SingleDay from './SingleDay';
-import classes from './calendar.module.css';
-import { Calendar as CalendarType } from '../../../utils/_populateCalendar';
-import { PopulateCalendar } from '../../../utils';
-import { EmptyNutritionGoalsWithMacros } from '../../../../../../utils/constants/goals';
+import type { Calendar as CalendarType } from '../../../types';
 
 type CalendarProps = {
   days: CalendarType,

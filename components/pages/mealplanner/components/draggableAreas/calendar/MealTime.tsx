@@ -1,11 +1,11 @@
 import React from 'react';
 import { Col, Divider } from 'antd';
 import { Droppable } from 'react-beautiful-dnd';
-import { GetColor } from './utils';
+import type { MealEvent } from 'utils/propTypes/db';
+import classes from 'components/css/mealPlanner.module.css';
+import type { Meal, Meals } from 'components/pages/mealplanner/types';
+import GetColor from './utils';
 import Recipe from './recipe/Recipe';
-import classes from './calendar.module.css';
-import { Meals, Meal } from '../../../utils/_populateCalendar';
-import { MealEvent } from 'utils/propTypes/db';
 
 type MealTimeProps = {
   day: string,
@@ -38,20 +38,19 @@ function MealTime({
               minHeight: '1px',
             }}
           >
-            {meals
-              ? meals.map((meal, index) => (
-                <Recipe
-                  key={meal.RecipeInfo.name + day + mealTime}
-                  isMealEvent
-                  recipeInfo={meal.RecipeInfo}
-                  listName={`${day}:${mealTime}`}
-                  index={index}
-                  meal={meal}
-                  givenServings={meal.Servings}
-                  deleteMealEvent={deleteMealEvent}
-                  updateMealEvent={updateMealEvent}
-                />
-              )) : <div />}
+            {meals && meals.map((meal, index) => (
+              <Recipe
+                key={meal.RecipeInfo.name + day + mealTime}
+                isMealEvent
+                recipeInfo={meal.RecipeInfo}
+                listName={`${day}:${mealTime}`}
+                index={index}
+                meal={meal}
+                givenServings={meal.Servings}
+                deleteMealEvent={deleteMealEvent}
+                updateMealEvent={updateMealEvent}
+              />
+            ))}
             {provided.placeholder}
           </div>
         )}

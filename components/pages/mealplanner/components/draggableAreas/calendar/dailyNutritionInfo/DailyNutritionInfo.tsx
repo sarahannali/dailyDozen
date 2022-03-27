@@ -1,11 +1,14 @@
 import React from 'react';
 import { Progress, Row } from 'antd';
 import Image from 'next/image';
-import { GetNutritionGoalImg, GetBorderColor, Capitalize } from '../../../../../../common';
-import { GetNutritionTotals } from './utils';
-import classes from './dailyNutritionInfo.module.css';
-import { NutritionGoals, NutritionGoalsWithMacros, Macros } from 'utils/propTypes/db';
-import { Meals } from '../../../../utils/_populateCalendar';
+import type {
+  NutritionGoals,
+  NutritionGoalsWithMacros, Macros,
+} from 'utils/propTypes/db';
+import classes from 'components/css/mealPlanner.module.css';
+import type { Meals } from 'components/pages/mealplanner/types';
+import { GetNutritionGoalImg, GetBorderColor, Capitalize } from 'components/common';
+import GetNutritionTotals from './utils';
 
 type DailyNutritionInfoProps = {
   nutritionGoalData: NutritionGoalsWithMacros,
@@ -16,18 +19,30 @@ function DailyNutritionInfo({ nutritionGoalData, meals }: DailyNutritionInfoProp
   const nutritionInfo = GetNutritionTotals(nutritionGoalData, meals);
   const macros: Array<keyof Macros> = ['calories', 'carbs', 'fat', 'protein'];
   const nutritionTypes: Array<keyof NutritionGoals> = [
-    'beans', 'berries', 'cruciferous', 'flaxseed', 'fruit', 'grains', 'greens', 'nuts', 'vegetables',
+    'beans',
+    'berries',
+    'cruciferous',
+    'flaxseed',
+    'fruit',
+    'grains',
+    'greens',
+    'nuts',
+    'vegetables',
   ];
 
   return (
     nutritionInfo
       ? (
-        <div className={classes.modal}>
+        <div className={classes.dailyNutritionDiv}>
           {macros.map((macro) => {
-            const title = <div style={{ color: 'black' }}>{nutritionInfo[macro].toFixed(2)}</div>;
+            const title = (
+              <div className={classes.macroTitle}>
+                {nutritionInfo[macro].toFixed(2)}
+              </div>
+            );
             return (
               <>
-                <strong style={{ marginBottom: '-30px' }}>{Capitalize(macro)}</strong>
+                <strong className={classes.macroText}>{Capitalize(macro)}</strong>
                 <Progress
                   percent={(nutritionInfo[macro] / nutritionGoalData[macro]) * 100}
                   format={() => title}
@@ -60,7 +75,7 @@ function DailyNutritionInfo({ nutritionGoalData, meals }: DailyNutritionInfoProp
       )
       : (
         <Row justify="center">
-          <p style={{ color: '#8c8c8c' }}>No Meals Found</p>
+          <p className={classes.noMealsFoundText}>No Meals Found</p>
         </Row>
       )
   );

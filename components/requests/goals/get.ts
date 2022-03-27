@@ -1,5 +1,5 @@
 import { doc, getDoc } from 'firebase/firestore/lite';
-import { NutritionGoalsWithMacros } from 'utils/propTypes/db';
+import type { NutritionGoalsWithMacros } from 'utils/propTypes/db';
 import db, { auth } from 'firebase/clientApp';
 
 const getNutritionGoalData = async (): Promise<NutritionGoalsWithMacros | null> => {

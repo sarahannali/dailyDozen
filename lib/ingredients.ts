@@ -1,5 +1,5 @@
 import { collection, getDocs } from 'firebase/firestore/lite';
-import { Ingredient } from 'utils/propTypes/db';
+import type { Ingredient } from 'utils/propTypes/db';
 import db from '../firebase/clientApp';
 
 const getAllIngredientData = async () => {

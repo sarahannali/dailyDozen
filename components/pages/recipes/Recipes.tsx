@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Row, Col } from 'antd';
-import { Recipe } from 'utils/propTypes/db';
+import type { Recipe } from 'utils/propTypes/db';
 import { getAllUserRecipeData, getNutritionGoalData } from 'components/requests';
 import { RecipeCard, CreateRecipe } from './components';
 import { SearchRecipeSection } from '../../common';
 import { EmptyNutritionGoalsWithMacros } from '../../../utils/constants/goals';
-import addUserRecipeData from './utils/addUserRecipeData';
+import addUserRecipeData from '../../common/utils/addUserRecipeData';
 
 const { Title } = Typography;
 
@@ -29,7 +29,7 @@ function Recipes({ recipes }: RecipesProps) {
   useEffect(() => {
     getNutritionGoalData()
       .then((res) => {
-        setNutritionGoalData(res);
+        if (res) setNutritionGoalData(res);
       });
 
     getAllUserRecipeData()
@@ -37,6 +37,7 @@ function Recipes({ recipes }: RecipesProps) {
         setBaseRecipes(addUserRecipeData(recipes, res));
         setCurrRecipes(addUserRecipeData(recipes, res));
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

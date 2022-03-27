@@ -1,5 +1,5 @@
 import { doc, updateDoc } from 'firebase/firestore/lite';
-import { GroceryItem } from 'utils/propTypes/db';
+import type { GroceryItem } from 'utils/propTypes/db';
 import db, { auth } from 'firebase/clientApp';
 
 const postGroceryList = async (newGroceryList: GroceryItem[]) => {

@@ -1,5 +1,5 @@
 import { collection, getDocs } from 'firebase/firestore/lite';
-import { Recipe } from 'utils/propTypes/db';
+import type { Recipe } from 'utils/propTypes/db';
 import db from '../firebase/clientApp';
 
 const getAllRecipeData = async () => {

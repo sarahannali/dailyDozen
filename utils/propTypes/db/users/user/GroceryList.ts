@@ -1,6 +1,6 @@
 import { AmountType } from '../../ingredients/Ingredient';
 
-interface GroceryItem {
+type GroceryItem = {
   amount: number,
   amountType: AmountType,
   checked: boolean,

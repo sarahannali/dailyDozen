@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import type { Calendar, Meal, Meals } from 'components/pages/mealplanner/types';
 import { DraggableLocation } from 'react-beautiful-dnd';
-import { Calendar, Meals, Meal } from '../../../utils/_populateCalendar';
-import { Recipe, MealEvent } from 'utils/propTypes/db';
+import type { Recipe, MealEvent } from 'utils/propTypes/db';
 
 export const DeleteMeal = (key: string, sourceIdx: number, days: Calendar): [Meal, Calendar] => {
   const codes = key.split(':');
@@ -34,19 +35,18 @@ const ReorderMeals = (
   const destCodes = destination.droppableId.split(':');
 
   if (source.droppableId === 'Recipes') {
-    console.log('RECIPES 2: ', recipes);
-    console.log('source 256 aaa sarah: ', source);
-    const newMealEvent = recipes[source.index];
+    const {
+      id, name, ingredients, macros, servings,
+    } = recipes[source.index];
 
     movedObj = {
       id: undefined,
       RecipeInfo: {
-        recipeID: newMealEvent.id,
-        imageURL: newMealEvent.imageURL,
-        name: newMealEvent.name,
-        ingredients: newMealEvent.ingredients,
-        macros: newMealEvent.macros,
-        servings: newMealEvent.servings,
+        recipeID: id,
+        name,
+        ingredients,
+        macros,
+        servings,
       },
       Servings: 1,
     };

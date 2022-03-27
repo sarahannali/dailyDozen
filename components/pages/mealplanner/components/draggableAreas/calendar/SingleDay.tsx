@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Col, Modal, Typography } from 'antd';
+import type { MealEvent, NutritionGoalsWithMacros } from 'utils/propTypes/db';
+import classes from 'components/css/mealPlanner.module.css';
+import { Meals } from 'components/pages/mealplanner/types';
+import { CalendarDays } from 'components/pages/mealplanner/utils';
 import MealTime from './MealTime';
-import { DailyNutritionInfo } from './dailyNutritionInfo';
-import { CalendarDays } from '../../../utils';
-import classes from './calendar.module.css';
-import { Meals } from '../../../utils/_populateCalendar';
-import { MealEvent, NutritionGoalsWithMacros } from 'utils/propTypes/db';
+import DailyNutritionInfo from './dailyNutritionInfo';
 
 const { Title } = Typography;
 
@@ -28,11 +28,20 @@ function SingleDay({
 
   return (
     <Col className={classes.singleDayCol}>
-      <div style={{ textAlign: 'center' }}>
-        <Title level={3} style={{ marginBottom: '0px' }} onClick={() => setIsModalVisible(true)} className={classes.singleDayTitle}>
+      <div className={classes.singleDayTitleDiv}>
+        <Title
+          level={3}
+          onClick={() => setIsModalVisible(true)}
+          className={classes.singleDayTitle}
+        >
           {dayOfWeek}
         </Title>
-        <Title level={5} style={{ marginTop: '0px' }}>{dateStr}</Title>
+        <Title
+          level={5}
+          className={classes.singleDaySubtitle}
+        >
+          {dateStr}
+        </Title>
       </div>
       {(Object.keys(meals) as Array<keyof Meals>).map((mealTime) => (
         <MealTime
@@ -49,7 +58,7 @@ function SingleDay({
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
-        style={{ marginTop: '-50px' }}
+        className={classes.dailyNutritionModal}
       >
         <DailyNutritionInfo nutritionGoalData={nutritionGoalData} meals={meals} />
       </Modal>

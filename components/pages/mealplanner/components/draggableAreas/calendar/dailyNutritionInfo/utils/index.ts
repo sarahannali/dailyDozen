@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as GetNutritionTotals } from './_getNutritionTotals';
+import GetNutritionTotals from './_getNutritionTotals';
+
+export default GetNutritionTotals;

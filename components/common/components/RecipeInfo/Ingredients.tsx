@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from 'antd';
-import { RecipeIngredient } from 'utils/propTypes/db';
+import type { RecipeIngredient } from 'utils/propTypes/db';
 import classes from './recipeInfo.module.css';
 
 const { Title } = Typography;

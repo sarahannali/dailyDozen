@@ -1,2 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-export { default as GetColor } from './_getColor';
+import GetColor from './_getColor';
+
+export default GetColor;

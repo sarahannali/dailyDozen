@@ -1,5 +1,5 @@
 import React from 'react';
-import { Macros } from 'utils/propTypes/db';
+import type { Macros } from 'utils/propTypes/db';
 import Capitalize from '../../utils/_capitalize';
 import classes from './recipeInfo.module.css';
 
