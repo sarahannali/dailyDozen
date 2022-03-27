@@ -27,7 +27,7 @@ function MealTime({
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
-            data-isDraggingOver={snapshot.isDraggingOver}
+            data-isdraggingover={snapshot.isDraggingOver}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             style={{

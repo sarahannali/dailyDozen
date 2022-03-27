@@ -1,6 +1,6 @@
 import { doc, updateDoc } from 'firebase/firestore/lite';
 import type { GroceryItem } from 'utils/propTypes/db';
-import db, { auth } from 'firebase/clientApp';
+import db, { auth } from 'firebaseUtils/clientApp';
 
 const postGroceryList = async (newGroceryList: GroceryItem[]) => {
   const userDoc = doc(db, `users/${auth.currentUser?.uid}`);

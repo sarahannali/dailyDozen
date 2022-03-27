@@ -37,7 +37,7 @@ function RecipeInfo({
             />
           </Col>
           <Col span={13}>
-            <Row gutter={[80, 16]} className={classes.nutritionValuesGutter}>
+            <Row gutter={[80, 16]} style={{ marginLeft: '-30px', marginRight: '0px' }}>
               <NutritionValues
                 ingredients={recipe.ingredients}
                 nutritionGoalData={nutritionGoalData}

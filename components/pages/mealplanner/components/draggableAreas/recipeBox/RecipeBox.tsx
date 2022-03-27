@@ -57,7 +57,7 @@ function RecipeBox({
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
-                data-isDraggingOver={snapshot.isDraggingOver}
+                data-isdraggingover={snapshot.isDraggingOver}
                 className={classes.recipeDiv}
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...provided.droppableProps}
@@ -72,6 +72,7 @@ function RecipeBox({
                     && (
                     <Recipe
                       listName={droppableId}
+                      key={recipe.name}
                       recipeInfo={recipeInfo}
                       index={recipes.findIndex((i) => i.id === recipe.id)}
                       favorite={recipe.Favorite}

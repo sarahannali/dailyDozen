@@ -2,7 +2,7 @@ import {
   collection, doc, addDoc,
 } from 'firebase/firestore/lite';
 import type { MealEvent } from 'utils/propTypes/db';
-import db, { auth } from 'firebase/clientApp';
+import db, { auth } from 'firebaseUtils/clientApp';
 import zeroedDate from './util/zeroedDate';
 
 const postMealEvent = async (mealEvent: MealEvent) => {

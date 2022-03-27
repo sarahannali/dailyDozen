@@ -1,6 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore/lite';
 import type { UserRecipe } from 'utils/propTypes/db';
-import db, { auth } from 'firebase/clientApp';
+import db, { auth } from 'firebaseUtils/clientApp';
 
 const getAllUserRecipeData = async (): Promise<UserRecipe[]> => {
   const userRecipesCollection = collection(db, `users/${auth.currentUser?.uid}/userRecipes`);
@@ -8,11 +8,11 @@ const getAllUserRecipeData = async (): Promise<UserRecipe[]> => {
   const userRecipesList = userRecipesSnapshot.docs.map((userRecipeDoc) => {
     const data = userRecipeDoc.data() as UserRecipe;
     const {
-      id, Recipe, Rating, Favorite,
+      Recipe, Rating, Favorite,
     } = data;
 
     return {
-      id,
+      id: userRecipeDoc.id,
       RecipeID: Recipe?.id,
       Rating,
       Favorite,

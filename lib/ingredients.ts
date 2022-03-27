@@ -1,6 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore/lite';
 import type { Ingredient } from 'utils/propTypes/db';
-import db from '../firebase/clientApp';
+import db from '../firebaseUtils/clientApp';
 
 const getAllIngredientData = async () => {
   const ingredientSnapshot = await getDocs(collection(db, 'ingredients'));

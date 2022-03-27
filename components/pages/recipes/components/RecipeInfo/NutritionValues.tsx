@@ -11,7 +11,7 @@ import {
   GetBorderColor,
   GetNutritionGoalImg,
   GetNutritionValues,
-} from '../../utils/nutritionGoals';
+} from 'components/common';
 
 type NutritionValuesProps = {
   ingredients: RecipeIngredient[],
@@ -44,7 +44,7 @@ function NutritionValues({
           );
 
           return nutritionValues[val] !== 0 && (
-            <Col span={4}>
+            <Col span={4} key={val}>
               <Progress
                 type="circle"
                 percent={nutritionValues[val] * 100}

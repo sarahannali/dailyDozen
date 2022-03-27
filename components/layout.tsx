@@ -9,7 +9,7 @@ import {
   LineChartOutlined,
 } from '@ant-design/icons';
 import classes from './css/layout.module.css';
-import { auth } from '../firebase/clientApp';
+import { auth } from '../firebaseUtils/clientApp';
 import { AuthContext } from './contexts/AuthContext';
 
 const { Sider, Content } = Layout;

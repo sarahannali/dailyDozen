@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider, signInWithPopup,
 } from 'firebase/auth';
 import Head from 'next/head';
-import { auth } from 'firebase/clientApp';
+import { auth } from 'firebaseUtils/clientApp';
 import { AuthContext } from 'components/contexts/AuthContext';
 import classes from 'components/css/login.module.css';
 

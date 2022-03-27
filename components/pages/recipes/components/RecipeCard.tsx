@@ -7,7 +7,7 @@ import Image from 'next/image';
 import type { NutritionGoals, Recipe } from 'utils/propTypes/db';
 import { putUserRecipe, postUserRecipe } from 'components/requests';
 import classes from 'components/css/recipes.module.css';
-import { RecipeInfo } from 'components/common';
+import RecipeInfo from './RecipeInfo/RecipeInfo';
 
 type RecipeCardProps = {
   recipe: Recipe,

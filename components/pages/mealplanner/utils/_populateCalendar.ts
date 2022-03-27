@@ -38,10 +38,12 @@ const PopulateCalendar = (mealEvents: MealEventResponse[], startDate: Date) => {
 
   mealEvents.forEach((mealEvent) => {
     const {
-      Date, MealTime, id, Recipe, Servings,
+      MealTime, id, Recipe, Servings,
     } = mealEvent;
 
-    const dateIdx = Date.getDay();
+    console.log(mealEvent.Date);
+    const dateIdx = new Date(mealEvent.Date).getDay();
+    console.log('DATE IDX: ', dateIdx, ' DATE: ', new Date(mealEvent.Date.seconds));
     const calendarIdx = Math.abs(
       dateIdx + (CalendarDays.length - startDate.getDay()),
     ) % CalendarDays.length;

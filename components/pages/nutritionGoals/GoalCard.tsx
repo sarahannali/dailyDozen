@@ -42,15 +42,15 @@ function GoalCard({
             />
           </Col>
           <Col>
-            <Row style={{ lineHeight: '2', marginRight: '5px', marginLeft: '30px' }}>
+            <Row className={classes.goalTitle}>
               <Text>Daily Goal: </Text>
             </Row>
           </Col>
           <Col>
-            <Row style={{ margin: '5px', width: '150px' }}>
+            <Row className={classes.goalRow}>
               {
                 loading
-                  ? <Skeleton.Input style={{ width: '150px' }} />
+                  ? <Skeleton.Input className={classes.skeleton} />
                   : (
                     <Input
                       type="number"

@@ -3,7 +3,7 @@ import {
 } from 'firebase/firestore/lite';
 import type { MealEvent } from 'utils/propTypes/db';
 import type { MealEventResponse } from 'utils/propTypes/requests';
-import db, { auth } from 'firebase/clientApp';
+import db, { auth } from 'firebaseUtils/clientApp';
 
 const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
   const startDate = new Date(dateStr);
@@ -22,7 +22,7 @@ const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
     const data = mealEventDoc.data() as MealEvent;
 
     const {
-      MealTime, Date, Recipe, RecipeInfo, Servings,
+      MealTime, Recipe, RecipeInfo, Servings,
     } = data;
     const {
       name, macros, ingredients, servings,
@@ -30,7 +30,7 @@ const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
 
     return {
       id: mealEventDoc.id,
-      Date,
+      Date: new Date(data.Date.seconds * 1000),
       MealTime,
       Recipe: {
         id: Recipe?.id,

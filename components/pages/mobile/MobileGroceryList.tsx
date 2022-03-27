@@ -8,7 +8,7 @@ import type { GroceryItem } from 'utils/propTypes/db';
 import { getGroceryList, postGroceryList } from 'components/requests';
 import classes from 'components/css/login.module.css';
 import { AuthContext } from 'components/contexts/AuthContext';
-import { auth } from 'firebase/clientApp';
+import { auth } from 'firebaseUtils/clientApp';
 import GroceryList from '../mealplanner/components/groceryList/GroceryList';
 
 const { Title } = Typography;
