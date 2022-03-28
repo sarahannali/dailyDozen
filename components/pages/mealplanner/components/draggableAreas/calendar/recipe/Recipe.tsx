@@ -3,7 +3,7 @@ import React, { CSSProperties, useState } from 'react';
 import { Draggable, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd';
 import { Card } from 'antd';
 import Image from 'next/image';
-import type { MealEvent } from 'utils/propTypes/db';
+import type { MealEvent, MealEventRecipe } from 'utils/propTypes/db';
 import classes from 'components/css/mealPlanner.module.css';
 import type { Meal } from 'components/pages/mealplanner/types';
 import RecipeMealEvent from './RecipeMealEvent';
@@ -19,10 +19,7 @@ const getItemStyle = (
 });
 
 type RecipeProps = {
-  recipeInfo: {
-    id?: string;
-    name: string;
-  },
+  recipeInfo: MealEventRecipe,
   index: number,
   listName: string,
   isMealEvent: true,

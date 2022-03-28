@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Progress, Row } from 'antd';
 import Image from 'next/image';
 import type {
@@ -41,14 +41,14 @@ function DailyNutritionInfo({ nutritionGoalData, meals }: DailyNutritionInfoProp
               </div>
             );
             return (
-              <>
+              <Fragment key={macro}>
                 <strong className={classes.macroText}>{Capitalize(macro)}</strong>
                 <Progress
                   percent={(nutritionInfo[macro] / nutritionGoalData[macro]) * 100}
                   format={() => title}
                   strokeColor="#3d4954"
                 />
-              </>
+              </Fragment>
             );
           })}
           {nutritionTypes.map((type) => {
@@ -68,6 +68,7 @@ function DailyNutritionInfo({ nutritionGoalData, meals }: DailyNutritionInfoProp
                 format={() => img}
                 strokeColor={GetBorderColor(type)}
                 width={100}
+                key={type}
               />
             );
           })}

@@ -40,7 +40,7 @@ function MealTime({
           >
             {meals && meals.map((meal, index) => (
               <Recipe
-                key={meal.RecipeInfo.name + day + mealTime}
+                key={`${day}:${mealTime}-${meal.id}`}
                 isMealEvent
                 recipeInfo={meal.RecipeInfo}
                 listName={`${day}:${mealTime}`}

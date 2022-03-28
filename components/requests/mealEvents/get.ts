@@ -22,7 +22,7 @@ const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
     const data = mealEventDoc.data() as MealEvent;
 
     const {
-      MealTime, Recipe, RecipeInfo, Servings,
+      MealTime, RecipeInfo, Servings,
     } = data;
     const {
       name, macros, ingredients, servings,
@@ -33,7 +33,7 @@ const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
       Date: new Date(data.Date.seconds * 1000),
       MealTime,
       Recipe: {
-        id: Recipe?.id,
+        id: RecipeInfo?.id,
         name,
         macros,
         ingredients,
