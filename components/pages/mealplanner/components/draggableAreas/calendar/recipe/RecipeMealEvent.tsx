@@ -38,7 +38,11 @@ function RecipeMealEvent({
           <CloseOutlined />
         </Button>
       </Popconfirm>
-      <Paragraph className={classes.recipeMealEventName} ellipsis={{ rows: 3 }}>
+      <Paragraph
+        style={{ marginBottom: '0px' }}
+        className={classes.recipeMealEventName}
+        ellipsis={{ rows: 3 }}
+      >
         {name}
       </Paragraph>
       <Button
