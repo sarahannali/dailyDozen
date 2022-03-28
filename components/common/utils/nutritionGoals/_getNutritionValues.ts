@@ -1,5 +1,9 @@
+import type {
+  NutritionGoals,
+  NutritionGoalsWithMacros,
+  RecipeIngredient,
+} from 'utils/propTypes/db';
 import { EmptyNutritionGoals } from '../../../../utils/constants/goals';
-import { NutritionGoals, NutritionGoalsWithMacros, RecipeIngredient } from '../../../../utils/propTypes';
 
 const GetNutritionValues = (
   ingredients: RecipeIngredient[],

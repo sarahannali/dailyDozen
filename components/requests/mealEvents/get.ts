@@ -1,10 +1,10 @@
 import {
   collection, getDocs, query, where,
 } from 'firebase/firestore/lite';
-import db, { auth } from '../../../firebase/clientApp';
+import type { MealEventResponse } from 'utils/propTypes/requests';
+import db, { auth } from 'firebaseUtils/clientApp';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getMealEvents = async (dateStr: string) => {
+const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
   const startDate = new Date(dateStr);
   startDate.setHours(0, 0, 0, 0);
 
@@ -20,21 +20,29 @@ export const getMealEvents = async (dateStr: string) => {
   const mealEventsList = mealEventsSnapshot.docs.map((mealEventDoc) => {
     const data = mealEventDoc.data();
 
+    const {
+      MealTime, RecipeInfo, Servings,
+    } = data;
+    const {
+      name, macros, ingredients, servings,
+    } = RecipeInfo;
+
     return {
       id: mealEventDoc.id,
-      Date: data.Date.toDate().toDateString(),
-      MealTime: data.MealTime,
+      Date: new Date(data.Date.seconds * 1000),
+      MealTime,
       Recipe: {
-        recipeID: data.Recipe.id,
-        imageURL: data.RecipeInfo.imageURL,
-        name: data.RecipeInfo.name,
-        macros: data.RecipeInfo.macros,
-        ingredients: data.RecipeInfo.ingredients,
-        servings: data.RecipeInfo.servings,
+        id: RecipeInfo?.id,
+        name,
+        macros,
+        ingredients,
+        servings,
       },
-      Servings: data.Servings,
+      Servings,
     };
   });
 
   return mealEventsList;
 };
+
+export default getMealEvents;

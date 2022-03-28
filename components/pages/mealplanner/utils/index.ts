@@ -1,2 +1,1 @@
-export { default as PopulateCalendar } from './_populateCalendar';
-export { CalendarDays } from './_populateCalendar';
+export { default as PopulateCalendar, CalendarDays } from './_populateCalendar';

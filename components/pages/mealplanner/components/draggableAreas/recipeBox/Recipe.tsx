@@ -6,7 +6,7 @@ import {
   HeartFilled,
 } from '@ant-design/icons';
 import Image from 'next/image';
-import classes from './recipeBox.module.css';
+import classes from 'components/css/mealPlanner.module.css';
 
 const { Paragraph } = Typography;
 
@@ -22,7 +22,7 @@ const getItemStyle = (
 
 type RecipeProps = {
   recipeInfo: {
-    imageURL: string;
+    id: string;
     name: string;
   },
   favorite: boolean,
@@ -31,73 +31,48 @@ type RecipeProps = {
 }
 
 function Recipe({
-  recipeInfo,
-  index,
-  listName,
-  favorite,
+  recipeInfo, index, listName, favorite,
 }: RecipeProps) {
   const [hover, setHover] = useState(false);
 
   const onHoverImg = (
-    <Paragraph style={{ marginBottom: '0px', height: '90px', width: '90px' }} ellipsis={{ rows: 3 }}>
+    <Paragraph className={classes.hoverImg} ellipsis={{ rows: 3 }}>
       {recipeInfo.name}
     </Paragraph>
   );
 
   return (
-    <Draggable key={recipeInfo.name} draggableId={recipeInfo.name + listName + index} index={index}>
+    <Draggable
+      key={recipeInfo.name}
+      draggableId={recipeInfo.name + listName + index}
+      index={index}
+    >
       {(provided) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          style={getItemStyle(
-            provided.draggableProps.style,
-          )}
+          style={getItemStyle(provided.draggableProps.style)}
         >
-          {
-          favorite
-            ? (
-              <Badge count={<HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} />}>
-                <Card
-                  onMouseEnter={() => setHover(true)}
-                  onMouseLeave={() => setHover(false)}
-                  className={classes.card}
-                >
-                  {hover
-                    ? onHoverImg
-                    : (
-                      <Image
-                        loader={() => recipeInfo.imageURL}
-                        width={200}
-                        height={200}
-                        src={recipeInfo.imageURL}
-                        className={classes.recipeImg}
-                      />
-                    )}
-                </Card>
-              </Badge>
-            )
-            : (
-              <Card
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
-                className={classes.card}
-              >
-                {hover
-                  ? onHoverImg
-                  : (
-                    <Image
-                      loader={() => recipeInfo.imageURL}
-                      width={200}
-                      height={200}
-                      src={recipeInfo.imageURL}
-                      className={classes.recipeImg}
-                    />
-                  )}
-              </Card>
-            )
-        }
+          <Badge count={favorite ? <HeartFilled className={classes.heart} /> : 0}>
+            <Card
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              className={classes.card}
+            >
+              {hover
+                ? onHoverImg
+                : (
+                  <Image
+                    width={200}
+                    height={200}
+                    src={`/images/recipes/${recipeInfo.id}.png`}
+                    alt={recipeInfo.name}
+                    className={classes.recipeImg}
+                  />
+                )}
+            </Card>
+          </Badge>
         </div>
       )}
     </Draggable>

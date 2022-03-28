@@ -7,8 +7,8 @@ import {
   CaretLeftOutlined,
   CaretRightOutlined,
 } from '@ant-design/icons';
-import classes from './recipe.module.css';
-import { Meal } from '../../../../utils/_populateCalendar';
+import classes from 'components/css/mealPlanner.module.css';
+import type { Meal } from 'components/pages/mealplanner/types';
 
 const { Paragraph } = Typography;
 
@@ -38,13 +38,17 @@ function RecipeMealEvent({
           <CloseOutlined />
         </Button>
       </Popconfirm>
-      <Paragraph style={{ marginBottom: '0px', height: '90px', width: '90px' }} ellipsis={{ rows: 3 }}>
+      <Paragraph
+        style={{ marginBottom: '0px' }}
+        className={classes.recipeMealEventName}
+        ellipsis={{ rows: 3 }}
+      >
         {name}
       </Paragraph>
       <Button
-        className={classes.leftServingArrow}
         onClick={() => servings > 0 && setServings(servings - 1)}
-        style={{ color: servings <= 0 ? 'gray' : 'black', zIndex: '1' }}
+        className={`${classes.recipeServingButtons} ${classes.leftServingArrow}`}
+        style={{ color: servings <= 0 ? 'gray' : 'black' }}
       >
         <CaretLeftOutlined />
       </Button>
@@ -52,9 +56,8 @@ function RecipeMealEvent({
         <div className={classes.servingSize}>{servings}</div>
       </Tooltip>
       <Button
-        className={classes.rightServingArrow}
         onClick={() => setServings(servings + 1)}
-        style={{ zIndex: '1' }}
+        className={`${classes.recipeServingButtons} ${classes.rightServingArrow}`}
       >
         <CaretRightOutlined />
       </Button>

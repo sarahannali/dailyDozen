@@ -3,9 +3,9 @@ import {
   Card, Row, Col, Typography, Input, Progress, Skeleton,
 } from 'antd';
 import Image from 'next/image';
-import { Capitalize, GetBorderColor, GetNutritionGoalImg } from '../../common';
-import classes from '../../css/nutritionGoals.module.css';
-import { NutritionGoals } from '../../../utils/propTypes';
+import type { NutritionGoals } from 'utils/propTypes/db';
+import classes from 'components/css/nutritionGoals.module.css';
+import { Capitalize, GetBorderColor, GetNutritionGoalImg } from 'components/common';
 
 const { Text } = Typography;
 
@@ -42,15 +42,15 @@ function GoalCard({
             />
           </Col>
           <Col>
-            <Row style={{ lineHeight: '2', marginRight: '5px', marginLeft: '30px' }}>
+            <Row className={classes.goalTitle}>
               <Text>Daily Goal: </Text>
             </Row>
           </Col>
           <Col>
-            <Row style={{ margin: '5px', width: '150px' }}>
+            <Row className={classes.goalRow}>
               {
                 loading
-                  ? <Skeleton.Input style={{ width: '150px' }} />
+                  ? <Skeleton.Input className={classes.skeleton} />
                   : (
                     <Input
                       type="number"

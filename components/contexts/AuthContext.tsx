@@ -2,7 +2,7 @@ import React, {
   createContext, SetStateAction, useMemo, useState, Dispatch,
 } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '../../firebase/clientApp';
+import { auth } from '../../firebaseUtils/clientApp';
 
 type AuthProviderProps = {
   children: React.ReactElement<any, string | React.JSXElementConstructor<any>>

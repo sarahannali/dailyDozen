@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input } from 'antd';
 import Fuse from 'fuse.js';
+import classes from 'components/css/searchSection.module.css';
 
 const { Search } = Input;
 
@@ -23,13 +24,14 @@ function SearchBar({ allData, setData, searchKeys }: SearchBarProps) {
       const foundData = fuse.search(search).map((i) => i.item);
       setData(foundData);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   return (
     <Search
       onChange={(e) => setSearch(e.target.value)}
       onSearch={(e) => setSearch(e)}
-      style={{ width: '250px' }}
+      className={classes.search}
     />
   );
 }

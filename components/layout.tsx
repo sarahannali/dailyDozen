@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Button, Layout, Menu } from 'antd';
+import { signOut } from 'firebase/auth';
 import {
   PieChartOutlined,
   FolderOpenOutlined,
   LineChartOutlined,
 } from '@ant-design/icons';
-import { signOut } from 'firebase/auth';
 import classes from './css/layout.module.css';
-import { auth } from '../firebase/clientApp';
+import { auth } from '../firebaseUtils/clientApp';
 import { AuthContext } from './contexts/AuthContext';
 
 const { Sider, Content } = Layout;
@@ -35,16 +35,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
       </Head>
 
       <main>
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider
-            theme="dark"
-            style={{
-              position: 'fixed',
-              left: 0,
-              top: 0,
-              bottom: 0,
-            }}
-          >
+        <Layout className={classes.layout}>
+          <Sider theme="dark" className={classes.sider}>
             <div className={classes.sidebarTitle}>
               Daily Dozen
               <h2>Meal Planner</h2>
@@ -66,10 +58,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </Link>
               </Menu.Item>
             </Menu>
-            <div style={{
-              width: '100%', position: 'absolute', bottom: '40px', marginLeft: '30%',
-            }}
-            >
+            <div className={classes.logoutButton}>
               <Button
                 danger
                 type="primary"
@@ -84,7 +73,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <a href="https://www.flaticon.com/free-icons/food-waste" title="food waste icons">Flaticon</a>
             </div>
           </Sider>
-          <Content style={{ marginLeft: 200, marginTop: 16 }}>
+          <Content className={classes.content}>
             {children}
           </Content>
         </Layout>

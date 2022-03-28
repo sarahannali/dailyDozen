@@ -1,6 +1,6 @@
-import { Calendar, Meals } from '../../../utils/_populateCalendar';
-import { ConvertAmount } from './_convertAmount';
-import { GroceryItem } from '../../../../../../utils/propTypes';
+import type { Calendar, Meals } from 'components/pages/mealplanner/types';
+import type { GroceryItem } from 'utils/propTypes/db';
+import ConvertAmount from './_convertAmount';
 
 const getIngredientToGramsMap = (days: Calendar) => {
   const ingredientMap = new Map<string, {amount: number, ratio: number}>();
@@ -9,15 +9,18 @@ const getIngredientToGramsMap = (days: Calendar) => {
     (Object.keys(day.meals) as Array<keyof Meals>).forEach((key) => {
       day.meals[key].forEach((mealEvent) => {
         mealEvent.RecipeInfo.ingredients.forEach((ingredient) => {
+          const { grams, name, ratio } = ingredient;
+
           const amountNeeded = (
-            ingredient.grams / mealEvent.RecipeInfo.servings
+            grams / mealEvent.RecipeInfo.servings
           ) * mealEvent.Servings;
-          if (ingredientMap.has(ingredient.name)) {
-            ingredientMap.get(ingredient.name)!.amount += amountNeeded;
+
+          if (ingredientMap.has(name)) {
+            ingredientMap.get(name)!.amount += amountNeeded;
           } else {
-            ingredientMap.set(ingredient.name, {
+            ingredientMap.set(name, {
               amount: amountNeeded,
-              ratio: ingredient.ratio,
+              ratio,
             });
           }
         });
@@ -37,7 +40,7 @@ const convertIngredientToSelectedType = (
   const groceryIngredient = groceryList.find((entry) => entry.name === name);
 
   if (groceryIngredient) {
-    const { amountType } = groceryIngredient;
+    const { amountType, checked } = groceryIngredient;
 
     const newAmount = ConvertAmount(
       amount,
@@ -50,10 +53,11 @@ const convertIngredientToSelectedType = (
       name,
       amount: newAmount,
       amountType,
-      checked: !!(groceryIngredient.checked && amount <= groceryIngredient.amount),
+      checked: !!(checked && amount <= groceryIngredient.amount),
       ratio,
     };
   }
+
   return {
     name,
     amount,

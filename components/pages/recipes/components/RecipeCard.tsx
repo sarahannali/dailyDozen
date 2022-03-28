@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card, Col, Row, Modal, Rate, Badge, Spin,
 } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
 import Image from 'next/image';
-import RecipeInfo from '../../../common/components/RecipeInfo/RecipeInfo';
-import classes from './recipes.module.css';
-import { NutritionGoals, Recipe } from '../../../../utils/propTypes';
-import { putUserRecipe } from '../../../requests/userRecipes/put';
-import { postUserRecipe } from '../../../requests/userRecipes/post';
+import type { NutritionGoals, Recipe } from 'utils/propTypes/db';
+import { putUserRecipe, postUserRecipe } from 'components/requests';
+import classes from 'components/css/recipes.module.css';
+import RecipeInfo from './RecipeInfo/RecipeInfo';
 
 type RecipeCardProps = {
   recipe: Recipe,
   nutritionGoalData: NutritionGoals,
-  updateRecipes: () => void
+  updateRecipes: () => Promise<void>
 }
 
 function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProps) {
@@ -23,6 +22,13 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
     Rating: recipe.Rating,
   });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setUserData({
+      Favorite: recipe.Favorite,
+      Rating: recipe.Rating,
+    });
+  }, [recipe.Favorite, recipe.Rating]);
 
   const updateUserRecipe = async () => {
     setLoading(true);
@@ -52,15 +58,15 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
   const updateFavorite = (favorite: boolean) => setUserData({ ...userData, Favorite: favorite });
 
   return (
-    <Badge count={recipe.Favorite ? <HeartFilled style={{ color: '#eb2f96', fontSize: '20px' }} /> : 0}>
+    <Badge count={recipe.Favorite ? <HeartFilled className={classes.favoriteHeart} /> : 0}>
       <Card className={classes.recipecard} onClick={() => setIsModalVisible(true)} hoverable>
         <Row>
           <Col span={12}>
             <Image
-              loader={() => recipe.imageURL}
               width={100}
               height={100}
-              src={recipe.imageURL}
+              src={`/images/recipes/${recipe.id}.png`}
+              alt={recipe.name}
               className={classes.recipecardimg}
             />
           </Col>
@@ -77,7 +83,7 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
               count={1}
               defaultValue={+recipe.Favorite}
               character={<HeartFilled />}
-              style={{ color: '#eb2f96', marginLeft: '10px' }}
+              className={classes.favoriteHeartModal}
               onChange={(e) => updateFavorite(e === 1)}
             />
           </span>
@@ -85,7 +91,7 @@ function RecipeCard({ recipe, nutritionGoalData, updateRecipes }: RecipeCardProp
         visible={isModalVisible}
         onCancel={onModalClose}
         footer={null}
-        style={{ marginTop: '-50px' }}
+        className={classes.recipeModal}
         bodyStyle={{ maxHeight: '600px', overflowY: 'auto' }}
       >
         <Spin spinning={loading}>

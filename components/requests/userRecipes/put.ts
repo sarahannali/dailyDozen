@@ -1,17 +1,17 @@
-import {
-  doc, updateDoc,
-} from 'firebase/firestore/lite';
-import db, { auth } from '../../../firebase/clientApp';
-import { UserRecipe } from '../../../utils/propTypes';
+import { doc, updateDoc } from 'firebase/firestore/lite';
+import type { UserRecipe } from 'utils/propTypes/db';
+import db, { auth } from 'firebaseUtils/clientApp';
 
-// eslint-disable-next-line import/prefer-default-export
-export const putUserRecipe = async (userRecipeID: string, userRecipe: UserRecipe) => {
+const putUserRecipe = async (userRecipeID: string, userRecipe: UserRecipe) => {
+  const { Rating, Favorite } = userRecipe;
   const userRecipeDoc = doc(db, `users/${auth?.currentUser?.uid}/userRecipes/${userRecipeID}`);
 
   await updateDoc(userRecipeDoc, {
-    Rating: userRecipe.Rating,
-    Favorite: userRecipe.Favorite,
+    Rating,
+    Favorite,
   });
 
   return userRecipeID;
 };
+
+export default putUserRecipe;

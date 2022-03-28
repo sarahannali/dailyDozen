@@ -1,5 +1,5 @@
+import type { NutritionGoalsWithMacros } from 'utils/propTypes/db';
 import { macros } from '../../../../utils/constants/goals';
-import { NutritionGoalsWithMacros } from '../../../../utils/propTypes';
 
 const isNotMacro = (goal: keyof NutritionGoalsWithMacros) => macros.findIndex(
   (macro) => macro === goal,

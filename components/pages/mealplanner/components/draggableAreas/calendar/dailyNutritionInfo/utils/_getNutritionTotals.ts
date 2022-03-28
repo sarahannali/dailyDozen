@@ -1,46 +1,46 @@
-import { NutritionGoalsWithMacros } from '../../../../../../../../utils/propTypes';
-import { Macros } from '../../../../../../../../utils/propTypes/db/Recipe';
-import { GetNutritionValues } from '../../../../../../../common';
-import { Meals, Meal } from '../../../../../utils/_populateCalendar';
+import type { Meal, Meals } from 'components/pages/mealplanner/types';
+import type { NutritionGoalsWithMacros, Macros } from 'utils/propTypes/db';
+import { GetNutritionValues } from 'components/common';
 
 const SetMealNutritionTotals = (
   mealNutritionMap: NutritionGoalsWithMacros,
   nutritionMap: NutritionGoalsWithMacros,
-) => (Object.keys(mealNutritionMap) as Array<keyof NutritionGoalsWithMacros>).reduce(
-  (prevNutritionMap, nutrValKey) => ({
-    ...prevNutritionMap,
-    [nutrValKey]:
+) => (Object.keys(mealNutritionMap) as Array<keyof NutritionGoalsWithMacros>)
+  .reduce(
+    (prevNutritionMap, nutrValKey) => ({
+      ...prevNutritionMap,
+      [nutrValKey]:
       prevNutritionMap[nutrValKey]
         ? prevNutritionMap[nutrValKey] + mealNutritionMap[nutrValKey]
         : mealNutritionMap[nutrValKey],
-  }),
-  nutritionMap,
-);
+    }),
+    nutritionMap,
+  );
 
 const GetMealTimeTotals = (
   mealTime: Meal[],
   nutritionMap: NutritionGoalsWithMacros,
   nutritionGoalData: NutritionGoalsWithMacros,
-): NutritionGoalsWithMacros => mealTime.reduce(
-  (prevObj, meal) => {
-    const servings = meal.Servings;
-    const servingsRatio = meal.RecipeInfo.servings;
+): NutritionGoalsWithMacros => mealTime
+  .reduce(
+    (prevObj, meal) => {
+      const { ingredients, macros, servings } = meal.RecipeInfo;
 
-    const nutritionForMeal = GetNutritionValues(
-      meal.RecipeInfo.ingredients,
-      nutritionGoalData,
-      servings,
-      servingsRatio,
-    ) as NutritionGoalsWithMacros;
+      const nutritionForMeal = GetNutritionValues(
+        ingredients,
+        nutritionGoalData,
+        meal.Servings,
+        servings,
+      ) as NutritionGoalsWithMacros;
 
-    (Object.keys(meal.RecipeInfo.macros) as Array<keyof Macros>).forEach((macro) => {
-      nutritionForMeal[macro] = meal.RecipeInfo.macros[macro] * (servings / servingsRatio);
-    });
+      (Object.keys(macros) as Array<keyof Macros>).forEach((macro) => {
+        nutritionForMeal[macro] = macros[macro] * (meal.Servings / servings);
+      });
 
-    return SetMealNutritionTotals(nutritionForMeal, prevObj);
-  },
-  nutritionMap,
-);
+      return SetMealNutritionTotals(nutritionForMeal, prevObj);
+    },
+    nutritionMap,
+  );
 
 function GetNutritionTotals(
   nutritionGoals: NutritionGoalsWithMacros,
@@ -48,8 +48,10 @@ function GetNutritionTotals(
 ): NutritionGoalsWithMacros | null {
   const nutritionInfo = (Object.keys(meals) as Array<keyof Meals>)
     .reduce(
-      // eslint-disable-next-line react/destructuring-assignment
-      (prevObj, mealKey) => GetMealTimeTotals(meals[mealKey], prevObj, nutritionGoals),
+      (prevObj, mealKey) => {
+        const { [mealKey]: mealTime } = meals;
+        return GetMealTimeTotals(mealTime, prevObj, nutritionGoals);
+      },
     {} as NutritionGoalsWithMacros,
     );
 

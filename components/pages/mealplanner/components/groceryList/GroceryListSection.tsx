@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Spin } from 'antd';
 import { ProfileOutlined } from '@ant-design/icons';
+import type { GroceryItem } from 'utils/propTypes/db';
+import { getGroceryList, postGroceryList } from 'components/requests';
+import classes from 'components/css/mealPlanner.module.css';
 import GroceryList from './GroceryList';
-import classes from './groceryList.module.css';
-import { GroceryItem } from '../../../../../utils/propTypes';
-import { Calendar } from '../../utils/_populateCalendar';
 import { UpdateGroceryList } from './utils';
-import { getGroceryList, postGroceryList } from '../../../../requests';
+import type { Calendar } from '../../types';
 
 type GroceryListSectionProps = {
   days: Calendar
@@ -27,12 +27,13 @@ function GroceryListSection({ days }: GroceryListSectionProps) {
       const updatedGroceryList = UpdateGroceryList(groceryList, days);
       updateAndPostGroceryList(updatedGroceryList);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalVisible]);
 
   useEffect(() => {
     getGroceryList()
       .then((res) => {
-        setGroceryList(res);
+        if (res) setGroceryList(res);
         setLoading(false);
       });
   }, []);
@@ -50,7 +51,7 @@ function GroceryListSection({ days }: GroceryListSectionProps) {
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
-        style={{ marginTop: '-50px' }}
+        className={classes.groceryModal}
         bodyStyle={{ maxHeight: '600px', overflowY: 'auto' }}
       >
         <Spin spinning={loading}>

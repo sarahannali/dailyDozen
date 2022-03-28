@@ -1,0 +1,47 @@
+.recipeInfoDiv {
+  height: 80vh;
+  width: 60vw;
+}
+
+.recipeImgRow {
+  margin-bottom: 15px;
+}
+
+.recipeInfoImg {
+  object-fit: cover;
+  object-position: right bottom;
+}
+
+.input {
+  width: 75px;
+  margin-left: 10px;
+}
+
+.ingredients {
+  background-color: #e8eded;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0px 15px 0px;
+}
+
+.goalImg {
+  object-fit: cover;
+}
+
+.nutritionGoal {
+  margin: 5px;
+}
+
+.nutritionValues {
+  display: flex;
+  margin-left: 15px;
+}
+
+.nutritionValueImg {
+  margin: 5px;
+}
+
+.sourceLink {
+  font-size: 10px;
+  padding-bottom: 20px;
+}

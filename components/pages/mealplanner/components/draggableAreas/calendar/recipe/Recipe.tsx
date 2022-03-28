@@ -3,9 +3,9 @@ import React, { CSSProperties, useState } from 'react';
 import { Draggable, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd';
 import { Card } from 'antd';
 import Image from 'next/image';
-import { MealEvent } from '../../../../../../../utils/propTypes';
-import { Meal } from '../../../../utils/_populateCalendar';
-import classes from './recipe.module.css';
+import type { MealEvent, MealEventRecipe } from 'utils/propTypes/db';
+import classes from 'components/css/mealPlanner.module.css';
+import type { Meal } from 'components/pages/mealplanner/types';
 import RecipeMealEvent from './RecipeMealEvent';
 
 const getItemStyle = (
@@ -19,10 +19,7 @@ const getItemStyle = (
 });
 
 type RecipeProps = {
-  recipeInfo: {
-    imageURL: string;
-    name: string;
-  },
+  recipeInfo: MealEventRecipe,
   index: number,
   listName: string,
   isMealEvent: true,
@@ -48,7 +45,7 @@ function Recipe({
   const onMouseLeave = () => {
     setHover(false);
 
-    if (isMealEvent && meal && updateMealEvent !== undefined && servings !== meal.Servings) {
+    if (isMealEvent && meal && servings !== meal.Servings) {
       const newMeal = meal;
       newMeal.Servings = servings;
 
@@ -84,15 +81,17 @@ function Recipe({
             onMouseLeave={onMouseLeave}
             className={classes.card}
           >
-            {hover ? onHoverImg : (
-              <Image
-                loader={() => recipeInfo.imageURL}
-                width={90}
-                height={90}
-                src={recipeInfo.imageURL}
-                className={classes.recipeImg}
-              />
-            )}
+            {hover
+              ? onHoverImg
+              : (
+                <Image
+                  width={90}
+                  height={90}
+                  src={`/images/recipes/${recipeInfo.id}.png`}
+                  alt={recipeInfo.name}
+                  className={classes.recipeImg}
+                />
+              )}
           </Card>
         </div>
       )}

@@ -1,15 +1,6 @@
-import { Ingredient, Macros } from '../db/Recipe';
+import { MealEventRecipe } from '../db';
 
-export interface MealEventRecipe {
-  recipeID: string,
-  imageURL: string,
-  name: string,
-  macros: Macros,
-  ingredients: Ingredient[],
-  servings: number,
-}
-
-interface MealEventResponse {
+type MealEventResponse = {
   id: string,
   Date: Date,
   MealTime: 'Breakfast' | 'Lunch' | 'Dinner',

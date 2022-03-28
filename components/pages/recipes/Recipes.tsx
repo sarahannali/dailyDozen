@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Row, Col } from 'antd';
-import { RecipeCard, CreateRecipe } from './components';
-import { SearchRecipeSection } from '../../common';
-import { Recipe } from '../../../utils/propTypes';
-import { EmptyNutritionGoalsWithMacros } from '../../../utils/constants/goals';
-import { getAllUserRecipeData } from '../../requests/userRecipes/get';
-import addUserRecipeData from './utils/addUserRecipeData';
-import { getNutritionGoalData } from '../../requests';
+import type { Recipe } from 'utils/propTypes/db';
+import { getAllUserRecipeData, getNutritionGoalData } from 'components/requests';
+import { addUserRecipeData } from 'components/common/utils';
+import { SearchRecipeSection } from 'components/common';
+import { EmptyNutritionGoalsWithMacros } from 'utils/constants/goals';
+import classes from 'components/css/recipes.module.css';
+import RecipeCard from './components';
 
 const { Title } = Typography;
 
@@ -30,7 +30,7 @@ function Recipes({ recipes }: RecipesProps) {
   useEffect(() => {
     getNutritionGoalData()
       .then((res) => {
-        setNutritionGoalData(res);
+        if (res) setNutritionGoalData(res);
       });
 
     getAllUserRecipeData()
@@ -38,11 +38,12 @@ function Recipes({ recipes }: RecipesProps) {
         setBaseRecipes(addUserRecipeData(recipes, res));
         setCurrRecipes(addUserRecipeData(recipes, res));
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh' }}>
-      <Row justify="center" style={{ marginBottom: '10px' }}>
+    <div className={classes.recipeDiv}>
+      <Row justify="center" className={classes.recipeTitle}>
         <Title level={2}>Recipes</Title>
       </Row>
       <Row>
@@ -54,7 +55,7 @@ function Recipes({ recipes }: RecipesProps) {
           setCurrRecipes={setCurrRecipes}
         />
       </Row>
-      <Row justify="center" style={{ marginTop: '40px' }}>
+      <Row justify="center" className={classes.recipesRow}>
         <Col span={2} />
         <Col span={20}>
           <Row>
@@ -66,7 +67,7 @@ function Recipes({ recipes }: RecipesProps) {
                       xs={24}
                       xl={7}
                       key={recipe.id}
-                      style={{ marginBottom: '20px' }}
+                      className={classes.recipesCol}
                     >
                       <RecipeCard
                         recipe={recipe}
@@ -79,7 +80,6 @@ function Recipes({ recipes }: RecipesProps) {
           </Row>
         </Col>
       </Row>
-      <CreateRecipe />
     </div>
   );
 }

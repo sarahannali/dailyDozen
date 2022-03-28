@@ -4,13 +4,14 @@ import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
 } from '@ant-design/icons';
+import type { Recipe } from 'utils/propTypes/db';
+import classes from 'components/css/mealPlanner.module.css';
 import {
   DatePickerSection,
   GroceryListSection,
   DraggableAreas,
 } from './components';
-import { Recipe } from '../../../utils/propTypes';
-import { Calendar } from './utils/_populateCalendar';
+import type { Calendar } from './types';
 
 interface MealPlannerProps {
   allRecipeData: Recipe[]
@@ -24,7 +25,7 @@ function MealPlanner({
 
   const performRequest = async (request: (...args: any[]) => Promise<any>, body: unknown) => {
     let result = false;
-    setLoadingSymbol(<SyncOutlined spin style={{ color: 'gray' }} />);
+    setLoadingSymbol(<SyncOutlined spin color="gray" />);
 
     try {
       result = await request(body);
@@ -39,10 +40,10 @@ function MealPlanner({
   };
 
   return (
-    <div style={{ overflowX: 'scroll', minHeight: '100vh' }}>
-      <div style={{ display: 'flex' }}>
+    <div className={classes.mealPlannerDiv}>
+      <div className={classes.datePicker}>
         <DatePickerSection setDays={setDays} />
-        <span style={{ margin: '3px 0px 0px 10px', fontSize: '20px' }}>{loadingSymbol}</span>
+        <span className={classes.loadingSymbol}>{loadingSymbol}</span>
       </div>
       <DraggableAreas
         allRecipeData={allRecipeData}

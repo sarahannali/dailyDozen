@@ -1,13 +1,13 @@
-import { AmountType } from '../db/Ingredient';
+import { AmountType } from '../db/ingredients/Ingredient';
 
-export interface IngredientRequest {
+export type IngredientRequest = {
   amount: number,
   amountType: AmountType,
   name: string,
   types?: string[]
 }
 
-interface RecipeRequest {
+type RecipeRequest = {
   name: string,
   source: string,
   imageURL: string,

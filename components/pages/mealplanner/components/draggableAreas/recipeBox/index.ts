@@ -1,2 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-export { default as RecipeBox } from './RecipeBox';
+import RecipeBox from './RecipeBox';
+
+export default RecipeBox;

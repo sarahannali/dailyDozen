@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Button, DatePicker } from 'antd';
 import moment from 'moment';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import classes from './datePicker.module.css';
+import { getMealEvents } from 'components/requests';
+import classes from 'components/css/mealPlanner.module.css';
 import { PopulateCalendar } from '../../utils';
-import { Calendar } from '../../utils/_populateCalendar';
-import { getMealEvents } from '../../../../requests';
+import { Calendar } from '../../types';
 
 type DatePickerSectionProps = {
   setDays: React.Dispatch<React.SetStateAction<Calendar>>
