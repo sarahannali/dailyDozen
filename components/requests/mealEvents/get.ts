@@ -19,7 +19,7 @@ const getMealEvents = async (dateStr: string): Promise<MealEventResponse[]> => {
   ));
 
   const mealEventsList = mealEventsSnapshot.docs.map((mealEventDoc) => {
-    const data = mealEventDoc.data() as MealEvent;
+    const data = mealEventDoc.data();
 
     const {
       MealTime, RecipeInfo, Servings,
