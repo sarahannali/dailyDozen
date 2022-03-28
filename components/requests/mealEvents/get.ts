@@ -1,7 +1,6 @@
 import {
   collection, getDocs, query, where,
 } from 'firebase/firestore/lite';
-import type { MealEvent } from 'utils/propTypes/db';
 import type { MealEventResponse } from 'utils/propTypes/requests';
 import db, { auth } from 'firebaseUtils/clientApp';
 

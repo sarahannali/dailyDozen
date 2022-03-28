@@ -12,7 +12,7 @@ const postMealEvent = async (mealEvent: MealEvent) => {
   const result = await addDoc(mealEventsCollection, {
     Date: zeroedDate(Date.toString()),
     MealTime,
-    Recipe: doc(db, `recipes/${RecipeInfo.recipeID}`),
+    Recipe: doc(db, `recipes/${RecipeInfo.id}`),
     RecipeInfo,
     Servings: 1,
   });
