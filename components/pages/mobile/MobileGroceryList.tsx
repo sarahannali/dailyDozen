@@ -1,5 +1,5 @@
 import {
-  Button, Row, Spin, Typography,
+  Button, InputNumber, Row, Spin, Typography,
 } from 'antd';
 import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -15,6 +15,7 @@ const { Title } = Typography;
 
 function MobileGroceryList() {
   const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
+  const [multiplier, setMultiplier] = useState(1);
   const [loading, setLoading] = useState(false);
 
   const { setUser } = useContext(AuthContext);
@@ -44,16 +45,27 @@ function MobileGroceryList() {
     <div className={classes.loginDiv}>
       <Spin spinning={loading} size="large" className={classes.spin}>
         <div className={classes.fullScreen}>
-          <div className={`${classes.loginModal} ${classes.groceryListRow}`}>
-            <Row justify="center" className={classes.iconRow}>
+          <div className={`${classes.loginModal} ${classes.groceryListModal}`}>
+            <Row justify="center" style={{ marginBottom: '20px' }}>
               <Image src="/images/Icon.png" height={80} width={80} />
             </Row>
-            <Row justify="center" className={classes.groceryListRow}>
+            <Row justify="center">
               <Title level={2}>GROCERY LIST</Title>
+            </Row>
+            <Row justify="center" className={classes.groceryListRow}>
+              Multiplier:
+              <InputNumber
+                defaultValue={1}
+                className={classes.inputNumber}
+                min={1}
+                type="number"
+                onChange={(e) => setMultiplier(e)}
+              />
             </Row>
             <GroceryList
               groceryList={groceryList}
               updateAndPostGroceryList={updateAndPostGroceryList}
+              multiplier={multiplier}
             />
           </div>
           <Button

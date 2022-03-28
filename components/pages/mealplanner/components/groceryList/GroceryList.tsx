@@ -9,10 +9,15 @@ const { Option } = Select;
 
 type GroceryListProps = {
   groceryList: GroceryItem[],
-  updateAndPostGroceryList: (updatedGroceryList: GroceryItem[]) => void
+  updateAndPostGroceryList: (updatedGroceryList: GroceryItem[]) => void,
+  multiplier?: number
 }
 
-function GroceryList({ groceryList, updateAndPostGroceryList }: GroceryListProps) {
+function GroceryList({
+  groceryList,
+  updateAndPostGroceryList,
+  multiplier = 1,
+}: GroceryListProps) {
   const handleChange = (ingredient: GroceryItem, newType: AmountType, idx: number) => {
     const updatedGroceryList = [...groceryList];
 
@@ -48,7 +53,7 @@ function GroceryList({ groceryList, updateAndPostGroceryList }: GroceryListProps
               onChange={(e) => handleChecked(e, idx)}
               className={classes.listCheckbox}
             >
-              {ingredient.amount.toFixed(1)}
+              {(ingredient.amount * multiplier).toFixed(1)}
             </Checkbox>
             <Select
               value={ingredient.amountType}
@@ -68,5 +73,7 @@ function GroceryList({ groceryList, updateAndPostGroceryList }: GroceryListProps
     </div>
   );
 }
+
+GroceryList.defaultProps = { multiplier: 1 };
 
 export default GroceryList;

@@ -62,6 +62,12 @@
 
 .groceryListRow {
   margin-bottom: 20px;
+  gap: 10px;
+  line-height: 2;
+}
+
+.inputNumber {
+  width: 60px;
 }
 
 .loginButton {
