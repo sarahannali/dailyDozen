@@ -13,10 +13,7 @@ export type MealEventRecipe = {
 
 type MealEvent = {
   id?: string,
-  Date: {
-    seconds: number,
-    milliseconds: number
-  },
+  Date: Date,
   MealTime: 'Breakfast' | 'Lunch' | 'Dinner',
   Recipe?: DocumentReference,
   RecipeInfo: MealEventRecipe,
