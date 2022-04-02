@@ -32,6 +32,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <Head>
         <title>Meal Planner</title>
         <link rel="icon" href="/images/Icon.png" />
+        <meta name="description" content="Vegan meal planning app that incorporates the Daily Dozen philosophy." />
       </Head>
 
       <main>
